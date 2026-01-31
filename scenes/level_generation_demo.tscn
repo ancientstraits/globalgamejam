@@ -1,11 +1,11 @@
-[gd_scene format=3 uid="uid://bpdkq0ff5ojod"]
+[gd_scene format=3 uid="uid://bvsbqq0d6cm6i"]
 
-[ext_resource type="Script" uid="uid://ob6kpnnneepf" path="res://scenes/level_generator.gd" id="1_xtr0w"]
-[ext_resource type="Script" uid="uid://dp65yn2l58f6y" path="res://scripts/mandatory_room.gd" id="2_xtr0w"]
+[ext_resource type="Script" path="res://scenes/level_generator.gd" id="1_xtr0w"]
+[ext_resource type="Script" path="res://scripts/mandatory_room.gd" id="2_xtr0w"]
 [ext_resource type="PackedScene" uid="uid://dqlta5edfll3l" path="res://scenes/tiles/basic_wall.tscn" id="3_wcvtu"]
 [ext_resource type="PackedScene" uid="uid://dvx0ytpis1a0j" path="res://scenes/tiles/room_floor.tscn" id="4_wcvtu"]
 [ext_resource type="PackedScene" uid="uid://bvf0l4t2kcxi5" path="res://scenes/tiles/basic_floor.tscn" id="5_wcvtu"]
-[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="6_3xbt6"]
+[ext_resource type="PackedScene" uid="uid://cnyha7j8gdx03" path="res://scenes/player.tscn" id="6_3xbt6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xtr0w"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
