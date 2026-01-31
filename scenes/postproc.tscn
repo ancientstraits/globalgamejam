@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://ctd70a8i0e0yw"]
+
+[ext_resource type="Shader" uid="uid://dyvi2gawwbewk" path="res://scenes/postproc.gdshader" id="1_e66ms"]
+[ext_resource type="Texture2D" uid="uid://08bmi5fllv6c" path="res://assets/gasmaskcutout.png" id="2_c2esr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c2esr"]
+shader = ExtResource("1_e66ms")
+shader_parameter/gasmask_texture = ExtResource("2_c2esr")
+shader_parameter/gasmask_mul = Vector2(0.8, 0.55)
+shader_parameter/gasmask_off = Vector2(0.05, 0)
+shader_parameter/pixelate_factor = 8
+shader_parameter/vignette_m = 0.5
+shader_parameter/vignette_b = -0.2
+
+[node name="Postproc" type="CanvasLayer" unique_id=1075234556]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=659871003]
+material = SubResource("ShaderMaterial_c2esr")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
