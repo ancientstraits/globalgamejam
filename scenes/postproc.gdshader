@@ -13,7 +13,7 @@ uniform float vignette_b;
 float vignette(vec2 uv) {
 	vec2 ndc = 2.0 * (uv - 0.5);
 	float dist2 = dot(ndc, ndc);
-	return max(0.0, vignette_m * dist2 + vignette_b);
+	return min(1.0, max(0.0, vignette_m * dist2 + vignette_b));
 }
 
 vec2 pixelate_uv(vec2 uv, vec2 px_size, float factor) {
@@ -26,7 +26,8 @@ vec2 pixelate_uv(vec2 uv, vec2 px_size, float factor) {
 vec3 superimpose_gas_mask(vec2 uv, vec3 input) {
 	vec2 gasmask_pos = gasmask_off + 0.5 + gasmask_mul * (uv - 0.5);
 	vec4 gasmask = texture(gasmask_texture, gasmask_pos);
-	vec3 mixed = mix(input, gasmask.rgb, 0.5 * gasmask.a);
+	float vig = vignette(uv);
+	vec3 mixed = mix(input, gasmask.rgb, gasmask.a * vig);
 	return mixed;
 }
 
