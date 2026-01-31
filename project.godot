@@ -19,6 +19,10 @@ run/main_scene="uid://bvpqcfq2fku1"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://assets/icon.svg"
 
+[autoload]
+
+Globals="*uid://buwp7ihkx4c1f"
+
 [input]
 
 jump={

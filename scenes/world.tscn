@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bvpqcfq2fku1"]
 
 [ext_resource type="Script" uid="uid://cy04b2ow18jlo" path="res://scenes/player3d.gd" id="1_nnsk1"]
+[ext_resource type="Script" uid="uid://d30j6idw7vuat" path="res://scenes/gas_mask.gd" id="2_rwgxs"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mf8r0"]
 
@@ -24,6 +25,9 @@ shape = SubResource("CapsuleShape3D_mf8r0")
 [node name="Camera3D" type="Camera3D" parent="Player" unique_id=425394841]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6030874, -0.1589483)
 
+[node name="GasMask" type="Node3D" parent="Player" unique_id=1544456072]
+script = ExtResource("2_rwgxs")
+
 [node name="Ground" type="StaticBody3D" parent="." unique_id=103679757]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=594082250]
@@ -35,3 +39,7 @@ size = Vector3(100, 0.25, 100)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=442866872]
 transform = Transform3D(1, 0, 0, 0, 0.20000072, 0.9797958, 0, -0.9797958, 0.20000072, 0, 8.979358, -1.1422927)
+
+[node name="SlenderEnemy" type="CharacterBody3D" parent="." unique_id=1530867360]
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="SlenderEnemy" unique_id=439482757]
