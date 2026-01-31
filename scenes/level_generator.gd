@@ -1,269 +1,146 @@
 extends Node3D
+class_name MapGenerator
 
-const EMPTY: int = -1
+const TILE_EMPTY = -1
 
-@export var cell_size: int
-@export var width: int
-@export var height: int
-@export var mandatory_rooms: Array[MandatoryRoom]
+class PlacedRoom:
+	var room
+	var x
+	var y
+	var w
+	var h
 
-var tiles: Array = []
+# ----------------------------------------------------------------------
+# PUBLIC API
+# ----------------------------------------------------------------------
 
-func _grid_pos_to_world(x: int, y: int) -> Vector3:
-	return Vector3(-x, 0, -y)
+func generate_map(width, height, mandatory_rooms, straight_bias = 0.85):
+	randomize()
 
-func _h_wall_pos_to_world(x: int, y: int) -> Vector3:
-	var out = _grid_pos_to_world(x, y)
-	out.z += 0.5
-	return out
+	# assign ids (0..n-1) to rooms so tiles can store them
+	for i in range(mandatory_rooms.size()):
+		mandatory_rooms[i].id = i
 
-func _v_wall_pos_to_world(x: int, y: int) -> Vector3:
-	var out = _grid_pos_to_world(x, y)
-	out.x += 0.5
-	return out
+	var tiles = _create_tiles(width, height)
+	var placed_rooms = _place_rooms(width, height, tiles, mandatory_rooms)
+	if placed_rooms.size() != mandatory_rooms.size():
+		push_error("Failed to place all mandatory rooms")
+		return {}
 
-func _init_grid():
-	tiles.resize(height)
-	for y in height:
-		tiles[y] = []
-		tiles[y].resize(width)
-		for x in width:
-			tiles[y][x] = EMPTY
+	var h_walls = []
+	var v_walls = []
+	_init_walls(width, height, h_walls, v_walls)
 
-var h_walls: Array = []
-var v_walls: Array = []
+	_generate_maze(width, height, h_walls, v_walls, straight_bias)
+	_open_room_interior(placed_rooms, h_walls, v_walls)
+	_remove_dead_ends(width, height, h_walls, v_walls)
+	_ensure_two_exits(width, height, tiles, placed_rooms, h_walls, v_walls)
 
-func _init_walls():
-	h_walls.resize(height + 1)
-	for y in height + 1:
-		h_walls[y] = []
-		h_walls[y].resize(width)
-		for x in width:
-			h_walls[y][x] = true
-	
-	v_walls.resize(height)
-	for y in height:
-		v_walls[y] = []
-		v_walls[y].resize(width + 1)
-		for x in width + 1:
-			v_walls[y][x] = true
+	return {
+		"tiles": tiles,          # 2D: tiles[y][x] = room_id or TILE_EMPTY
+		"rooms": placed_rooms,   # Array of PlacedRoom
+		"h_walls": h_walls,      # (height+1) x width, true = wall
+		"v_walls": v_walls       # height x (width+1), true = wall
+	}
 
-var placed_rooms: Array = []  # store instances if you need them later
+# ----------------------------------------------------------------------
+# 1. Tiles and room placement
+# ----------------------------------------------------------------------
 
-class RoomInstance:
-	var preset: MandatoryRoom
-	var origin: Vector2i  # top-left tile
-	var rotated: bool     # false = (w,h), true = (h,w)
+func _create_tiles(width, height):
+	var tiles = []
+	for y in range(height):
+		tiles.append([])
+		for x in range(width):
+			tiles[y].append(TILE_EMPTY)
+	return tiles
 
-func _room_size(p: MandatoryRoom, rotated: bool) -> Vector2i:
-	return Vector2i(p.height, p.width) if rotated else Vector2i(p.width, p.height)
+func _place_rooms(width, height, tiles, mandatory_rooms):
+	var placed_rooms = []
+	var max_layout_attempts = 50
+	var max_room_attempts = 200
 
-func _can_place_room(preset: MandatoryRoom, origin: Vector2i, rotated: bool) -> bool:
-	var size: Vector2i = preset.size_for_rotation(rotated)
-
-	if origin.x < 0 or origin.y < 0:
-		return false
-	if origin.x + size.x > width or origin.y + size.y > height:
-		return false
-
-	for dy in size.y:
-		var y := origin.y + dy
-		for dx in size.x:
-			var x := origin.x + dx
-			if tiles[y][x] != EMPTY:
-				return false
-	return true
-
-func _apply_room(preset: MandatoryRoom, origin: Vector2i, rotated: bool, place: bool) -> void:
-	var size := preset.size_for_rotation(rotated)
-	var value := preset.id if place else EMPTY
-	for dy in size.y:
-		var y := origin.y + dy
-		for dx in size.x:
-			var x := origin.x + dx
-			tiles[y][x] = value
-
-func place_mandatory_rooms_random(mandatory: Array[MandatoryRoom]) -> bool:
-	_init_grid()
-	placed_rooms.clear()
-
-	var max_config_attempts := 1000
-	var max_room_tries := 5000 # per room per config
-
-	# Can shuffle order if you want extra randomness:
-	var presets := mandatory.duplicate()
-	presets.shuffle()
-
-	for attempt in max_config_attempts:
-		# clear grid this attempt
-		for y in height:
-			for x in width:
-				tiles[y][x] = EMPTY
+	for attempt in range(max_layout_attempts):
+		# clear tiles
+		for y in range(height):
+			for x in range(width):
+				tiles[y][x] = TILE_EMPTY
 		placed_rooms.clear()
 
-		var success_config := true
+		var layout_ok = true
 
-		for preset in presets:
-			var placed := false
-			for t in max_room_tries:
-				var rotated := bool(randi() & 1)
-				var size: Vector2i = preset.size_for_rotation(rotated)
-
-				var x := randi() % (width - size.x + 1)
-				var y := randi() % (height - size.y + 1)
-				var origin := Vector2i(x, y)
-
-				if not _can_place_room(preset, origin, rotated):
+		for room_res in mandatory_rooms:
+			var placed = false
+			for t in range(max_room_attempts):
+				var rotated = randf() < 0.5
+				var size = room_res.size_for_rotation(rotated)
+				var rw = size.x
+				var rh = size.y
+				if rw > width or rh > height:
 					continue
-				# if not _respects_spread(preset, origin, rotated):
-				#     continue
 
-				_apply_room(preset, origin, rotated, true)
+				var x0 = randi() % (width - rw + 1)
+				var y0 = randi() % (height - rh + 1)
 
-				var inst := RoomInstance.new()
-				inst.preset = preset
-				inst.origin = origin
-				inst.rotated = rotated
-				placed_rooms.append(inst)
+				# check overlap
+				var overlap = false
+				for yy in range(rh):
+					for xx in range(rw):
+						if tiles[y0 + yy][x0 + xx] != TILE_EMPTY:
+							overlap = true
+							break
+					if overlap:
+						break
+				if overlap:
+					continue
+
+				# commit room
+				for yy in range(rh):
+					for xx in range(rw):
+						tiles[y0 + yy][x0 + xx] = room_res.id
+
+				var pr = PlacedRoom.new()
+				pr.room = room_res
+				pr.x = x0
+				pr.y = y0
+				pr.w = rw
+				pr.h = rh
+				placed_rooms.append(pr)
 
 				placed = true
 				break
 
 			if not placed:
-				success_config = false
+				layout_ok = false
 				break
 
-		if success_config:
-			return true  # we got a full, random, valid layout
+		if layout_ok:
+			return placed_rooms
 
-	return false  # couldn’t place with constraints
+	# failed after many attempts
+	return placed_rooms
 
-class DSU:
-	var parent: Array
-	var rank: Array
+# ----------------------------------------------------------------------
+# 2. Walls representation
+# ----------------------------------------------------------------------
 
-	func _init(size: int) -> void:
-		parent.resize(size)
-		rank.resize(size)
-		for i in size:
-			parent[i] = i
-			rank[i] = 0
+func _init_walls(width, height, h_walls, v_walls):
+	h_walls.clear()
+	v_walls.clear()
 
-	func find(x: int) -> int:
-		if parent[x] != x:
-			parent[x] = find(parent[x])
-		return parent[x]
+	# horizontal walls: (height+1) x width
+	for y in range(height + 1):
+		h_walls.append([])
+		for x in range(width):
+			h_walls[y].append(true)
 
-	func union(a: int, b: int) -> void:
-		var pa = find(a)
-		var pb = find(b)
-		if pa == pb:
-			return
-		if rank[pa] < rank[pb]:
-			parent[pa] = pb
-		elif rank[pb] < rank[pa]:
-			parent[pb] = pa
-		else:
-			parent[pb] = pa
-			rank[pa] += 1
+	# vertical walls: height x (width+1)
+	for y in range(height):
+		v_walls.append([])
+		for x in range(width + 1):
+			v_walls[y].append(true)
 
-func tile_index(x: int, y: int) -> int:
-	return y * width + x
-
-func _force_rooms_open(dsu: DSU) -> void:
-	for r in placed_rooms:
-		var size: Vector2i = r.preset.size_for_rotation(r.rotated)
-		for dy in size.y:
-			var y: int = r.origin.y + dy
-			for dx in size.x:
-				var x: int = r.origin.x + dx
-				var idx := tile_index(x, y)
-
-				# connect to right neighbor inside same room
-				if dx + 1 < size.x:
-					var nx := x + 1
-					var nidx := tile_index(nx, y)
-					dsu.union(idx, nidx)
-					v_walls[y][nx] = false
-
-				# connect to bottom neighbor inside same room
-				if dy + 1 < size.y:
-					var ny := y + 1
-					var nidx2 := tile_index(x, ny)
-					dsu.union(idx, nidx2)
-					h_walls[ny][x] = false
-
-func _is_same_room(x1: int, y1: int, x2: int, y2: int) -> bool:
-	return tiles[y1][x1] != EMPTY and tiles[y1][x1] == tiles[y2][x2]
-
-class Edge:
-	var ax: int
-	var ay: int
-	var bx: int
-	var by: int
-
-func _collect_edges() -> Array:
-	var edges: Array = []
-	for y in height:
-		for x in width:
-			if x + 1 < width and not _is_same_room(x, y, x + 1, y):
-				var e := Edge.new()
-				e.ax = x; e.ay = y
-				e.bx = x + 1; e.by = y
-				edges.append(e)
-			if y + 1 < height and not _is_same_room(x, y, x, y + 1):
-				var e2 := Edge.new()
-				e2.ax = x; e2.ay = y
-				e2.bx = x; e2.by = y + 1
-				edges.append(e2)
-	return edges
-
-func _build_edges() -> Array:
-	var edges: Array = []
-	for y in height:
-		for x in width:
-			# right neighbor
-			if x + 1 < width:
-				# skip; internal room edges already handled
-				if not _is_same_room(x, y, x + 1, y):
-					var e := Edge.new()
-					e.a_x = x; e.a_y = y
-					e.b_x = x + 1; e.b_y = y
-					edges.append(e)
-			# bottom neighbor
-			if y + 1 < height:
-				if not _is_same_room(x, y, x, y + 1):
-					var e2 := Edge.new()
-					e2.a_x = x; e2.a_y = y
-					e2.b_x = x; e2.b_y = y + 1
-					edges.append(e2)
-	return edges
-
-func generate_maze_walls() -> void:
-	_init_walls()
-
-	var dsu := DSU.new(width * height)
-
-	# 1) Rooms fully open inside
-	_force_rooms_open(dsu)
-
-	# 2) Random spanning tree over rest (perfect maze)
-	var edges := _collect_edges()
-	edges.shuffle()
-
-	for e in edges:
-		var a_idx := tile_index(e.ax, e.ay)
-		var b_idx := tile_index(e.bx, e.by)
-		var pa := dsu.find(a_idx)
-		var pb := dsu.find(b_idx)
-		if pa != pb:
-			dsu.union(pa, pb)
-			_open_wall_between(e.ax, e.ay, e.bx, e.by)
-
-	# 3) Remove dead ends to get “no cul‑de‑sacs”
-	_remove_dead_ends()
-
-func _open_wall_between(x1: int, y1: int, x2: int, y2: int) -> void:
+func _open_wall_between(x1, y1, x2, y2, h_walls, v_walls):
 	if x1 == x2:
 		# vertical neighbors -> horizontal wall
 		if y2 == y1 + 1:
@@ -277,119 +154,271 @@ func _open_wall_between(x1: int, y1: int, x2: int, y2: int) -> void:
 		elif x1 == x2 + 1:
 			v_walls[y1][x1] = false
 
-func generate_map(w: int, h: int, mandatory_rooms: Array[MandatoryRoom]) -> bool:
-	width = w
-	height = h
-
-	# 1. random room placement
-	if not place_mandatory_rooms_random(mandatory_rooms):
-		return false
-
-	# 2. mark all remaining tiles as “hallway” (still floor)
-	for y in height:
-		for x in width:
-			if tiles[y][x] == EMPTY:
-				tiles[y][x] = EMPTY  # or some special “hallway” id if you want
-									 # but it’s still a walkable tile
-
-	# 3. random walls with connectivity and open rooms
-	generate_maze_walls()
-
-	return true
-
-func _in_bounds(x: int, y: int) -> bool:
+func _in_bounds(x, y, width, height):
 	return x >= 0 and x < width and y >= 0 and y < height
 
-func _open_neighbor_count(x: int, y: int) -> int:
-	var c := 0
-	# up
+# ----------------------------------------------------------------------
+# 3. Biased DFS maze (straight-ish hallways)
+# ----------------------------------------------------------------------
+
+func _generate_maze(width, height, h_walls, v_walls, straight_bias):
+	var visited = []
+	for y in range(height):
+		visited.append([])
+		for x in range(width):
+			visited[y].append(false)
+
+	# 0=up, 1=down, 2=left, 3=right
+	var dir_vecs = [
+		Vector2(0, -1),
+		Vector2(0, 1),
+		Vector2(-1, 0),
+		Vector2(1, 0)
+	]
+
+	var stack = []
+
+	var sx = randi() % width
+	var sy = randi() % height
+	stack.append({"x": sx, "y": sy, "last_dir": -1})
+	visited[sy][sx] = true
+
+	while stack.size() > 0:
+		var cur = stack[stack.size() - 1]
+		var cx = cur["x"]
+		var cy = cur["y"]
+		var last_dir = cur["last_dir"]
+
+		# collect unvisited neighbors
+		var candidates = []
+		for d in range(4):
+			var nx = cx + int(dir_vecs[d].x)
+			var ny = cy + int(dir_vecs[d].y)
+			if _in_bounds(nx, ny, width, height) and not visited[ny][nx]:
+				candidates.append({"dir": d, "x": nx, "y": ny})
+
+		if candidates.is_empty():
+			stack.pop_back()
+			continue
+
+		# choose direction with bias to continue straight
+		var chosen = candidates[randi() % candidates.size()]
+		if last_dir != -1 and randf() < straight_bias:
+			for c in candidates:
+				if c["dir"] == last_dir:
+					chosen = c
+					break
+
+		var nx2 = chosen["x"]
+		var ny2 = chosen["y"]
+		var d2 = chosen["dir"]
+
+		_open_wall_between(cx, cy, nx2, ny2, h_walls, v_walls)
+		visited[ny2][nx2] = true
+		stack.append({"x": nx2, "y": ny2, "last_dir": d2})
+
+# ----------------------------------------------------------------------
+# 4. Open room interiors (rooms become big open spaces)
+# ----------------------------------------------------------------------
+
+func _open_room_interior(placed_rooms, h_walls, v_walls):
+	for pr in placed_rooms:
+		var x0 = pr.x
+		var y0 = pr.y
+		var w = pr.w
+		var h = pr.h
+
+		for yy in range(h):
+			for xx in range(w):
+				var x = x0 + xx
+				var y = y0 + yy
+
+				# right neighbor inside room
+				if xx + 1 < w:
+					_open_wall_between(x, y, x + 1, y, h_walls, v_walls)
+				# bottom neighbor inside room
+				if yy + 1 < h:
+					_open_wall_between(x, y, x, y + 1, h_walls, v_walls)
+
+# ----------------------------------------------------------------------
+# 5. Remove dead ends (no cul-de-sacs)
+# ----------------------------------------------------------------------
+
+func _open_neighbor_count(x, y, width, height, h_walls, v_walls):
+	var c = 0
 	if y > 0 and not h_walls[y][x]:
 		c += 1
-	# down
 	if y + 1 < height and not h_walls[y + 1][x]:
 		c += 1
-	# left
 	if x > 0 and not v_walls[y][x]:
 		c += 1
-	# right
 	if x + 1 < width and not v_walls[y][x + 1]:
 		c += 1
 	return c
 
-func _closed_neighbors(x: int, y: int) -> Array:
-	var res: Array = []
-	# up
+func _closed_neighbors(x, y, width, height, h_walls, v_walls):
+	var res = []
 	if y > 0 and h_walls[y][x]:
-		res.append(Vector2i(x, y - 1))
-	# down
+		res.append(Vector2(x, y - 1))
 	if y + 1 < height and h_walls[y + 1][x]:
-		res.append(Vector2i(x, y + 1))
-	# left
+		res.append(Vector2(x, y + 1))
 	if x > 0 and v_walls[y][x]:
-		res.append(Vector2i(x - 1, y))
-	# right
+		res.append(Vector2(x - 1, y))
 	if x + 1 < width and v_walls[y][x + 1]:
-		res.append(Vector2i(x + 1, y))
+		res.append(Vector2(x + 1, y))
 	return res
 
-func _remove_dead_ends() -> void:
-	# We only need a single pass: each dead end gets 1 extra connection.
-	for y in height:
-		for x in width:
-			var deg := _open_neighbor_count(x, y)
-			if deg != 1:
-				continue
+func _remove_dead_ends(width, height, h_walls, v_walls):
+	var changed = true
+	while changed:
+		changed = false
+		for y in range(height):
+			for x in range(width):
+				var deg = _open_neighbor_count(x, y, width, height, h_walls, v_walls)
+				if deg != 1:
+					continue
 
-			var closed := _closed_neighbors(x, y)
-			if closed.is_empty():
-				continue  # should not happen if deg == 1, but safe
+				var closed = _closed_neighbors(x, y, width, height, h_walls, v_walls)
+				if closed.is_empty():
+					continue
 
-			# Prefer neighbors with smaller degree to avoid huge hubs
-			var best_candidates: Array = []
-			var min_deg := 99
-			for n in closed:
-				var nd := _open_neighbor_count(n.x, n.y)
-				if nd < min_deg:
-					min_deg = nd
-					best_candidates = [n]
-				elif nd == min_deg:
-					best_candidates.append(n)
+				# prefer neighbors with lower degree (fewer big hubs)
+				var best = []
+				var min_deg = 99
+				for n in closed:
+					var nd = _open_neighbor_count(int(n.x), int(n.y), width, height, h_walls, v_walls)
+					if nd < min_deg:
+						min_deg = nd
+						best = [n]
+					elif nd == min_deg:
+						best.append(n)
 
-			var target: Vector2i = best_candidates[randi() % best_candidates.size()]
-			_open_wall_between(x, y, target.x, target.y)
+				var target = best[randi() % best.size()]
+				_open_wall_between(x, y, int(target.x), int(target.y), h_walls, v_walls)
+				changed = true
 
-func place_placeholders() -> bool:
-	for y in height:
-		for x in width:
+# ----------------------------------------------------------------------
+# 6. Ensure each room has at least 2 exits
+# ----------------------------------------------------------------------
+
+func _ensure_two_exits(width, height, tiles, placed_rooms, h_walls, v_walls):
+	for pr in placed_rooms:
+		var room_id = pr.room.id
+		var x0 = pr.x
+		var y0 = pr.y
+		var w = pr.w
+		var h = pr.h
+
+		var exits = 0
+		var closed_edges = []
+
+		for yy in range(h):
+			for xx in range(w):
+				var x = x0 + xx
+				var y = y0 + yy
+				if tiles[y][x] != room_id:
+					continue
+
+				var neighbors = [
+					Vector2(x, y - 1),
+					Vector2(x, y + 1),
+					Vector2(x - 1, y),
+					Vector2(x + 1, y)
+				]
+
+				for n in neighbors:
+					var nx = int(n.x)
+					var ny = int(n.y)
+					if not _in_bounds(nx, ny, width, height):
+						continue
+					if tiles[ny][nx] == room_id:
+						continue  # internal
+
+					# boundary edge: check wall
+					var open = false
+					if nx == x and ny == y - 1:      # up
+						open = not h_walls[y][x]
+					elif nx == x and ny == y + 1:    # down
+						open = not h_walls[y + 1][x]
+					elif ny == y and nx == x - 1:    # left
+						open = not v_walls[y][x]
+					elif ny == y and nx == x + 1:    # right
+						open = not v_walls[y][x + 1]
+
+					if open:
+						exits += 1
+					else:
+						closed_edges.append({
+							"ax": x, "ay": y,
+							"bx": nx, "by": ny
+						})
+
+		closed_edges.shuffle()
+		var i = 0
+		while exits < 2 and i < closed_edges.size():
+			var e = closed_edges[i]
+			i += 1
+			_open_wall_between(
+				e["ax"], e["ay"],
+				e["bx"], e["by"],
+				h_walls, v_walls
+			)
+			exits += 1
+
+func _grid_pos_to_world(x, y) -> Vector3:
+	return Vector3(-x, 0, -y)
+
+func _h_wall_grid_pos_to_world(x, y) -> Vector3:
+	var out = _grid_pos_to_world(x, y)
+	out.x += 0.5
+	return out
+
+func _v_wall_grid_pos_to_world(x, y) -> Vector3:
+	var out = _grid_pos_to_world(x, y)
+	out.z += 0.5
+	return out
+
+@export var height: int
+@export var width: int
+@export var straightaway_bias: float = 0.85
+
+@export var mandatory_rooms: Array[MandatoryRoom]
+
+@export var floor: PackedScene
+@export var room_floor: PackedScene
+@export var wall: PackedScene
+
+func _place_tiles(result) -> void:
+	for y in range(height):
+		for x in range(width):
 			var node = 0
-			if tiles[y][x] == EMPTY:
-				node = placeholder_tile.instantiate()
+			if result['tiles'][x][y] == TILE_EMPTY:
+				node = floor.instantiate()
 			else:
-				node = placeholder_room_tile.instantiate()
+				node = room_floor.instantiate()
 			add_child(node)
 			node.global_position = _grid_pos_to_world(x, y)
-	
+
 	for y in range(height + 1):
 		for x in range(width + 1):
-			if x < width and h_walls[y][x]:
+			if y < height and result['h_walls'][x][y]:
 				var node = 0
-				node = placeholder_wall.instantiate()
+				node = wall.instantiate()
 				add_child(node)
-				node.global_position = _h_wall_pos_to_world(x, y)
-				node.rotation_degrees.y = 90
-			if y < height and v_walls[y][x]:
-				var node = 0
-				node = placeholder_wall.instantiate()
-				add_child(node)
-				node.global_position = _v_wall_pos_to_world(x, y)
-				# node.rotation_degrees.y = 90
-	
-	return true
+				node.global_position = _h_wall_grid_pos_to_world(x, y)
 
-@export var placeholder_wall: PackedScene
-@export var placeholder_room_tile: PackedScene
-@export var placeholder_tile: PackedScene
+			if x < width and result['v_walls'][x][y]:
+				var node = 0
+				node = wall.instantiate()
+				add_child(node)
+				node.global_position = _v_wall_grid_pos_to_world(x, y)
+				node.rotation_degrees.y = 90
+
 
 func _ready() -> void:
-	generate_map(width, height, mandatory_rooms)
-	place_placeholders()
+	var result: Dictionary = generate_map(height, width, mandatory_rooms, straightaway_bias)
+	if result.size() == 0:
+		print("generation failed")
+	else:
+		_place_tiles(result)
+		print("success")

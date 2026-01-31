@@ -19,25 +19,13 @@ background_mode = 2
 sky = SubResource("Sky_m8m12")
 tonemap_mode = 2
 
-[sub_resource type="Resource" id="Resource_m8m12"]
-script = ExtResource("2_xtr0w")
-width = 2
-height = 3
-metadata/_custom_type_script = "uid://dp65yn2l58f6y"
-
-[sub_resource type="Resource" id="Resource_sjnq8"]
-script = ExtResource("2_xtr0w")
-width = 2
-height = 3
-metadata/_custom_type_script = "uid://dp65yn2l58f6y"
-
-[sub_resource type="Resource" id="Resource_wcvtu"]
-script = ExtResource("2_xtr0w")
-width = 2
-height = 3
-metadata/_custom_type_script = "uid://dp65yn2l58f6y"
-
 [sub_resource type="Resource" id="Resource_3xbt6"]
+script = ExtResource("2_xtr0w")
+width = 2
+height = 3
+metadata/_custom_type_script = "uid://dp65yn2l58f6y"
+
+[sub_resource type="Resource" id="Resource_liak8"]
 script = ExtResource("2_xtr0w")
 width = 2
 height = 2
@@ -55,14 +43,15 @@ shadow_enabled = true
 
 [node name="LevelGenerator" type="Node3D" parent="." unique_id=1098101087]
 script = ExtResource("1_xtr0w")
-width = 15
-height = 8
-mandatory_rooms = Array[ExtResource("2_xtr0w")]([SubResource("Resource_m8m12"), SubResource("Resource_sjnq8"), SubResource("Resource_wcvtu"), SubResource("Resource_3xbt6")])
-placeholder_wall = ExtResource("3_wcvtu")
-placeholder_room_tile = ExtResource("4_wcvtu")
-placeholder_tile = ExtResource("5_wcvtu")
+height = 14
+width = 12
+straightaway_bias = 0.3
+mandatory_rooms = Array[ExtResource("2_xtr0w")]([SubResource("Resource_3xbt6"), SubResource("Resource_3xbt6"), SubResource("Resource_3xbt6"), SubResource("Resource_liak8")])
+floor = ExtResource("5_wcvtu")
+room_floor = ExtResource("4_wcvtu")
+wall = ExtResource("3_wcvtu")
 
 [node name="Player" parent="." unique_id=155048425 instance=ExtResource("6_3xbt6")]
-transform = Transform3D(0.43394342, 0, 0.24838096, 0, 0.5, 0, -0.24838096, 0, 0.43394342, -1.0188649, -0.088912964, -0.95417035)
+transform = Transform3D(0.43394342, 0, 0.24838096, 0, 0.5, 0, -0.24838096, 0, 0.43394342, -1.0188649, 14.20916, -0.95417035)
 gravity = 0.0
 move_vel = 3.0
