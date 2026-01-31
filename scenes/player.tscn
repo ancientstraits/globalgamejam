@@ -10,6 +10,14 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_qhqgy"]
 size = Vector3(0.3, 0.3, 4)
 
+[ext_resource type="Script" uid="uid://ohaiknv2vxd7" path="res://scenes/flashlight.gd" id="4_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://et2qpq8ojjqa" path="res://assets/flashlight_texture.jpg" id="5_tuyoq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mf8r0"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fjrip"]
+blend_mode = 1
+
 [node name="Player" type="CharacterBody3D" unique_id=155048425]
 transform = Transform3D(0.86788684, 0, 0.49676192, 0, 1, 0, -0.49676192, 0, 0.86788684, 0, 0, 0)
 script = ExtResource("1_qhqgy")
@@ -33,6 +41,17 @@ target_position = Vector3(0, 0, -2.03)
 collision_mask = 16
 collide_with_areas = true
 script = ExtResource("2_qlg0r")
+[node name="Flashlight" type="Node3D" parent="Camera3D" unique_id=1640074504 node_paths=PackedStringArray("canvas", "texture_outer", "texture_inner")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6030874, 0.1589483)
+script = ExtResource("4_qlg0r")
+canvas = NodePath("../../CanvasLayer")
+texture_outer = NodePath("../../CanvasLayer/TextureRect")
+texture_inner = NodePath("../../CanvasLayer/TextureRect2")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D/Flashlight" unique_id=1931078391]
+light_energy = 5.0
+spot_range = 10.0
+spot_angle = 90.0
 
 [node name="GasMask" type="Node3D" parent="." unique_id=788697399]
 script = ExtResource("2_dqkch")
@@ -46,3 +65,41 @@ script = ExtResource("3_qlg0r")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GasMask/GasDetector" unique_id=2012420051]
 shape = SubResource("CapsuleShape3D_mf8r0")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1141877781]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1402139479]
+modulate = Color(1, 1, 1, 0.26666668)
+material = SubResource("CanvasItemMaterial_fjrip")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.0043501)
+pivot_offset = Vector2(256, 256)
+texture = ExtResource("5_tuyoq")
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer" unique_id=559640303]
+modulate = Color(1, 1, 1, 0.3254902)
+material = SubResource("CanvasItemMaterial_fjrip")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.7243853
+pivot_offset = Vector2(256, 256)
+texture = ExtResource("5_tuyoq")
