@@ -3,8 +3,10 @@
 [ext_resource type="Script" uid="uid://cy04b2ow18jlo" path="res://scripts/player3d.gd" id="1_nnsk1"]
 [ext_resource type="Script" uid="uid://d30j6idw7vuat" path="res://scripts/gas_mask.gd" id="2_rwgxs"]
 [ext_resource type="Script" uid="uid://brkliyb6hfu4m" path="res://scripts/basic_enemy.gd" id="3_4wyf3"]
-[ext_resource type="Script" uid="uid://dk2on0wnitumo" path="res://scenes/gas_detector.gd" id="4_71j4m"]
-[ext_resource type="Script" uid="uid://u305pkolf8el" path="res://scenes/gas.gd" id="4_k0juu"]
+[ext_resource type="Script" uid="uid://dk2on0wnitumo" path="res://scripts/gas_detector.gd" id="4_71j4m"]
+[ext_resource type="Script" uid="uid://u305pkolf8el" path="res://scripts/gas.gd" id="4_k0juu"]
+[ext_resource type="Script" uid="uid://b053u7yx5kp8r" path="res://scripts/generator.gd" id="6_qfnet"]
+[ext_resource type="PackedScene" uid="uid://kjd7q8l2ntln" path="res://scenes/defect.tscn" id="7_i7141"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4wyf3"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -47,17 +49,56 @@ size = Vector3(5, 5, 5)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71j4m"]
 bg_color = Color(0, 0.66224426, 0.057101645, 1)
 
+[sub_resource type="Gradient" id="Gradient_71j4m"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.76811594)
+colors = PackedColorArray(0, 0, 0, 1, 0.78039217, 0.6901961, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qfnet"]
+noise_type = 3
+frequency = 0.0266
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_i7141"]
+noise = SubResource("FastNoiseLite_qfnet")
+color_ramp = SubResource("Gradient_71j4m")
+seamless = true
+as_normal_map = true
+seamless_blend_skirt = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4mrxx"]
+albedo_color = Color(0.24518025, 0.14159244, 0.051793218, 1)
+metallic = 0.29
+metallic_specular = 0.79
+roughness = 0.39
+normal_enabled = true
+normal_scale = 1.68
+normal_texture = SubResource("NoiseTexture2D_i7141")
+uv1_scale = Vector3(-0.27, -0.27, -0.27)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_71j4m"]
+material = SubResource("StandardMaterial3D_4mrxx")
+size = Vector3(10, 4, 3)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_71j4m"]
+points = PackedVector3Array(5, 2, 1.5, 5, 2, -1.5, -5, 2, 1.5, 5, -2, 1.5, 5, -2, -1.5, -5, 2, -1.5, -5, -2, 1.5, -5, -2, -1.5)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_71j4m"]
+size = Vector2(10, 4)
+orientation = 2
+
 [node name="3Dworld" type="Node3D" unique_id=513478039]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=853303836]
 environment = SubResource("Environment_71j4m")
 
 [node name="Player" type="CharacterBody3D" parent="." unique_id=1498063532]
-transform = Transform3D(0.86788684, 0, 0.49676192, 0, 1, 0, -0.49676192, 0, 0.86788684, 0, 4.7243547, 0)
+transform = Transform3D(0.86788684, 0, 0.49676192, 0, 1, 0, -0.49676192, 0, 0.86788684, 0, 2.4135165, 4.655791)
 script = ExtResource("1_nnsk1")
 gravity = -40.0
 jump_vel = 10.0
-move_vel = 30.0
+move_vel = 10.0
 camera_speed = 0.001
 health = 3
 
@@ -86,6 +127,7 @@ shape = SubResource("CapsuleShape3D_mf8r0")
 transform = Transform3D(1, 0, 0, 0, 0.20000072, 0.9797958, 0, -0.9797958, 0.20000072, 0, 8.979358, -1.1422927)
 
 [node name="BasicEnemy" type="CharacterBody3D" parent="." unique_id=1530867360]
+process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7771378, 13.095138)
 script = ExtResource("3_4wyf3")
 speed = 5.0
@@ -140,3 +182,20 @@ offset_right = 270.0
 offset_bottom = 51.0
 theme_override_colors/font_color = Color(0.18690777, 0.99999994, 0.103041, 1)
 theme_override_styles/fill = SubResource("StyleBoxFlat_71j4m")
+
+[node name="Generator" type="StaticBody3D" parent="." unique_id=1780922523]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.288012, 2, 0)
+script = ExtResource("6_qfnet")
+defect = ExtResource("7_i7141")
+defect_position_padding = 0.3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Generator" unique_id=4447079]
+mesh = SubResource("BoxMesh_71j4m")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Generator" unique_id=499083583]
+shape = SubResource("ConvexPolygonShape3D_71j4m")
+
+[node name="RepairPlane" type="MeshInstance3D" parent="Generator" unique_id=139612559]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5)
+visible = false
+mesh = SubResource("PlaneMesh_71j4m")
