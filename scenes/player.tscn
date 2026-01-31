@@ -1,10 +1,14 @@
-[gd_scene format=3 uid="uid://b6nwh03k30tgx"]
+[gd_scene format=3 uid="uid://cnyha7j8gdx03"]
 
 [ext_resource type="Script" uid="uid://cy04b2ow18jlo" path="res://scripts/player3d.gd" id="1_qhqgy"]
 [ext_resource type="Script" uid="uid://d30j6idw7vuat" path="res://scripts/gas_mask.gd" id="2_dqkch"]
+[ext_resource type="Script" uid="uid://bubq3tve6bkb2" path="res://scenes/interaction_cast.gd" id="2_qlg0r"]
 [ext_resource type="Script" uid="uid://dk2on0wnitumo" path="res://scenes/gas_detector.gd" id="3_qlg0r"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mf8r0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qhqgy"]
+size = Vector3(0.3, 0.3, 4)
 
 [node name="Player" type="CharacterBody3D" unique_id=155048425]
 transform = Transform3D(0.86788684, 0, 0.49676192, 0, 1, 0, -0.49676192, 0, 0.86788684, 0, 0, 0)
@@ -22,6 +26,13 @@ shape = SubResource("CapsuleShape3D_mf8r0")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=260826829]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6030874, -0.1589483)
+
+[node name="InteractionCast" type="ShapeCast3D" parent="Camera3D" unique_id=231130860]
+shape = SubResource("BoxShape3D_qhqgy")
+target_position = Vector3(0, 0, -2.03)
+collision_mask = 16
+collide_with_areas = true
+script = ExtResource("2_qlg0r")
 
 [node name="GasMask" type="Node3D" parent="." unique_id=788697399]
 script = ExtResource("2_dqkch")
