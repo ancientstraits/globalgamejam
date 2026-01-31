@@ -174,6 +174,7 @@ pivot_offset = Vector2(20, 20)
 texture = ExtResource("6_qfnet")
 
 [node name="OuchHUD" type="TextureRect" parent="." unique_id=825553448]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
