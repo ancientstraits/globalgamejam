@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://cy04b2ow18jlo" path="res://scripts/player3d.gd" id="1_nnsk1"]
 [ext_resource type="Script" uid="uid://d30j6idw7vuat" path="res://scripts/gas_mask.gd" id="2_rwgxs"]
 [ext_resource type="Script" uid="uid://brkliyb6hfu4m" path="res://scripts/basic_enemy.gd" id="3_4wyf3"]
+[ext_resource type="Script" uid="uid://dk2on0wnitumo" path="res://scenes/gas_detector.gd" id="4_71j4m"]
+[ext_resource type="Script" uid="uid://u305pkolf8el" path="res://scenes/gas.gd" id="4_k0juu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4wyf3"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -32,6 +34,19 @@ data = PackedVector3Array(-50, -0.125, 50, -50, -0.125, -50, -50, 0.125, -50, 50
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_k0juu"]
 data = PackedVector3Array(-5, -2.5, 0.5, -5, -2.5, -0.5, -5, 2.5, -0.5, 5, -2.5, -0.5, -5, -2.5, -0.5, -5, -2.5, 0.5, -5, 2.5, -0.5, -5, -2.5, -0.5, 5, -2.5, -0.5, -5, 2.5, -0.5, -5, 2.5, 0.5, -5, -2.5, 0.5, -5, -2.5, 0.5, -5, 2.5, 0.5, 5, 2.5, 0.5, 5, 2.5, 0.5, -5, 2.5, 0.5, -5, 2.5, -0.5, -5, -2.5, 0.5, 5, -2.5, 0.5, 5, -2.5, -0.5, 5, 2.5, 0.5, 5, -2.5, 0.5, -5, -2.5, 0.5, 5, -2.5, -0.5, 5, -2.5, 0.5, 5, 2.5, 0.5, 5, -2.5, -0.5, 5, 2.5, -0.5, -5, 2.5, -0.5, -5, 2.5, -0.5, 5, 2.5, -0.5, 5, 2.5, 0.5, 5, 2.5, 0.5, 5, 2.5, -0.5, 5, -2.5, -0.5)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4wyf3"]
+albedo_color = Color(0.30397612, 0.78026706, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_k0juu"]
+material = SubResource("StandardMaterial3D_4wyf3")
+size = Vector2(5, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_71j4m"]
+size = Vector3(5, 5, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71j4m"]
+bg_color = Color(0, 0.66224426, 0.057101645, 1)
+
 [node name="3Dworld" type="Node3D" unique_id=513478039]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=853303836]
@@ -44,6 +59,7 @@ gravity = -40.0
 jump_vel = 10.0
 move_vel = 30.0
 camera_speed = 0.001
+health = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1139850675]
 shape = SubResource("CapsuleShape3D_mf8r0")
@@ -55,6 +71,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6030874, -0.1589483)
 
 [node name="GasMask" type="Node3D" parent="Player" unique_id=1544456072]
 script = ExtResource("2_rwgxs")
+max_gas = 100.0
+gas_gain_rate = 7.0
+gas_drain_rate = 3.0
+
+[node name="GasDetector" type="Area3D" parent="Player/GasMask" unique_id=950339270]
+transform = Transform3D(0.86788684, 0, -0.49676192, 0, 1, 0, 0.49676192, 0, 0.86788684, 0, 0, 0)
+script = ExtResource("4_71j4m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/GasMask/GasDetector" unique_id=1966041011]
+shape = SubResource("CapsuleShape3D_mf8r0")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=442866872]
 transform = Transform3D(1, 0, 0, 0, 0.20000072, 0.9797958, 0, -0.9797958, 0.20000072, 0, 8.979358, -1.1422927)
@@ -95,3 +121,22 @@ size = Vector3(10, 5, 1)
 [node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Wall" unique_id=1578837901]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 2, 10)
 shape = SubResource("ConcavePolygonShape3D_k0juu")
+
+[node name="Gas" type="Area3D" parent="." unique_id=1958327155 groups=["gas"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.576209, 0.5549674, 0)
+script = ExtResource("4_k0juu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Gas" unique_id=586452937]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5538006, 0)
+mesh = SubResource("PlaneMesh_k0juu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gas" unique_id=768314873]
+shape = SubResource("BoxShape3D_71j4m")
+
+[node name="GasMeter" type="ProgressBar" parent="." unique_id=801314967]
+offset_left = 26.0
+offset_top = 24.0
+offset_right = 270.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(0.18690777, 0.99999994, 0.103041, 1)
+theme_override_styles/fill = SubResource("StyleBoxFlat_71j4m")

@@ -4,8 +4,10 @@ extends CharacterBody3D
 @export var jump_vel: float
 @export var move_vel: float
 @export var camera_speed: float
+@export var health : int
 
 @onready var cam = $Camera3D
+@onready var collider = $CollisionShape3D
 
 # var camera_velocity: Vector2
 
@@ -43,3 +45,5 @@ func _process(delta: float) -> void:
 	velocity.z = move_vel * dir.z
 	velocity.x = move_vel * dir.x
 	move_and_slide()
+	
+	

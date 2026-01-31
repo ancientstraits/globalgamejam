@@ -23,6 +23,10 @@ config/icon="res://assets/icon.svg"
 
 Globals="*uid://buwp7ihkx4c1f"
 
+[global_group]
+
+gas=""
+
 [input]
 
 jump={
