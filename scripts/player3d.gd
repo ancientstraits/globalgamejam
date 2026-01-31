@@ -43,6 +43,10 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	if hanging and Input.is_action_just_pressed('jump'):
 		hanging = false
+		# this stops the hanging animation
+		var tweens := get_tree().get_processed_tweens()
+		if tweens.size() > 0:
+			tweens[0].kill()
 	
 	var vel_vec := Vector2( \
 		Input.get_axis('move_left', 'move_right'), Input.get_axis('move_forward', 'move_backward')  \

@@ -1,8 +1,7 @@
 [gd_scene format=4 uid="uid://2vbhfyqmrflk"]
 
-[ext_resource type="PackedScene" uid="uid://cnyha7j8gdx03" path="res://scenes/player.tscn" id="1_aa3wj"]
+[ext_resource type="PackedScene" uid="uid://bnqv3i273vgd1" path="res://scenes/player.tscn" id="1_aa3wj"]
 [ext_resource type="Script" uid="uid://bqjmf4pi5iwvy" path="res://scripts/hanger.gd" id="2_rgguv"]
-[ext_resource type="PackedScene" uid="uid://ctd70a8i0e0yw" path="res://scenes/postproc.tscn" id="3_o41e5"]
 
 [sub_resource type="Environment" id="Environment_aa3wj"]
 
@@ -123,7 +122,5 @@ shape = SubResource("BoxShape3D_aa3wj")
 
 [node name="PlayerPosition" type="Node3D" parent="Hanger" unique_id=91987400]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1100798, 0)
-
-[node name="Postproc" parent="." unique_id=1075234556 instance=ExtResource("3_o41e5")]
 
 [connection signal="body_entered" from="Hanger" to="Hanger" method="_on_body_entered"]
