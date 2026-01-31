@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cnyha7j8gdx03"]
+[gd_scene format=3 uid="uid://bnqv3i273vgd1"]
 
 [ext_resource type="Script" uid="uid://cy04b2ow18jlo" path="res://scripts/player3d.gd" id="1_qhqgy"]
 [ext_resource type="Script" uid="uid://d30j6idw7vuat" path="res://scripts/gas_mask.gd" id="2_dqkch"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dk2on0wnitumo" path="res://scenes/gas_detector.gd" id="3_qlg0r"]
 [ext_resource type="Script" uid="uid://ohaiknv2vxd7" path="res://scenes/flashlight.gd" id="4_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://et2qpq8ojjqa" path="res://assets/flashlight_texture.jpg" id="5_tuyoq"]
+[ext_resource type="PackedScene" path="res://scenes/postproc.tscn" id="7_fjrip"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mf8r0"]
 
@@ -106,5 +107,7 @@ texture = ExtResource("5_tuyoq")
 mesh = SubResource("CapsuleMesh_tuyoq")
 
 [node name="InvulnerabilityTimer" type="Timer" parent="." unique_id=1793104084]
+
+[node name="Postproc" parent="." unique_id=1075234556 instance=ExtResource("7_fjrip")]
 
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]
