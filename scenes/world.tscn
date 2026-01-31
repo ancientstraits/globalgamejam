@@ -1,11 +1,16 @@
 [gd_scene format=3 uid="uid://bvpqcfq2fku1"]
 
 [ext_resource type="Script" uid="uid://cy04b2ow18jlo" path="res://scenes/player3d.gd" id="1_nnsk1"]
+[ext_resource type="Script" uid="uid://ohaiknv2vxd7" path="res://scenes/flashlight.gd" id="2_4wyf3"]
 [ext_resource type="Script" uid="uid://d30j6idw7vuat" path="res://scenes/gas_mask.gd" id="2_rwgxs"]
+[ext_resource type="Texture2D" uid="uid://3mo7ckm0wl3m" path="res://assets/flashlight_texture.jpg" id="3_k0juu"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mf8r0"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_g0ymw"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k0juu"]
+blend_mode = 1
 
 [node name="3Dworld" type="Node3D" unique_id=513478039]
 
@@ -25,6 +30,20 @@ shape = SubResource("CapsuleShape3D_mf8r0")
 [node name="Camera3D" type="Camera3D" parent="Player" unique_id=425394841]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6030874, -0.1589483)
 
+[node name="Flashlight" type="Node3D" parent="Player/Camera3D" unique_id=1708143587 node_paths=PackedStringArray("canvas", "texture_inner", "texture_outer")]
+script = ExtResource("2_4wyf3")
+canvas = NodePath("../../../FlashlightEffect")
+texture_inner = NodePath("../../../FlashlightEffect/TextureRect2")
+texture_outer = NodePath("../../../FlashlightEffect/TextureRect")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Player/Camera3D/Flashlight" unique_id=1786814677]
+light_energy = 10.263
+light_indirect_energy = 16.0
+light_specular = 5.0
+shadow_enabled = true
+spot_range = 20.0
+spot_angle = 20.0
+
 [node name="GasMask" type="Node3D" parent="Player" unique_id=1544456072]
 script = ExtResource("2_rwgxs")
 
@@ -39,7 +58,60 @@ size = Vector3(100, 0.25, 100)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=442866872]
 transform = Transform3D(1, 0, 0, 0, 0.20000072, 0.9797958, 0, -0.9797958, 0.20000072, 0, 8.979358, -1.1422927)
+light_energy = 0.0
 
 [node name="SlenderEnemy" type="CharacterBody3D" parent="." unique_id=1530867360]
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="SlenderEnemy" unique_id=439482757]
+
+[node name="Ground2" type="StaticBody3D" parent="." unique_id=273903501]
+transform = Transform3D(1, 0, 0, 0, -0.09824298, 0.9951624, 0, -0.9951624, -0.09824298, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2" unique_id=647869973]
+shape = SubResource("WorldBoundaryShape3D_g0ymw")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Ground2" unique_id=2116268558]
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 11.893055, 1.186429)
+size = Vector3(100, 0.25, 100)
+
+[node name="FlashlightEffect" type="CanvasLayer" parent="." unique_id=2038750413]
+
+[node name="TextureRect2" type="TextureRect" parent="FlashlightEffect" unique_id=1909387531]
+modulate = Color(1, 1, 1, 0.5411765)
+material = SubResource("CanvasItemMaterial_k0juu")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.206841
+scale = Vector2(0.49, 0.49)
+pivot_offset = Vector2(256, 256)
+texture = ExtResource("3_k0juu")
+stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="FlashlightEffect" unique_id=2132817754]
+modulate = Color(1, 1, 1, 0.24313726)
+material = SubResource("CanvasItemMaterial_k0juu")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -6.2831855
+scale = Vector2(0.8, 0.8)
+pivot_offset = Vector2(256, 256)
+texture = ExtResource("3_k0juu")
+stretch_mode = 4
