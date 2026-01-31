@@ -16,10 +16,6 @@ func _ready() -> void:
 		
 		var defect_instance = defect.instantiate()
 		
-		print(aabb.position)
-		
 		defect_instance.position =  repair_plane.position + aabb.position + Vector3(randf_range(defect_position_padding,size.x - defect_position_padding), randf_range(defect_position_padding,size.y - defect_position_padding), 0)
-		
-		print(defect_instance.position)
 		
 		add_child(defect_instance)
