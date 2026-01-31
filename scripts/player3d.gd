@@ -68,8 +68,9 @@ func _process(delta: float) -> void:
 	
 	if hanging:
 		var to_hangpos := hang_pos - global_position
-		velocity += 20.0 * to_hangpos
 		velocity.y = 0.0
+		velocity += 20.0 * to_hangpos
+	
 	
 	move_and_slide()
 	
