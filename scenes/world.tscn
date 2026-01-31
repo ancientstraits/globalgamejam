@@ -4,9 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://dex8ha1cwedsc" path="res://scenes/basic_enemy.tscn" id="2_k0juu"]
 [ext_resource type="PackedScene" uid="uid://dnjglam3v7436" path="res://scenes/generator.tscn" id="3_w7kh3"]
 [ext_resource type="Script" uid="uid://u305pkolf8el" path="res://scenes/gas.gd" id="4_k0juu"]
-[ext_resource type="PackedScene" uid="uid://dakrx0blmuigi" path="res://scenes/gas_meter.tscn" id="5_i7141"]
-[ext_resource type="PackedScene" uid="uid://dn3oldl2o4g26" path="res://scenes/crosshair.tscn" id="6_4mrxx"]
-[ext_resource type="PackedScene" uid="uid://c6fpn5euunax8" path="res://scenes/ouch_hud.tscn" id="7_7r4gi"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4wyf3"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -116,9 +113,3 @@ mesh = SubResource("PlaneMesh_k0juu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Gas" unique_id=768314873]
 shape = SubResource("BoxShape3D_71j4m")
-
-[node name="GasMeter" parent="." unique_id=1262088993 instance=ExtResource("5_i7141")]
-
-[node name="Crosshair" parent="." unique_id=22330358 instance=ExtResource("6_4mrxx")]
-
-[node name="OuchHUD" parent="." unique_id=530555860 instance=ExtResource("7_7r4gi")]

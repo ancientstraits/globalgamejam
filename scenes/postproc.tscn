@@ -1,23 +1,22 @@
-[gd_scene format=3 uid="uid://ctd70a8i0e0yw"]
+[gd_scene format=3 uid="uid://cvcs1exfgfvdm"]
 
 [ext_resource type="Script" uid="uid://da8oku04vawyq" path="res://scripts/postproc.gd" id="1_2py5d"]
-[ext_resource type="Shader" uid="uid://dyvi2gawwbewk" path="res://scenes/postproc.gdshader" id="1_e66ms"]
-[ext_resource type="Texture2D" uid="uid://08bmi5fllv6c" path="res://assets/gasmaskcutout.png" id="2_c2esr"]
+[ext_resource type="Shader" path="res://scenes/postproc.gdshader" id="1_e66ms"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_c2esr"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2py5d"]
 shader = ExtResource("1_e66ms")
-shader_parameter/gasmask_texture = ExtResource("2_c2esr")
 shader_parameter/gasmask_mul = Vector2(0.8, 0.55)
 shader_parameter/gasmask_off = Vector2(0.05, 0)
 shader_parameter/pixelate_factor = 8
-shader_parameter/vignette_m = 0.6
+shader_parameter/vignette_m = 0.0
 shader_parameter/vignette_b = 0.0
 
 [node name="Postproc" type="CanvasLayer" unique_id=1075234556]
 script = ExtResource("1_2py5d")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=659871003]
-material = SubResource("ShaderMaterial_c2esr")
+z_index = -1
+material = SubResource("ShaderMaterial_2py5d")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

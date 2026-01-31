@@ -1,31 +1,55 @@
-[gd_scene format=3 uid="uid://bnqv3i273vgd1"]
+[gd_scene format=3 uid="uid://cnyha7j8gdx03"]
 
 [ext_resource type="Script" uid="uid://cy04b2ow18jlo" path="res://scripts/player3d.gd" id="1_qhqgy"]
 [ext_resource type="Script" uid="uid://d30j6idw7vuat" path="res://scripts/gas_mask.gd" id="2_dqkch"]
 [ext_resource type="Script" uid="uid://bubq3tve6bkb2" path="res://scenes/interaction_cast.gd" id="2_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://08bmi5fllv6c" path="res://assets/gasmaskcutout.png" id="3_jej6c"]
 [ext_resource type="Script" uid="uid://dk2on0wnitumo" path="res://scenes/gas_detector.gd" id="3_qlg0r"]
 [ext_resource type="Script" uid="uid://ohaiknv2vxd7" path="res://scenes/flashlight.gd" id="4_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://et2qpq8ojjqa" path="res://assets/flashlight_texture.jpg" id="5_tuyoq"]
-[ext_resource type="PackedScene" path="res://scenes/postproc.tscn" id="7_fjrip"]
+[ext_resource type="PackedScene" uid="uid://cvcs1exfgfvdm" path="res://scenes/postproc.tscn" id="7_fjrip"]
+[ext_resource type="PackedScene" uid="uid://dakrx0blmuigi" path="res://scenes/gas_meter.tscn" id="7_y4r1p"]
+[ext_resource type="PackedScene" uid="uid://dn3oldl2o4g26" path="res://scenes/crosshair.tscn" id="8_d2wvv"]
+[ext_resource type="PackedScene" uid="uid://c6fpn5euunax8" path="res://scenes/ouch_hud.tscn" id="9_3v2ag"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_d2wvv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mf8r0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qhqgy"]
 size = Vector3(0.3, 0.3, 4)
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tuyoq"]
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fjrip"]
 blend_mode = 1
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_tuyoq"]
 
 [node name="Player" type="CharacterBody3D" unique_id=155048425]
 transform = Transform3D(0.86788684, 0, 0.49676192, 0, 1, 0, -0.49676192, 0, 0.86788684, 0, 0, 0)
 script = ExtResource("1_qhqgy")
 gravity = -40.0
 jump_vel = 10.0
-move_vel = 30.0
+move_vel = 10.0
 camera_speed = 0.001
 invulnerability_time = 2.0
+
+[node name="Mask" type="CanvasLayer" parent="." unique_id=235587990]
+
+[node name="ColorRect" type="TextureRect" parent="Mask" unique_id=1100704667]
+texture_filter = 1
+texture_repeat = 1
+material = SubResource("CanvasItemMaterial_d2wvv")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -626.0
+offset_top = -341.0
+offset_right = -626.0
+offset_bottom = -312.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.56, 1.6399996)
+texture = ExtResource("3_jej6c")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1528320197]
 shape = SubResource("CapsuleShape3D_mf8r0")
@@ -58,12 +82,27 @@ max_gas = 100.0
 gas_gain_rate = 7.0
 gas_drain_rate = 3.0
 
+[node name="DamageOverlay" type="CanvasLayer" parent="GasMask" unique_id=1118804646]
+
+[node name="GasMeter" parent="GasMask/DamageOverlay" unique_id=1262088993 instance=ExtResource("7_y4r1p")]
+scale = Vector2(2.7600012, 2.7600012)
+show_percentage = false
+
+[node name="Crosshair" parent="GasMask/DamageOverlay" unique_id=22330358 instance=ExtResource("8_d2wvv")]
+
+[node name="OuchHUD" parent="GasMask/DamageOverlay" unique_id=530555860 instance=ExtResource("9_3v2ag")]
+
 [node name="GasDetector" type="Area3D" parent="GasMask" unique_id=216936063]
 transform = Transform3D(0.86788684, 0, -0.49676192, 0, 1, 0, 0.49676192, 0, 0.86788684, 0, 0, 0)
 script = ExtResource("3_qlg0r")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GasMask/GasDetector" unique_id=2012420051]
 shape = SubResource("CapsuleShape3D_mf8r0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1295110005]
+mesh = SubResource("CapsuleMesh_tuyoq")
+
+[node name="InvulnerabilityTimer" type="Timer" parent="." unique_id=1793104084]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1141877781]
 
@@ -102,11 +141,6 @@ grow_vertical = 2
 rotation = 1.7243853
 pivot_offset = Vector2(256, 256)
 texture = ExtResource("5_tuyoq")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1295110005]
-mesh = SubResource("CapsuleMesh_tuyoq")
-
-[node name="InvulnerabilityTimer" type="Timer" parent="." unique_id=1793104084]
 
 [node name="Postproc" parent="." unique_id=1075234556 instance=ExtResource("7_fjrip")]
 
