@@ -1,9 +1,7 @@
 [gd_scene format=3 uid="uid://bvpqcfq2fku1"]
 
-[ext_resource type="Script" uid="uid://cy04b2ow18jlo" path="res://scripts/player3d.gd" id="1_nnsk1"]
-[ext_resource type="Script" uid="uid://d30j6idw7vuat" path="res://scripts/gas_mask.gd" id="2_rwgxs"]
-[ext_resource type="Script" uid="uid://brkliyb6hfu4m" path="res://scripts/basic_enemy.gd" id="3_4wyf3"]
-[ext_resource type="Script" uid="uid://dk2on0wnitumo" path="res://scenes/gas_detector.gd" id="4_71j4m"]
+[ext_resource type="PackedScene" uid="uid://b6nwh03k30tgx" path="res://scenes/player.tscn" id="1_4wyf3"]
+[ext_resource type="PackedScene" uid="uid://dex8ha1cwedsc" path="res://scenes/basic_enemy.tscn" id="2_k0juu"]
 [ext_resource type="Script" uid="uid://u305pkolf8el" path="res://scenes/gas.gd" id="4_k0juu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4wyf3"]
@@ -17,12 +15,6 @@ sky_material = SubResource("ProceduralSkyMaterial_4wyf3")
 background_mode = 2
 sky = SubResource("Sky_k0juu")
 tonemap_mode = 2
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mf8r0"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_k0juu"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_71j4m"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_rwgxs"]
 vertices = PackedVector3Array(-49.5, 0.5, 10, -10, 0.5, 10, -9.75, 0.5, 9, -7.75, 0.5, -49.5, -49.5, 0.5, -49.5, -7.75, 0.5, 9, -1, 0.5, 9, -1, 0.5, -49.5, 1, 0.5, 9, 1.25, 0.5, 10, 49.5, 0.5, 10, 49.5, 0.5, -49.5, -8.5, 0.5, 49.5, -8.25, 0.5, 11.25, -9.75, 0.5, 11.25, -49.5, 0.5, 49.5, 0.75, 0.5, 11.25, -0.75, 0.5, 11.25, -0.5, 0.5, 49.5, 49.5, 0.5, 49.5)
@@ -52,52 +44,14 @@ bg_color = Color(0, 0.66224426, 0.057101645, 1)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=853303836]
 environment = SubResource("Environment_71j4m")
 
-[node name="Player" type="CharacterBody3D" parent="." unique_id=1498063532]
+[node name="Player" parent="." unique_id=155048425 instance=ExtResource("1_4wyf3")]
 transform = Transform3D(0.86788684, 0, 0.49676192, 0, 1, 0, -0.49676192, 0, 0.86788684, 0, 4.7243547, 0)
-script = ExtResource("1_nnsk1")
-gravity = -40.0
-jump_vel = 10.0
-move_vel = 30.0
-camera_speed = 0.001
-health = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1139850675]
-shape = SubResource("CapsuleShape3D_mf8r0")
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Player" unique_id=1398007988]
-
-[node name="Camera3D" type="Camera3D" parent="Player" unique_id=425394841]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6030874, -0.1589483)
-
-[node name="GasMask" type="Node3D" parent="Player" unique_id=1544456072]
-script = ExtResource("2_rwgxs")
-max_gas = 100.0
-gas_gain_rate = 7.0
-gas_drain_rate = 3.0
-
-[node name="GasDetector" type="Area3D" parent="Player/GasMask" unique_id=950339270]
-transform = Transform3D(0.86788684, 0, -0.49676192, 0, 1, 0, 0.49676192, 0, 0.86788684, 0, 0, 0)
-script = ExtResource("4_71j4m")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/GasMask/GasDetector" unique_id=1966041011]
-shape = SubResource("CapsuleShape3D_mf8r0")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=442866872]
 transform = Transform3D(1, 0, 0, 0, 0.20000072, 0.9797958, 0, -0.9797958, 0.20000072, 0, 8.979358, -1.1422927)
 
-[node name="BasicEnemy" type="CharacterBody3D" parent="." unique_id=1530867360]
+[node name="BasicEnemy" parent="." unique_id=662068 instance=ExtResource("2_k0juu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7771378, 13.095138)
-script = ExtResource("3_4wyf3")
-speed = 5.0
-
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="BasicEnemy" unique_id=439482757]
-debug_enabled = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="BasicEnemy" unique_id=1352269139]
-mesh = SubResource("CapsuleMesh_k0juu")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BasicEnemy" unique_id=1820682207]
-shape = SubResource("CapsuleShape3D_71j4m")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=2024323905]
 navigation_mesh = SubResource("NavigationMesh_rwgxs")
