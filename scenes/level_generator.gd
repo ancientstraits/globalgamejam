@@ -366,21 +366,22 @@ func _ensure_two_exits(width, height, tiles, placed_rooms, h_walls, v_walls):
 			exits += 1
 
 func _grid_pos_to_world(x, y) -> Vector3:
-	return Vector3(-x, 0, -y)
+	return Vector3(-x, 0, -y) * tile_size
 
 func _h_wall_grid_pos_to_world(x, y) -> Vector3:
 	var out = _grid_pos_to_world(x, y)
-	out.x += 0.5
+	out.x += 0.5 * tile_size
 	return out
 
 func _v_wall_grid_pos_to_world(x, y) -> Vector3:
 	var out = _grid_pos_to_world(x, y)
-	out.z += 0.5
+	out.z += 0.5 * tile_size
 	return out
 
 @export var height: int
 @export var width: int
 @export var straightaway_bias: float = 0.85
+@export var tile_size: float = 1
 
 @export var mandatory_rooms: Array[MandatoryRoom]
 

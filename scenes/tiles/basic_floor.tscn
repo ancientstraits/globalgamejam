@@ -3,5 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://vnvqiu2nxm05" path="res://assets/models/basic_floor.glb" id="1_abtpw"]
 
 [node name="BasicFloor" type="Node3D" unique_id=621641132]
+transform = Transform3D(4, 0, 0, 0, 2, 0, 0, 0, 4, 0, 0, 0)
 
 [node name="basic_floor" parent="." unique_id=58713971 instance=ExtResource("1_abtpw")]
