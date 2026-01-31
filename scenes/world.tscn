@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://bvpqcfq2fku1"]
 
-[ext_resource type="PackedScene" uid="uid://b6nwh03k30tgx" path="res://scenes/player.tscn" id="1_4wyf3"]
-[ext_resource type="PackedScene" uid="uid://dex8ha1cwedsc" path="res://scenes/basic_enemy.tscn" id="2_k0juu"]
+[ext_resource type="PackedScene" uid="uid://cnyha7j8gdx03" path="res://scenes/player.tscn" id="1_4wyf3"]
+[ext_resource type="PackedScene" path="res://scenes/basic_enemy.tscn" id="2_k0juu"]
 [ext_resource type="Script" uid="uid://u305pkolf8el" path="res://scenes/gas.gd" id="4_k0juu"]
-[ext_resource type="Script" path="res://scripts/generator.gd" id="6_i7141"]
+[ext_resource type="Script" uid="uid://b053u7yx5kp8r" path="res://scripts/generator.gd" id="6_i7141"]
+[ext_resource type="Texture2D" uid="uid://b3mfmx1ojm73k" path="res://assets/crosshair.png" id="6_qfnet"]
 [ext_resource type="PackedScene" uid="uid://c4ujeyr0po3jj" path="res://scenes/defect.tscn" id="7_4mrxx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4wyf3"]
@@ -17,6 +18,9 @@ sky_material = SubResource("ProceduralSkyMaterial_4wyf3")
 background_mode = 2
 sky = SubResource("Sky_k0juu")
 tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.71
+glow_bloom = 0.16
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_rwgxs"]
 vertices = PackedVector3Array(-49.5, 0.5, 10, -10, 0.5, 10, -9.75, 0.5, 9, -7.75, 0.5, -49.5, -49.5, 0.5, -49.5, -7.75, 0.5, 9, -1, 0.5, 9, -1, 0.5, -49.5, 1, 0.5, 9, 1.25, 0.5, 10, 49.5, 0.5, 10, 49.5, 0.5, -49.5, -8.5, 0.5, 49.5, -8.25, 0.5, 11.25, -9.75, 0.5, 11.25, -49.5, 0.5, 49.5, 0.75, 0.5, 11.25, -0.75, 0.5, 11.25, -0.5, 0.5, 49.5, 49.5, 0.5, 49.5)
@@ -144,3 +148,20 @@ shape = SubResource("ConvexPolygonShape3D_w7kh3")
 [node name="RepairPlane" type="MeshInstance3D" parent="Generator" unique_id=1093424144]
 visible = false
 mesh = SubResource("PlaneMesh_i7141")
+
+[node name="Crosshair" type="TextureRect" parent="." unique_id=1632406217]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.44, 0.44)
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("6_qfnet")
