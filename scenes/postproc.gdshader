@@ -26,7 +26,7 @@ vec2 pixelate_uv(vec2 uv, vec2 px_size, float factor) {
 vec3 superimpose_gas_mask(vec2 uv, vec3 input) {
 	vec2 gasmask_pos = gasmask_off + 0.5 + gasmask_mul * (uv - 0.5);
 	vec4 gasmask = texture(gasmask_texture, gasmask_pos);
-	vec3 mixed = mix(input, gasmask.rgb, gasmask.a);
+	vec3 mixed = mix(input, gasmask.rgb, 0.5 * gasmask.a);
 	return mixed;
 }
 

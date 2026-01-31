@@ -12,11 +12,18 @@ extends CharacterBody3D
 var hanging: bool = false
 var hang_pos: Vector3 = Vector3.ZERO
 
-# var camera_velocity: Vector2
+var has_postproc: bool
+var postproc: CanvasLayer = null
 
+# var camera_velocity: Vector2
+	
 func _ready() -> void:
 	Globals.player = self
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	has_postproc = get_tree().current_scene.has_node('Postproc')
+	if has_postproc:
+		postproc = get_tree().current_scene.get_node('Postproc')
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed('ui_cancel'):
@@ -31,6 +38,9 @@ func _input(event: InputEvent) -> void:
 		var camera_velocity: Vector2 = camera_speed * event.screen_relative
 		rotate_y(-camera_velocity.x) # sideways camera rotation
 		cam.rotation.x = clamp(cam.rotation.x - camera_velocity.y, -PI/2, PI/2) # vertical camera rotation
+		
+		if has_postproc:
+			postproc.gasmask_off = 0.1 * camera_velocity
 
 # 2d is so mainstream, WE are all doing 3d now
 func _process(delta: float) -> void:
@@ -41,6 +51,10 @@ func _process(delta: float) -> void:
 		Input.get_axis('move_left', 'move_right'), Input.get_axis('move_forward', 'move_backward')  \
 	).normalized()
 	var dir := (transform.basis * Vector3(vel_vec.x, 0.0, vel_vec.y)).normalized()
+	
+	if has_postproc:
+		postproc.gasmask_mul = \
+			postproc.gasmask_mul.lerp(0.03 * vel_vec.y * Vector2.ONE, 0.5)
 	
 	if is_on_floor():
 		if Input.is_action_just_pressed('jump'):

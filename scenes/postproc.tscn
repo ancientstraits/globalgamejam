@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://ctd70a8i0e0yw"]
 
+[ext_resource type="Script" uid="uid://da8oku04vawyq" path="res://scripts/postproc.gd" id="1_2py5d"]
 [ext_resource type="Shader" uid="uid://dyvi2gawwbewk" path="res://scenes/postproc.gdshader" id="1_e66ms"]
 [ext_resource type="Texture2D" uid="uid://08bmi5fllv6c" path="res://assets/gasmaskcutout.png" id="2_c2esr"]
 
@@ -13,6 +14,7 @@ shader_parameter/vignette_m = 0.5
 shader_parameter/vignette_b = -0.2
 
 [node name="Postproc" type="CanvasLayer" unique_id=1075234556]
+script = ExtResource("1_2py5d")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=659871003]
 material = SubResource("ShaderMaterial_c2esr")
