@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://fnhrj6ium1r4"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_71r74"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="Placeholderwall" type="CSGMesh3D" unique_id=1432882851]
+mesh = SubResource("BoxMesh_71r74")

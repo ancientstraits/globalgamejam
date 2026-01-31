@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://d4nptp5ey0bpp"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_2c8tv"]
+size = Vector3(0.8, 0.8, 0.8)
+
+[node name="DebugCube" type="CSGMesh3D" unique_id=1694477328]
+mesh = SubResource("BoxMesh_2c8tv")
