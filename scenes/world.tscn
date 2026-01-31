@@ -138,6 +138,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 script = ExtResource("6_i7141")
 defect = ExtResource("7_4mrxx")
 defect_position_padding = 0.3
+defect_spawn_rate = 5.0
+defect_spawn_rate_variability = 2.0
+defect_lose_threshold = 5
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Generator" unique_id=2484708]
 mesh = SubResource("BoxMesh_7r4gi")
@@ -148,6 +151,9 @@ shape = SubResource("ConvexPolygonShape3D_w7kh3")
 [node name="RepairPlane" type="MeshInstance3D" parent="Generator" unique_id=1093424144]
 visible = false
 mesh = SubResource("PlaneMesh_i7141")
+
+[node name="Timer" type="Timer" parent="Generator" unique_id=124247678]
+one_shot = true
 
 [node name="Crosshair" type="TextureRect" parent="." unique_id=1632406217]
 texture_filter = 1
@@ -165,3 +171,5 @@ grow_vertical = 2
 scale = Vector2(0.44, 0.44)
 pivot_offset = Vector2(20, 20)
 texture = ExtResource("6_qfnet")
+
+[connection signal="timeout" from="Generator/Timer" to="Generator" method="_on_timer_timeout"]
