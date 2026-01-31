@@ -1,14 +1,9 @@
 [gd_scene format=3 uid="uid://bvpqcfq2fku1"]
 
 [ext_resource type="PackedScene" uid="uid://cnyha7j8gdx03" path="res://scenes/player.tscn" id="1_4wyf3"]
-<<<<<<< HEAD
 [ext_resource type="PackedScene" uid="uid://dex8ha1cwedsc" path="res://scenes/basic_enemy.tscn" id="2_k0juu"]
 [ext_resource type="PackedScene" uid="uid://dnjglam3v7436" path="res://scenes/generator.tscn" id="3_w7kh3"]
 [ext_resource type="Script" uid="uid://u305pkolf8el" path="res://scenes/gas.gd" id="4_k0juu"]
-=======
-[ext_resource type="PackedScene" path="res://scenes/basic_enemy.tscn" id="2_k0juu"]
-[ext_resource type="Script" path="res://scenes/gas.gd" id="4_k0juu"]
->>>>>>> 465e60d (Added grabbable & throwable props)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4wyf3"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -51,8 +46,6 @@ size = Vector2(5, 5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_71j4m"]
 size = Vector3(5, 5, 5)
 
-<<<<<<< HEAD
-=======
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71j4m"]
 bg_color = Color(0, 0.66224426, 0.057101645, 1)
 
@@ -63,7 +56,6 @@ bg_color = Color(0, 0.66224426, 0.057101645, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_k0juu"]
 size = Vector3(0.2578125, 0.2763672, 0.3)
 
->>>>>>> 465e60d (Added grabbable & throwable props)
 [node name="3Dworld" type="Node3D" unique_id=513478039]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=853303836]
@@ -133,8 +125,6 @@ mesh = SubResource("PlaneMesh_k0juu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Gas" unique_id=768314873]
 shape = SubResource("BoxShape3D_71j4m")
-<<<<<<< HEAD
-=======
 
 [node name="GasMeter" type="ProgressBar" parent="." unique_id=801314967]
 offset_left = 26.0
@@ -162,4 +152,3 @@ mesh = SubResource("BoxMesh_4wyf3")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prop/RigidBody3D" unique_id=1269332892 groups=["props"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 shape = SubResource("BoxShape3D_k0juu")
->>>>>>> 465e60d (Added grabbable & throwable props)
