@@ -12,5 +12,3 @@ func _physics_process(delta: float) -> void:
 			in_gas = true
 			
 	get_parent().in_gas = in_gas
-	
-	print(in_gas)

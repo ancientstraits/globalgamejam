@@ -15,4 +15,3 @@ func _physics_process(delta: float) -> void:
 	if gas >= max_gas:
 		Globals.die.emit()
 	get_tree().current_scene.get_node('GasMeter').value = gas
-	print(get_tree().current_scene.get_node('GasMeter').value)
