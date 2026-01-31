@@ -1,26 +1,111 @@
 [gd_scene format=3 uid="uid://bvpqcfq2fku1"]
 
-[ext_resource type="Script" uid="uid://cy04b2ow18jlo" path="res://scenes/player3d.gd" id="1_nnsk1"]
 [ext_resource type="Script" uid="uid://ohaiknv2vxd7" path="res://scenes/flashlight.gd" id="2_4wyf3"]
-[ext_resource type="Script" uid="uid://d30j6idw7vuat" path="res://scenes/gas_mask.gd" id="2_rwgxs"]
 [ext_resource type="Texture2D" uid="uid://3mo7ckm0wl3m" path="res://assets/flashlight_texture.jpg" id="3_k0juu"]
+[ext_resource type="Script" uid="uid://cy04b2ow18jlo" path="res://scripts/player3d.gd" id="1_nnsk1"]
+[ext_resource type="Script" uid="uid://d30j6idw7vuat" path="res://scripts/gas_mask.gd" id="2_rwgxs"]
+[ext_resource type="Script" uid="uid://brkliyb6hfu4m" path="res://scripts/basic_enemy.gd" id="3_4wyf3"]
+[ext_resource type="Script" uid="uid://dk2on0wnitumo" path="res://scripts/gas_detector.gd" id="4_71j4m"]
+[ext_resource type="Script" uid="uid://u305pkolf8el" path="res://scripts/gas.gd" id="4_k0juu"]
+[ext_resource type="Script" uid="uid://b053u7yx5kp8r" path="res://scripts/generator.gd" id="6_qfnet"]
+[ext_resource type="PackedScene" uid="uid://kjd7q8l2ntln" path="res://scenes/defect.tscn" id="7_i7141"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4wyf3"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_k0juu"]
+sky_material = SubResource("ProceduralSkyMaterial_4wyf3")
+
+[sub_resource type="Environment" id="Environment_71j4m"]
+background_mode = 2
+sky = SubResource("Sky_k0juu")
+tonemap_mode = 2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mf8r0"]
 
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_g0ymw"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_k0juu"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_71j4m"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_rwgxs"]
+vertices = PackedVector3Array(-49.5, 0.5, 10, -10, 0.5, 10, -9.75, 0.5, 9, -7.75, 0.5, -49.5, -49.5, 0.5, -49.5, -7.75, 0.5, 9, -1, 0.5, 9, -1, 0.5, -49.5, 1, 0.5, 9, 1.25, 0.5, 10, 49.5, 0.5, 10, 49.5, 0.5, -49.5, -8.5, 0.5, 49.5, -8.25, 0.5, 11.25, -9.75, 0.5, 11.25, -49.5, 0.5, 49.5, 0.75, 0.5, 11.25, -0.75, 0.5, 11.25, -0.5, 0.5, 49.5, 49.5, 0.5, 49.5)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 4), PackedInt32Array(2, 4, 3), PackedInt32Array(3, 5, 2), PackedInt32Array(3, 7, 5), PackedInt32Array(5, 7, 6), PackedInt32Array(9, 8, 10), PackedInt32Array(10, 8, 11), PackedInt32Array(11, 8, 7), PackedInt32Array(8, 6, 7), PackedInt32Array(14, 13, 12), PackedInt32Array(14, 12, 1), PackedInt32Array(1, 12, 0), PackedInt32Array(0, 12, 15), PackedInt32Array(18, 17, 16), PackedInt32Array(16, 9, 18), PackedInt32Array(18, 9, 10), PackedInt32Array(18, 10, 19), PackedInt32Array(13, 17, 12), PackedInt32Array(12, 17, 18)]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_4wyf3"]
+data = PackedVector3Array(-50, -0.125, 50, -50, -0.125, -50, -50, 0.125, -50, 50, -0.125, -50, -50, -0.125, -50, -50, -0.125, 50, -50, 0.125, -50, -50, -0.125, -50, 50, -0.125, -50, -50, 0.125, -50, -50, 0.125, 50, -50, -0.125, 50, -50, -0.125, 50, -50, 0.125, 50, 50, 0.125, 50, 50, 0.125, 50, -50, 0.125, 50, -50, 0.125, -50, -50, -0.125, 50, 50, -0.125, 50, 50, -0.125, -50, 50, 0.125, 50, 50, -0.125, 50, -50, -0.125, 50, 50, -0.125, -50, 50, -0.125, 50, 50, 0.125, 50, 50, -0.125, -50, 50, 0.125, -50, -50, 0.125, -50, -50, 0.125, -50, 50, 0.125, -50, 50, 0.125, 50, 50, 0.125, 50, 50, 0.125, -50, 50, -0.125, -50)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_k0juu"]
+data = PackedVector3Array(-5, -2.5, 0.5, -5, -2.5, -0.5, -5, 2.5, -0.5, 5, -2.5, -0.5, -5, -2.5, -0.5, -5, -2.5, 0.5, -5, 2.5, -0.5, -5, -2.5, -0.5, 5, -2.5, -0.5, -5, 2.5, -0.5, -5, 2.5, 0.5, -5, -2.5, 0.5, -5, -2.5, 0.5, -5, 2.5, 0.5, 5, 2.5, 0.5, 5, 2.5, 0.5, -5, 2.5, 0.5, -5, 2.5, -0.5, -5, -2.5, 0.5, 5, -2.5, 0.5, 5, -2.5, -0.5, 5, 2.5, 0.5, 5, -2.5, 0.5, -5, -2.5, 0.5, 5, -2.5, -0.5, 5, -2.5, 0.5, 5, 2.5, 0.5, 5, -2.5, -0.5, 5, 2.5, -0.5, -5, 2.5, -0.5, -5, 2.5, -0.5, 5, 2.5, -0.5, 5, 2.5, 0.5, 5, 2.5, 0.5, 5, 2.5, -0.5, 5, -2.5, -0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4wyf3"]
+albedo_color = Color(0.30397612, 0.78026706, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_k0juu"]
+material = SubResource("StandardMaterial3D_4wyf3")
+size = Vector2(5, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_71j4m"]
+size = Vector3(5, 5, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71j4m"]
+bg_color = Color(0, 0.66224426, 0.057101645, 1)
+
+[sub_resource type="Gradient" id="Gradient_71j4m"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.76811594)
+colors = PackedColorArray(0, 0, 0, 1, 0.78039217, 0.6901961, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qfnet"]
+noise_type = 3
+frequency = 0.0266
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_i7141"]
+noise = SubResource("FastNoiseLite_qfnet")
+color_ramp = SubResource("Gradient_71j4m")
+seamless = true
+as_normal_map = true
+seamless_blend_skirt = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4mrxx"]
+albedo_color = Color(0.24518025, 0.14159244, 0.051793218, 1)
+metallic = 0.29
+metallic_specular = 0.79
+roughness = 0.39
+normal_enabled = true
+normal_scale = 1.68
+normal_texture = SubResource("NoiseTexture2D_i7141")
+uv1_scale = Vector3(-0.27, -0.27, -0.27)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_71j4m"]
+material = SubResource("StandardMaterial3D_4mrxx")
+size = Vector3(10, 4, 3)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_71j4m"]
+points = PackedVector3Array(5, 2, 1.5, 5, 2, -1.5, -5, 2, 1.5, 5, -2, 1.5, 5, -2, -1.5, -5, 2, -1.5, -5, -2, 1.5, -5, -2, -1.5)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_71j4m"]
+size = Vector2(10, 4)
+orientation = 2
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k0juu"]
 blend_mode = 1
 
 [node name="3Dworld" type="Node3D" unique_id=513478039]
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=853303836]
+environment = SubResource("Environment_71j4m")
+
 [node name="Player" type="CharacterBody3D" parent="." unique_id=1498063532]
-transform = Transform3D(0.86788684, 0, 0.49676192, 0, 1, 0, -0.49676192, 0, 0.86788684, 0, 4.7243547, 0)
+transform = Transform3D(0.86788684, 0, 0.49676192, 0, 1, 0, -0.49676192, 0, 0.86788684, 0, 2.4135165, 4.655791)
 script = ExtResource("1_nnsk1")
 gravity = -40.0
 jump_vel = 10.0
-move_vel = 30.0
+move_vel = 10.0
 camera_speed = 0.001
+health = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1139850675]
 shape = SubResource("CapsuleShape3D_mf8r0")
@@ -46,21 +131,91 @@ spot_angle = 20.0
 
 [node name="GasMask" type="Node3D" parent="Player" unique_id=1544456072]
 script = ExtResource("2_rwgxs")
+max_gas = 100.0
+gas_gain_rate = 7.0
+gas_drain_rate = 3.0
 
-[node name="Ground" type="StaticBody3D" parent="." unique_id=103679757]
+[node name="GasDetector" type="Area3D" parent="Player/GasMask" unique_id=950339270]
+transform = Transform3D(0.86788684, 0, -0.49676192, 0, 1, 0, 0.49676192, 0, 0.86788684, 0, 0, 0)
+script = ExtResource("4_71j4m")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=594082250]
-shape = SubResource("WorldBoundaryShape3D_g0ymw")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/GasMask/GasDetector" unique_id=1966041011]
+shape = SubResource("CapsuleShape3D_mf8r0")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Ground" unique_id=85387341]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=442866872]
+transform = Transform3D(1, 0, 0, 0, 0.20000072, 0.9797958, 0, -0.9797958, 0.20000072, 0, 8.979358, -1.1422927)
+
+[node name="BasicEnemy" type="CharacterBody3D" parent="." unique_id=1530867360]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7771378, 13.095138)
+script = ExtResource("3_4wyf3")
+speed = 5.0
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="BasicEnemy" unique_id=439482757]
+debug_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BasicEnemy" unique_id=1352269139]
+mesh = SubResource("CapsuleMesh_k0juu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasicEnemy" unique_id=1820682207]
+shape = SubResource("CapsuleShape3D_71j4m")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=2024323905]
+navigation_mesh = SubResource("NavigationMesh_rwgxs")
+
+[node name="Ground" type="StaticBody3D" parent="NavigationRegion3D" unique_id=103679757]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/Ground" unique_id=85387341]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.125, 0)
 size = Vector3(100, 0.25, 100)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=442866872]
 transform = Transform3D(1, 0, 0, 0, 0.20000072, 0.9797958, 0, -0.9797958, 0.20000072, 0, 8.979358, -1.1422927)
 light_energy = 0.0
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Ground" unique_id=1374384776]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.125, 0)
+shape = SubResource("ConcavePolygonShape3D_4wyf3")
 
-[node name="SlenderEnemy" type="CharacterBody3D" parent="." unique_id=1530867360]
+[node name="Wall" type="StaticBody3D" parent="NavigationRegion3D" unique_id=2058444848]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/Wall" unique_id=244951456]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 2, 10)
+size = Vector3(10, 5, 1)
+
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Wall" unique_id=1578837901]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 2, 10)
+shape = SubResource("ConcavePolygonShape3D_k0juu")
+
+[node name="Gas" type="Area3D" parent="." unique_id=1958327155 groups=["gas"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.576209, 0.5549674, 0)
+script = ExtResource("4_k0juu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Gas" unique_id=586452937]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5538006, 0)
+mesh = SubResource("PlaneMesh_k0juu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gas" unique_id=768314873]
+shape = SubResource("BoxShape3D_71j4m")
+
+[node name="GasMeter" type="ProgressBar" parent="." unique_id=801314967]
+offset_left = 26.0
+offset_top = 24.0
+offset_right = 270.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(0.18690777, 0.99999994, 0.103041, 1)
+theme_override_styles/fill = SubResource("StyleBoxFlat_71j4m")
+
+[node name="Generator" type="StaticBody3D" parent="." unique_id=1780922523]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.288012, 2, 0)
+script = ExtResource("6_qfnet")
+defect = ExtResource("7_i7141")
+defect_position_padding = 0.3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Generator" unique_id=4447079]
+mesh = SubResource("BoxMesh_71j4m")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Generator" unique_id=499083583]
+shape = SubResource("ConvexPolygonShape3D_71j4m")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="SlenderEnemy" unique_id=439482757]
 
@@ -115,3 +270,7 @@ scale = Vector2(0.8, 0.8)
 pivot_offset = Vector2(256, 256)
 texture = ExtResource("3_k0juu")
 stretch_mode = 4
+[node name="RepairPlane" type="MeshInstance3D" parent="Generator" unique_id=139612559]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5)
+visible = false
+mesh = SubResource("PlaneMesh_71j4m")

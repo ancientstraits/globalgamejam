@@ -23,6 +23,15 @@ config/icon="res://assets/icon.svg"
 
 Globals="*uid://buwp7ihkx4c1f"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+
+[global_group]
+
+gas=""
+
 [input]
 
 jump={
