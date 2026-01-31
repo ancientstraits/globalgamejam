@@ -32,10 +32,7 @@ size = Vector3(0.3, 0.3, 4)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_tuyoq"]
 
-[ext_resource type="Script" path="res://scenes/gas_detector.gd" id="3_qlg0r"]
-[ext_resource type="Script" uid="uid://bi07tabyspqoh" path="res://scenes/interaction.gd" id="3_tuyoq"]
-[ext_resource type="Script" uid="uid://ohaiknv2vxd7" path="res://scenes/flashlight.gd" id="4_qlg0r"]
-[ext_resource type="Texture2D" uid="uid://et2qpq8ojjqa" path="res://assets/flashlight_texture.jpg" id="5_tuyoq"]
+
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mf8r0"]
 
