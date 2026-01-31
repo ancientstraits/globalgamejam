@@ -17,6 +17,9 @@ var hang_pos: Vector3 = Vector3.ZERO
 var has_postproc: bool
 var postproc: CanvasLayer = null
 
+var hanging: bool = false
+var hang_pos: Vector3 = Vector3.ZERO
+
 # var camera_velocity: Vector2
 	
 func _ready() -> void:

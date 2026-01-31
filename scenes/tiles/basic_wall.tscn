@@ -1,0 +1,43 @@
+[gd_scene format=4 uid="uid://dqlta5edfll3l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_17kg5"]
+albedo_color = Color(0.16745102, 0.16745102, 0.16745102, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ijmh8"]
+_surfaces = [{
+"aabb": AABB(-0.025000006, -0.27531895, -0.25, 0.050000012, 0.5168793, 0.5),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAAAEAAEAAgADAAUAAAACAAUAAQAGAAMAAQAEAAYABQADAAYABAAAAAcAAAAFAAcABAAHAAYABQAGAAcA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAAAAAAD//wAA//8AAP//AAAAAAAA////////AAAAAAAA//8AAP////8AAAAAAAD/////AAAAAP//AAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_pi13y"]
+resource_name = "basic_wall_Cube_001"
+_surfaces = [{
+"aabb": AABB(-0.025000006, -0.27531895, -0.25, 0.050000012, 0.5168793, 0.5),
+"attribute_data": PackedByteArray("/1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_17kg5"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAAAA/7///wAA////v///AAAAAP+/AAAAAP///78AAAAAAAD///////8AAP//AAD//wAA/////wAAAAD//wAAAAD//1TVAAD//wAAVNUAAP////9U1QAAAAAAAFTV//8AAP///78AAP//////v/////////+/AAAAAP///7//////AAD//wAA////////AAD//wAA////////////////AAAAAFTV////////VNX/////AABU1f//AAD//1TVAAD/fwAA/38AAP9/AAD/f/+//7//v/+//7//v/+//79U1VTVVNVU1VTVVNVU1VTV//////////////////////9//7//f/+//3//v/9//7+qKqoqqiqqKqoqqiqqKqoq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_ijmh8")
+
+[node name="BasicWall" type="Node3D" unique_id=1362576353]
+
+[node name="basic_wall" type="Node3D" parent="." unique_id=1593250091]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="Cube" type="MeshInstance3D" parent="basic_wall" unique_id=1323593194]
+mesh = SubResource("ArrayMesh_pi13y")
+skeleton = NodePath("")

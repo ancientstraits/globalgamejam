@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bkm5uyeb16j67"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g3bfe"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_otskr"]
+material = SubResource("StandardMaterial3D_g3bfe")
+size = Vector3(1, 0.1, 1)
+
+[node name="Placeholdertile" type="CSGMesh3D" unique_id=1861830727]
+mesh = SubResource("BoxMesh_otskr")
