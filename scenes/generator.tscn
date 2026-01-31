@@ -1,7 +1,7 @@
-[gd_scene format=4 uid="uid://dmr2k3nr3ttgm"]
+[gd_scene format=4 uid="uid://dnjglam3v7436"]
 
 [ext_resource type="Script" uid="uid://b053u7yx5kp8r" path="res://scripts/generator.gd" id="1_w5vnv"]
-[ext_resource type="PackedScene" path="res://scenes/defect.tscn" id="2_ef8yp"]
+[ext_resource type="PackedScene" uid="uid://c4ujeyr0po3jj" path="res://scenes/defect.tscn" id="2_ef8yp"]
 [ext_resource type="Texture2D" uid="uid://y1qfgvamgahv" path="res://assets/dih.png" id="3_ef8yp"]
 
 [sub_resource type="Gradient" id="Gradient_i7141"]
@@ -32,8 +32,8 @@ size = Vector3(10, 4, 3)
 points = PackedVector3Array(5, 2, 1.5, 5, 2, -1.5, -5, 2, 1.5, 5, -2, 1.5, 5, -2, -1.5, -5, 2, -1.5, -5, -2, 1.5, -5, -2, -1.5)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_i7141"]
-size = Vector2(10, 4)
-center_offset = Vector3(0, 0, 1.5)
+size = Vector2(5.755, 2.365)
+center_offset = Vector3(0, 0.75, 1.5)
 orientation = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rqoq6"]
@@ -88,7 +88,6 @@ transform = Transform3D(0.6202065, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_w7kh3")
 
 [node name="RepairPlane" type="MeshInstance3D" parent="." unique_id=630042335]
-transform = Transform3D(0.5639849, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("PlaneMesh_i7141")
 
 [node name="Timer" type="Timer" parent="." unique_id=881121636]
