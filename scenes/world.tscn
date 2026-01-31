@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bvpqcfq2fku1"]
 
-[ext_resource type="Script" uid="uid://cy04b2ow18jlo" path="res://scenes/player3d.gd" id="1_nnsk1"]
-[ext_resource type="Script" uid="uid://d30j6idw7vuat" path="res://scenes/gas_mask.gd" id="2_rwgxs"]
-[ext_resource type="Script" uid="uid://brkliyb6hfu4m" path="res://scenes/basic_enemy.gd" id="3_4wyf3"]
+[ext_resource type="Script" uid="uid://cy04b2ow18jlo" path="res://scripts/player3d.gd" id="1_nnsk1"]
+[ext_resource type="Script" uid="uid://d30j6idw7vuat" path="res://scripts/gas_mask.gd" id="2_rwgxs"]
+[ext_resource type="Script" uid="uid://brkliyb6hfu4m" path="res://scripts/basic_enemy.gd" id="3_4wyf3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4wyf3"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
