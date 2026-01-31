@@ -1,8 +1,12 @@
 [gd_scene format=3 uid="uid://bvpqcfq2fku1"]
 
-[ext_resource type="PackedScene" uid="uid://b6nwh03k30tgx" path="res://scenes/player.tscn" id="1_4wyf3"]
+[ext_resource type="PackedScene" uid="uid://cnyha7j8gdx03" path="res://scenes/player.tscn" id="1_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://dex8ha1cwedsc" path="res://scenes/basic_enemy.tscn" id="2_k0juu"]
 [ext_resource type="Script" uid="uid://u305pkolf8el" path="res://scenes/gas.gd" id="4_k0juu"]
+[ext_resource type="Script" uid="uid://b053u7yx5kp8r" path="res://scripts/generator.gd" id="6_i7141"]
+[ext_resource type="Texture2D" uid="uid://b3mfmx1ojm73k" path="res://assets/crosshair.png" id="6_qfnet"]
+[ext_resource type="PackedScene" uid="uid://c4ujeyr0po3jj" path="res://scenes/defect.tscn" id="7_4mrxx"]
+[ext_resource type="Texture2D" uid="uid://ocgs0vgv6rtm" path="res://assets/ouch/Ouch1.png" id="7_i7141"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4wyf3"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -15,16 +19,51 @@ sky_material = SubResource("ProceduralSkyMaterial_4wyf3")
 background_mode = 2
 sky = SubResource("Sky_k0juu")
 tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.71
+glow_bloom = 0.16
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_rwgxs"]
-vertices = PackedVector3Array(-49.5, 0.5, 10, -10, 0.5, 10, -9.75, 0.5, 9, -7.75, 0.5, -49.5, -49.5, 0.5, -49.5, -7.75, 0.5, 9, -1, 0.5, 9, -1, 0.5, -49.5, 1, 0.5, 9, 1.25, 0.5, 10, 49.5, 0.5, 10, 49.5, 0.5, -49.5, -8.5, 0.5, 49.5, -8.25, 0.5, 11.25, -9.75, 0.5, 11.25, -49.5, 0.5, 49.5, 0.75, 0.5, 11.25, -0.75, 0.5, 11.25, -0.5, 0.5, 49.5, 49.5, 0.5, 49.5)
-polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 4), PackedInt32Array(2, 4, 3), PackedInt32Array(3, 5, 2), PackedInt32Array(3, 7, 5), PackedInt32Array(5, 7, 6), PackedInt32Array(9, 8, 10), PackedInt32Array(10, 8, 11), PackedInt32Array(11, 8, 7), PackedInt32Array(8, 6, 7), PackedInt32Array(14, 13, 12), PackedInt32Array(14, 12, 1), PackedInt32Array(1, 12, 0), PackedInt32Array(0, 12, 15), PackedInt32Array(18, 17, 16), PackedInt32Array(16, 9, 18), PackedInt32Array(18, 9, 10), PackedInt32Array(18, 10, 19), PackedInt32Array(13, 17, 12), PackedInt32Array(12, 17, 18)]
+vertices = PackedVector3Array(-49.5, 0.5, 0.25, -5.5, 0.5, 0.5, -5.5, 0.5, -1.75, -3.25, 0.5, -2, -3.25, 0.5, -49.5, -49.5, 0.5, -49.5, 3.5, 0.5, -2, 3.5, 0.5, -49.5, 5.5, 0.5, -2, 5.75, 0.5, 0, 49.5, 0.5, 0, 49.5, 0.5, -49.5, -4.5, 4.5, -1, -4.5, 4.5, 1, 4.5, 4.5, 1, 4.5, 4.5, -1, -4.25, 0.5, -0.75, -4.25, 0.5, 1, 4.5, 0.5, 1, 4.5, 0.5, -0.75, -0.25, 0.5, 2.25, -0.5, 0.5, 9, 1, 0.5, 9, 5.25, 0.5, 2.25, 5.75, 0.5, 1.75, 1.25, 0.5, 10.75, -0.5, 0.5, 49.5, 49.5, 0.5, 49.5, 0.75, 0.5, 11.25, -0.75, 0.5, 11.25, -5.25, 0.5, 2.25, -9.75, 0.5, 9, -49.5, 0.5, 10.25, -10, 0.5, 10.25, -8.5, 0.5, 49.5, -8.25, 0.5, 11.25, -9.75, 0.5, 11.25, -49.5, 0.5, 49.5)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 0, 4), PackedInt32Array(4, 0, 5), PackedInt32Array(4, 7, 3), PackedInt32Array(3, 7, 6), PackedInt32Array(9, 8, 10), PackedInt32Array(10, 8, 11), PackedInt32Array(11, 8, 7), PackedInt32Array(8, 6, 7), PackedInt32Array(15, 14, 12), PackedInt32Array(12, 14, 13), PackedInt32Array(19, 18, 16), PackedInt32Array(16, 18, 17), PackedInt32Array(21, 20, 22), PackedInt32Array(22, 20, 23), PackedInt32Array(24, 9, 10), PackedInt32Array(23, 24, 22), PackedInt32Array(22, 24, 25), PackedInt32Array(25, 24, 26), PackedInt32Array(26, 24, 10), PackedInt32Array(26, 10, 27), PackedInt32Array(26, 29, 28), PackedInt32Array(26, 28, 25), PackedInt32Array(20, 21, 30), PackedInt32Array(30, 21, 31), PackedInt32Array(31, 33, 32), PackedInt32Array(30, 31, 1), PackedInt32Array(1, 31, 0), PackedInt32Array(0, 31, 32), PackedInt32Array(36, 35, 34), PackedInt32Array(36, 34, 33), PackedInt32Array(33, 34, 32), PackedInt32Array(32, 34, 37), PackedInt32Array(35, 29, 34), PackedInt32Array(34, 29, 26)]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_4wyf3"]
 data = PackedVector3Array(-50, -0.125, 50, -50, -0.125, -50, -50, 0.125, -50, 50, -0.125, -50, -50, -0.125, -50, -50, -0.125, 50, -50, 0.125, -50, -50, -0.125, -50, 50, -0.125, -50, -50, 0.125, -50, -50, 0.125, 50, -50, -0.125, 50, -50, -0.125, 50, -50, 0.125, 50, 50, 0.125, 50, 50, 0.125, 50, -50, 0.125, 50, -50, 0.125, -50, -50, -0.125, 50, 50, -0.125, 50, 50, -0.125, -50, 50, 0.125, 50, 50, -0.125, 50, -50, -0.125, 50, 50, -0.125, -50, 50, -0.125, 50, 50, 0.125, 50, 50, -0.125, -50, 50, 0.125, -50, -50, 0.125, -50, -50, 0.125, -50, 50, 0.125, -50, 50, 0.125, 50, 50, 0.125, 50, 50, 0.125, -50, 50, -0.125, -50)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_k0juu"]
 data = PackedVector3Array(-5, -2.5, 0.5, -5, -2.5, -0.5, -5, 2.5, -0.5, 5, -2.5, -0.5, -5, -2.5, -0.5, -5, -2.5, 0.5, -5, 2.5, -0.5, -5, -2.5, -0.5, 5, -2.5, -0.5, -5, 2.5, -0.5, -5, 2.5, 0.5, -5, -2.5, 0.5, -5, -2.5, 0.5, -5, 2.5, 0.5, 5, 2.5, 0.5, 5, 2.5, 0.5, -5, 2.5, 0.5, -5, 2.5, -0.5, -5, -2.5, 0.5, 5, -2.5, 0.5, 5, -2.5, -0.5, 5, 2.5, 0.5, 5, -2.5, 0.5, -5, -2.5, 0.5, 5, -2.5, -0.5, 5, -2.5, 0.5, 5, 2.5, 0.5, 5, -2.5, -0.5, 5, 2.5, -0.5, -5, 2.5, -0.5, -5, 2.5, -0.5, 5, 2.5, -0.5, 5, 2.5, 0.5, 5, 2.5, 0.5, 5, 2.5, -0.5, 5, -2.5, -0.5)
+
+[sub_resource type="Gradient" id="Gradient_i7141"]
+colors = PackedColorArray(0, 0, 0, 1, 0.36045092, 0.17922884, 0.025613934, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4mrxx"]
+frequency = 0.0192
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7r4gi"]
+noise = SubResource("FastNoiseLite_4mrxx")
+color_ramp = SubResource("Gradient_i7141")
+seamless = true
+as_normal_map = true
+seamless_blend_skirt = 0.278
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w7kh3"]
+albedo_color = Color(0.30690926, 0.16513526, 0.028907763, 1)
+normal_enabled = true
+normal_scale = 1.45
+normal_texture = SubResource("NoiseTexture2D_7r4gi")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_7r4gi"]
+material = SubResource("StandardMaterial3D_w7kh3")
+size = Vector3(10, 4, 3)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_w7kh3"]
+points = PackedVector3Array(5, 2, 1.5, 5, 2, -1.5, -5, 2, 1.5, 5, -2, 1.5, 5, -2, -1.5, -5, 2, -1.5, -5, -2, 1.5, -5, -2, -1.5)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_i7141"]
+size = Vector2(10, 4)
+center_offset = Vector3(0, 0, 1.5)
+orientation = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4wyf3"]
 albedo_color = Color(0.30397612, 0.78026706, 0, 1)
@@ -76,6 +115,28 @@ size = Vector3(10, 5, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 2, 10)
 shape = SubResource("ConcavePolygonShape3D_k0juu")
 
+[node name="Generator" type="StaticBody3D" parent="NavigationRegion3D" unique_id=1604553368]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+script = ExtResource("6_i7141")
+defect = ExtResource("7_4mrxx")
+defect_position_padding = 0.3
+defect_spawn_rate = 5.0
+defect_spawn_rate_variability = 2.0
+defect_lose_threshold = 5
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Generator" unique_id=2484708]
+mesh = SubResource("BoxMesh_7r4gi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Generator" unique_id=7052306]
+shape = SubResource("ConvexPolygonShape3D_w7kh3")
+
+[node name="RepairPlane" type="MeshInstance3D" parent="NavigationRegion3D/Generator" unique_id=1093424144]
+visible = false
+mesh = SubResource("PlaneMesh_i7141")
+
+[node name="Timer" type="Timer" parent="NavigationRegion3D/Generator" unique_id=124247678]
+one_shot = true
+
 [node name="Gas" type="Area3D" parent="." unique_id=1958327155 groups=["gas"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.576209, 0.5549674, 0)
 script = ExtResource("4_k0juu")
@@ -94,3 +155,37 @@ offset_right = 270.0
 offset_bottom = 51.0
 theme_override_colors/font_color = Color(0.18690777, 0.99999994, 0.103041, 1)
 theme_override_styles/fill = SubResource("StyleBoxFlat_71j4m")
+
+[node name="Crosshair" type="TextureRect" parent="." unique_id=1632406217]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.44, 0.44)
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("6_qfnet")
+
+[node name="OuchHUD" type="TextureRect" parent="." unique_id=825553448]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_i7141")
+
+[connection signal="timeout" from="NavigationRegion3D/Generator/Timer" to="NavigationRegion3D/Generator" method="_on_timer_timeout"]
