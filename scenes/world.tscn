@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bvpqcfq2fku1"]
 
-[ext_resource type="PackedScene" uid="uid://b6nwh03k30tgx" path="res://scenes/player.tscn" id="1_4wyf3"]
-[ext_resource type="PackedScene" uid="uid://dex8ha1cwedsc" path="res://scenes/basic_enemy.tscn" id="2_k0juu"]
-[ext_resource type="Script" uid="uid://u305pkolf8el" path="res://scenes/gas.gd" id="4_k0juu"]
+[ext_resource type="PackedScene" uid="uid://cnyha7j8gdx03" path="res://scenes/player.tscn" id="1_4wyf3"]
+[ext_resource type="PackedScene" path="res://scenes/basic_enemy.tscn" id="2_k0juu"]
+[ext_resource type="Script" path="res://scenes/gas.gd" id="4_k0juu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4wyf3"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -39,6 +39,13 @@ size = Vector3(5, 5, 5)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71j4m"]
 bg_color = Color(0, 0.66224426, 0.057101645, 1)
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4wyf3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4wyf3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k0juu"]
+size = Vector3(0.2578125, 0.2763672, 0.3)
+
 [node name="3Dworld" type="Node3D" unique_id=513478039]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=853303836]
@@ -46,6 +53,7 @@ environment = SubResource("Environment_71j4m")
 
 [node name="Player" parent="." unique_id=155048425 instance=ExtResource("1_4wyf3")]
 transform = Transform3D(0.86788684, 0, 0.49676192, 0, 1, 0, -0.49676192, 0, 0.86788684, 0, 4.7243547, 0)
+collision_layer = 2
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=442866872]
 transform = Transform3D(1, 0, 0, 0, 0.20000072, 0.9797958, 0, -0.9797958, 0.20000072, 0, 8.979358, -1.1422927)
@@ -57,6 +65,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7771378, 13.095138)
 navigation_mesh = SubResource("NavigationMesh_rwgxs")
 
 [node name="Ground" type="StaticBody3D" parent="NavigationRegion3D" unique_id=103679757]
+collision_mask = 3
 
 [node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/Ground" unique_id=85387341]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.125, 0)
@@ -94,3 +103,22 @@ offset_right = 270.0
 offset_bottom = 51.0
 theme_override_colors/font_color = Color(0.18690777, 0.99999994, 0.103041, 1)
 theme_override_styles/fill = SubResource("StyleBoxFlat_71j4m")
+
+[node name="Node3D" type="Node3D" parent="GasMeter" unique_id=1866581080]
+
+[node name="Prop" type="Node3D" parent="." unique_id=712604432 groups=["props"]]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Prop" unique_id=1580565900 groups=["props"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+collision_layer = 16
+collision_mask = 17
+mass = 0.5
+physics_material_override = SubResource("PhysicsMaterial_4wyf3")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Prop/RigidBody3D" unique_id=1746570891 groups=["props"]]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.60064304, 0)
+mesh = SubResource("BoxMesh_4wyf3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prop/RigidBody3D" unique_id=1269332892 groups=["props"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+shape = SubResource("BoxShape3D_k0juu")

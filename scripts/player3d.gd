@@ -36,7 +36,7 @@ func _process(delta: float) -> void:
 	).normalized()
 	var dir := (transform.basis * Vector3(vel_vec.x, 0.0, vel_vec.y)).normalized()
 	
-	if is_on_floor():
+	if is_on_floor():		
 		if Input.is_action_just_pressed('jump'):
 			velocity.y = jump_vel
 	else:
