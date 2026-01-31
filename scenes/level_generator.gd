@@ -2,6 +2,7 @@ extends Node3D
 
 const EMPTY: int = -1
 
+@export var cell_size: int
 @export var width: int
 @export var height: int
 @export var mandatory_rooms: Array[MandatoryRoom]
@@ -260,7 +261,7 @@ func generate_maze_walls() -> void:
 			_open_wall_between(e.ax, e.ay, e.bx, e.by)
 
 	# 3) Remove dead ends to get “no cul‑de‑sacs”
-	# _remove_dead_ends()
+	_remove_dead_ends()
 
 func _open_wall_between(x1: int, y1: int, x2: int, y2: int) -> void:
 	if x1 == x2:

@@ -3,8 +3,9 @@
 [ext_resource type="Script" uid="uid://ob6kpnnneepf" path="res://scenes/level_generator.gd" id="1_xtr0w"]
 [ext_resource type="Script" uid="uid://dp65yn2l58f6y" path="res://scripts/mandatory_room.gd" id="2_xtr0w"]
 [ext_resource type="PackedScene" uid="uid://dqlta5edfll3l" path="res://scenes/tiles/basic_wall.tscn" id="3_wcvtu"]
-[ext_resource type="PackedScene" uid="uid://bkm5uyeb16j67" path="res://scenes/placeholder/placeholderroom.tscn" id="4_wcvtu"]
+[ext_resource type="PackedScene" uid="uid://dvx0ytpis1a0j" path="res://scenes/tiles/room_floor.tscn" id="4_wcvtu"]
 [ext_resource type="PackedScene" uid="uid://bvf0l4t2kcxi5" path="res://scenes/tiles/basic_floor.tscn" id="5_wcvtu"]
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="6_3xbt6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xtr0w"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -49,6 +50,7 @@ environment = SubResource("Environment_sjnq8")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2053692630]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+visible = false
 shadow_enabled = true
 
 [node name="LevelGenerator" type="Node3D" parent="." unique_id=1098101087]
@@ -60,7 +62,7 @@ placeholder_wall = ExtResource("3_wcvtu")
 placeholder_room_tile = ExtResource("4_wcvtu")
 placeholder_tile = ExtResource("5_wcvtu")
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1825717693]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1.0000001, 0, -1, -4.3711392e-08, -8.69098, 11.000003, -9.656632)
-projection = 1
-size = 21.504755
+[node name="Player" parent="." unique_id=155048425 instance=ExtResource("6_3xbt6")]
+transform = Transform3D(0.43394342, 0, 0.24838096, 0, 0.5, 0, -0.24838096, 0, 0.43394342, -1.0188649, -0.088912964, -0.95417035)
+gravity = 0.0
+move_vel = 3.0
