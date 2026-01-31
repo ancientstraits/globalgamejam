@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://dnjglam3v7436"]
+
+[ext_resource type="Script" uid="uid://b053u7yx5kp8r" path="res://scripts/generator.gd" id="1_w5vnv"]
+[ext_resource type="PackedScene" uid="uid://c4ujeyr0po3jj" path="res://scenes/defect.tscn" id="2_ef8yp"]
+
+[sub_resource type="Gradient" id="Gradient_i7141"]
+colors = PackedColorArray(0, 0, 0, 1, 0.36045092, 0.17922884, 0.025613934, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4mrxx"]
+frequency = 0.0192
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7r4gi"]
+noise = SubResource("FastNoiseLite_4mrxx")
+color_ramp = SubResource("Gradient_i7141")
+seamless = true
+as_normal_map = true
+seamless_blend_skirt = 0.278
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w7kh3"]
+albedo_color = Color(0.30690926, 0.16513526, 0.028907763, 1)
+normal_enabled = true
+normal_scale = 1.45
+normal_texture = SubResource("NoiseTexture2D_7r4gi")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_7r4gi"]
+material = SubResource("StandardMaterial3D_w7kh3")
+size = Vector3(10, 4, 3)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_w7kh3"]
+points = PackedVector3Array(5, 2, 1.5, 5, 2, -1.5, -5, 2, 1.5, 5, -2, 1.5, 5, -2, -1.5, -5, 2, -1.5, -5, -2, 1.5, -5, -2, -1.5)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_i7141"]
+size = Vector2(10, 4)
+center_offset = Vector3(0, 0, 1.5)
+orientation = 2
+
+[node name="Generator" type="StaticBody3D" unique_id=1422162699]
+script = ExtResource("1_w5vnv")
+defect = ExtResource("2_ef8yp")
+defect_position_padding = 0.3
+defect_spawn_rate = 5.0
+defect_spawn_rate_variability = 2.0
+defect_lose_threshold = 5
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1629074328]
+mesh = SubResource("BoxMesh_7r4gi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=830310474]
+shape = SubResource("ConvexPolygonShape3D_w7kh3")
+
+[node name="RepairPlane" type="MeshInstance3D" parent="." unique_id=630042335]
+visible = false
+mesh = SubResource("PlaneMesh_i7141")
+
+[node name="Timer" type="Timer" parent="." unique_id=881121636]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

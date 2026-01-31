@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://d30j6idw7vuat" path="res://scripts/gas_mask.gd" id="2_dqkch"]
 [ext_resource type="Script" uid="uid://bubq3tve6bkb2" path="res://scenes/interaction_cast.gd" id="2_qlg0r"]
 [ext_resource type="Script" uid="uid://dk2on0wnitumo" path="res://scenes/gas_detector.gd" id="3_qlg0r"]
-[ext_resource type="Script" path="res://scenes/flashlight.gd" id="4_qlg0r"]
+[ext_resource type="Script" uid="uid://ohaiknv2vxd7" path="res://scenes/flashlight.gd" id="4_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://et2qpq8ojjqa" path="res://assets/flashlight_texture.jpg" id="5_tuyoq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mf8r0"]
@@ -24,7 +24,7 @@ gravity = -40.0
 jump_vel = 10.0
 move_vel = 30.0
 camera_speed = 0.001
-health = 3
+invulnerability_time = 2.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1528320197]
 shape = SubResource("CapsuleShape3D_mf8r0")
@@ -104,3 +104,7 @@ texture = ExtResource("5_tuyoq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1295110005]
 mesh = SubResource("CapsuleMesh_tuyoq")
+
+[node name="InvulnerabilityTimer" type="Timer" parent="." unique_id=1793104084]
+
+[connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]

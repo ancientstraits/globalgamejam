@@ -31,6 +31,8 @@ window/size/viewport_height=1080
 [global_group]
 
 gas=""
+enemy=""
+player=""
 
 [input]
 

@@ -4,11 +4,13 @@ extends CharacterBody3D
 @export var jump_vel: float
 @export var move_vel: float
 @export var camera_speed: float
-@export var health : int
+@export var invulnerability_time : float
 
 @onready var cam = $Camera3D
 @onready var collider = $CollisionShape3D
+@onready var invulnerability_timer = $InvulnerabilityTimer
 
+var can_take_damage := true
 var hanging: bool = false
 var hang_pos: Vector3 = Vector3.ZERO
 
@@ -18,6 +20,7 @@ var postproc: CanvasLayer = null
 # var camera_velocity: Vector2
 	
 func _ready() -> void:
+	Globals.take_damage.connect(start_invulnerability)
 	Globals.player = self
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
@@ -74,3 +77,9 @@ func _process(delta: float) -> void:
 	move_and_slide()
 	
 	
+func start_invulnerability():
+	invulnerability_timer.start(invulnerability_time)
+	can_take_damage = false
+
+func _on_invulnerability_timer_timeout() -> void:
+	can_take_damage = true
