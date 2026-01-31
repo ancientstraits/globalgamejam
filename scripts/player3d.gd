@@ -9,6 +9,9 @@ extends CharacterBody3D
 @onready var cam = $Camera3D
 @onready var collider = $CollisionShape3D
 
+var hanging: bool = false
+var hang_pos: Vector3 = Vector3.ZERO
+
 # var camera_velocity: Vector2
 
 func _ready() -> void:
@@ -31,6 +34,9 @@ func _input(event: InputEvent) -> void:
 
 # 2d is so mainstream, WE are all doing 3d now
 func _process(delta: float) -> void:
+	if hanging and Input.is_action_just_pressed('jump'):
+		hanging = false
+	
 	var vel_vec := Vector2( \
 		Input.get_axis('move_left', 'move_right'), Input.get_axis('move_forward', 'move_backward')  \
 	).normalized()
@@ -41,9 +47,16 @@ func _process(delta: float) -> void:
 			velocity.y = jump_vel
 	else:
 		velocity.y += gravity * delta
+
 	
 	velocity.z = move_vel * dir.z
 	velocity.x = move_vel * dir.x
+	
+	if hanging:
+		var to_hangpos := hang_pos - global_position
+		velocity += 20.0 * to_hangpos
+		velocity.y = 0.0
+	
 	move_and_slide()
 	
 	
