@@ -9,6 +9,7 @@ uniform int pixelate_factor;
 uniform float vignette_m;
 uniform float vignette_b;
 
+uniform int behavior : hint_enum("Pixelate", "Draw Gas Mask");
 
 float vignette(vec2 uv) {
 	vec2 ndc = 2.0 * (uv - 0.5);
@@ -31,15 +32,27 @@ vec3 superimpose_gas_mask(vec2 uv, vec3 input) {
 	return mixed;
 }
 
+vec4 gas_mask(vec2 uv) {
+	vec2 gasmask_pos = gasmask_off + 0.5 + gasmask_mul * (uv - 0.5);
+	vec4 gasmask = texture(gasmask_texture, gasmask_pos);
+	float vig = vignette(uv);
+	return vec4(gasmask.rgb, gasmask.a * vig);
+}
+
 void vertex() {
 	// Called for every vertex the material is visible on.
 }
 
 void fragment() {
-	vec2 uv = pixelate_uv(SCREEN_UV, SCREEN_PIXEL_SIZE, float(pixelate_factor));
-	vec3 screen = texture(screen_texture, uv).rgb;
-	vec3 gasmask = superimpose_gas_mask(uv, screen);
-	COLOR = vec4(gasmask, 1.0);
+	if (behavior == 0) {
+		vec2 uv = pixelate_uv(SCREEN_UV, SCREEN_PIXEL_SIZE, float(pixelate_factor));
+		COLOR = texture(screen_texture, uv);
+	} else {
+		//vec2 uv = pixelate_uv(SCREEN_UV, SCREEN_PIXEL_SIZE, float(pixelate_factor));
+		//vec3 screen = texture(screen_texture, uv).rgb;
+		vec4 gasmask = gas_mask(SCREEN_UV);
+		COLOR = gasmask;
+	}
 }
 
 //void light() {

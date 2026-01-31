@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://cnyha7j8gdx03"]
 
 [ext_resource type="Script" uid="uid://cy04b2ow18jlo" path="res://scripts/player3d.gd" id="1_qhqgy"]
+[ext_resource type="Shader" uid="uid://dyvi2gawwbewk" path="res://scenes/postproc.gdshader" id="2_3v2ag"]
 [ext_resource type="Script" uid="uid://d30j6idw7vuat" path="res://scripts/gas_mask.gd" id="2_dqkch"]
+[ext_resource type="Script" uid="uid://da8oku04vawyq" path="res://scripts/gasmasklayer.gd" id="2_jej6c"]
 [ext_resource type="Script" uid="uid://bubq3tve6bkb2" path="res://scenes/interaction_cast.gd" id="2_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://08bmi5fllv6c" path="res://assets/gasmaskcutout.png" id="3_jej6c"]
 [ext_resource type="Script" uid="uid://dk2on0wnitumo" path="res://scenes/gas_detector.gd" id="3_qlg0r"]
@@ -12,7 +14,15 @@
 [ext_resource type="PackedScene" uid="uid://dn3oldl2o4g26" path="res://scenes/crosshair.tscn" id="8_d2wvv"]
 [ext_resource type="PackedScene" uid="uid://c6fpn5euunax8" path="res://scenes/ouch_hud.tscn" id="9_3v2ag"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_d2wvv"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jej6c"]
+shader = ExtResource("2_3v2ag")
+shader_parameter/gasmask_texture = ExtResource("3_jej6c")
+shader_parameter/gasmask_mul = Vector2(0.8, 0.55)
+shader_parameter/gasmask_off = Vector2(0.05, 0)
+shader_parameter/pixelate_factor = 8
+shader_parameter/vignette_m = 0.6
+shader_parameter/vignette_b = 0.0
+shader_parameter/behavior = 1
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mf8r0"]
 
@@ -34,22 +44,17 @@ camera_speed = 0.001
 invulnerability_time = 2.0
 
 [node name="Mask" type="CanvasLayer" parent="." unique_id=235587990]
+script = ExtResource("2_jej6c")
 
-[node name="ColorRect" type="TextureRect" parent="Mask" unique_id=1100704667]
+[node name="ColorRect" type="ColorRect" parent="Mask" unique_id=2073402615]
 texture_filter = 1
 texture_repeat = 1
-material = SubResource("CanvasItemMaterial_d2wvv")
+material = SubResource("ShaderMaterial_jej6c")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -626.0
-offset_top = -341.0
-offset_right = -626.0
-offset_bottom = -312.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.56, 1.6399996)
-texture = ExtResource("3_jej6c")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1528320197]
 shape = SubResource("CapsuleShape3D_mf8r0")

@@ -14,7 +14,7 @@ var can_take_damage := true
 var hanging: bool = false
 var hang_pos: Vector3 = Vector3.ZERO
 
-@onready var postproc: CanvasLayer = $Postproc
+@onready var postproc: CanvasLayer = $Mask
 
 # var camera_velocity: Vector2
 	
