@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://b6nwh03k30tgx" path="res://scenes/player.tscn" id="1_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://dex8ha1cwedsc" path="res://scenes/basic_enemy.tscn" id="2_k0juu"]
 [ext_resource type="Script" uid="uid://u305pkolf8el" path="res://scenes/gas.gd" id="4_k0juu"]
+[ext_resource type="Script" path="res://scripts/generator.gd" id="6_i7141"]
+[ext_resource type="PackedScene" uid="uid://c4ujeyr0po3jj" path="res://scenes/defect.tscn" id="7_4mrxx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4wyf3"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -38,6 +40,38 @@ size = Vector3(5, 5, 5)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71j4m"]
 bg_color = Color(0, 0.66224426, 0.057101645, 1)
+
+[sub_resource type="Gradient" id="Gradient_i7141"]
+colors = PackedColorArray(0, 0, 0, 1, 0.36045092, 0.17922884, 0.025613934, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4mrxx"]
+frequency = 0.0192
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7r4gi"]
+noise = SubResource("FastNoiseLite_4mrxx")
+color_ramp = SubResource("Gradient_i7141")
+seamless = true
+as_normal_map = true
+seamless_blend_skirt = 0.278
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w7kh3"]
+albedo_color = Color(0.30690926, 0.16513526, 0.028907763, 1)
+normal_enabled = true
+normal_scale = 1.45
+normal_texture = SubResource("NoiseTexture2D_7r4gi")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_7r4gi"]
+material = SubResource("StandardMaterial3D_w7kh3")
+size = Vector3(10, 4, 3)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_w7kh3"]
+points = PackedVector3Array(5, 2, 1.5, 5, 2, -1.5, -5, 2, 1.5, 5, -2, 1.5, 5, -2, -1.5, -5, 2, -1.5, -5, -2, 1.5, -5, -2, -1.5)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_i7141"]
+size = Vector2(10, 4)
+center_offset = Vector3(0, 0, 1.5)
+orientation = 2
 
 [node name="3Dworld" type="Node3D" unique_id=513478039]
 
@@ -94,3 +128,19 @@ offset_right = 270.0
 offset_bottom = 51.0
 theme_override_colors/font_color = Color(0.18690777, 0.99999994, 0.103041, 1)
 theme_override_styles/fill = SubResource("StyleBoxFlat_71j4m")
+
+[node name="Generator" type="StaticBody3D" parent="." unique_id=1604553368]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+script = ExtResource("6_i7141")
+defect = ExtResource("7_4mrxx")
+defect_position_padding = 0.3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Generator" unique_id=2484708]
+mesh = SubResource("BoxMesh_7r4gi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Generator" unique_id=7052306]
+shape = SubResource("ConvexPolygonShape3D_w7kh3")
+
+[node name="RepairPlane" type="MeshInstance3D" parent="Generator" unique_id=1093424144]
+visible = false
+mesh = SubResource("PlaneMesh_i7141")

@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://c4ujeyr0po3jj"]
+
+[ext_resource type="Script" path="res://scenes/defect.gd" id="1_1int6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v77um"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_qfnet"]
+material = SubResource("StandardMaterial3D_v77um")
+radius = 0.2
+height = 0.2
+radial_segments = 4
+rings = 4
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v77um"]
+direction = Vector3(0, 1, 0.3)
+spread = 23.824
+flatness = 1.0
+initial_velocity_min = 2.0
+initial_velocity_max = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1int6"]
+albedo_color = Color(0.9999998, 0.5882031, 0.17387584, 1)
+emission_enabled = true
+emission = Color(0.8659228, 0.29551876, 0, 1)
+emission_energy_multiplier = 6.52
+
+[sub_resource type="SphereMesh" id="SphereMesh_v77um"]
+material = SubResource("StandardMaterial3D_1int6")
+radius = 0.05
+height = 0.1
+
+[node name="Defect" type="Node3D" unique_id=237752016]
+script = ExtResource("1_1int6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2079029932]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("SphereMesh_qfnet")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=497550902]
+emitting = false
+amount = 3
+lifetime = 2.69
+interp_to_end = 1.0
+one_shot = true
+explosiveness = 1.0
+randomness = 0.52
+process_material = SubResource("ParticleProcessMaterial_v77um")
+draw_pass_1 = SubResource("SphereMesh_v77um")
+
+[node name="Timer" type="Timer" parent="." unique_id=418576988]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
