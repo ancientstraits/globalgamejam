@@ -10,6 +10,7 @@ extends CharacterBody3D
 # var camera_velocity: Vector2
 
 func _ready() -> void:
+	Globals.player = self
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _input(event: InputEvent) -> void:
