@@ -2,7 +2,25 @@
 
 [ext_resource type="Script" uid="uid://brkliyb6hfu4m" path="res://scripts/basic_enemy.gd" id="1_057e2"]
 
+[sub_resource type="Gradient" id="Gradient_057e2"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fq0mw"]
+noise_type = 2
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2blxa"]
+noise = SubResource("FastNoiseLite_fq0mw")
+color_ramp = SubResource("Gradient_057e2")
+seamless = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hf6xp"]
+albedo_color = Color(0.30933055, 0.25339076, 0, 1)
+metallic = 0.71
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_2blxa")
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_057e2"]
+material = SubResource("StandardMaterial3D_hf6xp")
 top_radius = 1.0
 bottom_radius = 1.5
 height = 1.0
