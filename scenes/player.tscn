@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://cnyha7j8gdx03"]
 
 [ext_resource type="Script" uid="uid://cy04b2ow18jlo" path="res://scripts/player3d.gd" id="1_qhqgy"]
-[ext_resource type="Shader" uid="uid://dyvi2gawwbewk" path="res://scenes/postproc.gdshader" id="2_3v2ag"]
+[ext_resource type="Shader" path="res://scenes/postproc.gdshader" id="2_3v2ag"]
 [ext_resource type="Script" uid="uid://d30j6idw7vuat" path="res://scripts/gas_mask.gd" id="2_dqkch"]
-[ext_resource type="Script" uid="uid://da8oku04vawyq" path="res://scripts/gasmasklayer.gd" id="2_jej6c"]
+[ext_resource type="Script" path="res://scripts/gasmasklayer.gd" id="2_jej6c"]
 [ext_resource type="Script" uid="uid://bubq3tve6bkb2" path="res://scenes/interaction_cast.gd" id="2_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://08bmi5fllv6c" path="res://assets/gasmaskcutout.png" id="3_jej6c"]
-[ext_resource type="Script" uid="uid://dk2on0wnitumo" path="res://scenes/gas_detector.gd" id="3_qlg0r"]
-[ext_resource type="Script" path="res://scenes/interaction.gd" id="3_tuyoq"]
+[ext_resource type="Script" path="res://scenes/gas_detector.gd" id="3_qlg0r"]
+[ext_resource type="Script" uid="uid://bi07tabyspqoh" path="res://scenes/prop_interaction.gd" id="3_tuyoq"]
 [ext_resource type="Script" uid="uid://ohaiknv2vxd7" path="res://scenes/flashlight.gd" id="4_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://et2qpq8ojjqa" path="res://assets/flashlight_texture.jpg" id="5_tuyoq"]
 [ext_resource type="PackedScene" uid="uid://cvcs1exfgfvdm" path="res://scenes/postproc.tscn" id="7_fjrip"]
@@ -81,21 +81,21 @@ light_energy = 5.0
 spot_range = 10.0
 spot_angle = 40.0
 
-[node name="Interaction" type="Node3D" parent="Camera3D" unique_id=763953744]
+[node name="PropInteraction" type="Node3D" parent="Camera3D" unique_id=763953744]
 script = ExtResource("3_tuyoq")
 
-[node name="InteractCast" type="RayCast3D" parent="Camera3D/Interaction" unique_id=2687761]
+[node name="InteractCast" type="RayCast3D" parent="Camera3D/PropInteraction" unique_id=2687761]
 transform = Transform3D(5.7320566e-15, 1.3113416e-07, 3, 3, -1.3113416e-07, 0, 1.3113416e-07, 3, -1.3113416e-07, 0, 0, 0)
 collision_mask = 16
 hit_from_inside = true
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
-[node name="HoldCast" type="RayCast3D" parent="Camera3D/Interaction" unique_id=1839618635]
+[node name="HoldCast" type="RayCast3D" parent="Camera3D/PropInteraction" unique_id=1839618635]
 transform = Transform3D(5.7320566e-15, 1.3113416e-07, 3, 3, -1.3113416e-07, 0, 1.3113416e-07, 3, -1.3113416e-07, 0, 0, 0)
 hit_from_inside = true
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
-[node name="HoldPoint" type="Node3D" parent="Camera3D/Interaction" unique_id=1906602682]
+[node name="HoldPoint" type="Node3D" parent="Camera3D/PropInteraction" unique_id=1906602682]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.006, -0.5, -2)
 
 [node name="GasMask" type="Node3D" parent="." unique_id=788697399]
