@@ -33,13 +33,48 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ijmh8")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_17kg5"]
-albedo_color = Color(0.40470308, 0.2341077, 0.13630214, 1)
+albedo_color = Color(0.27022192, 0.27022192, 0.2702219, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j7set"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_7xgvm"]
+_surfaces = [{
+"aabb": AABB(-0.100000024, -1, -2.5, 0.20000005, 3.65, 5),
+"format": 34896613377,
+"index_count": 72,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYACAAJAAoACAALAAkADAAKAAkACwAMAAkADQAIAAoACwAIAA0ADAAOAAoADQAKAA4ACwAPAAwACwANAA8ADwAOAAwADwANAA4A"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//wfUAAAAA/////wAAAAAAAMH1AAD/////wfUAAP//AAD//wAA////////AAD//wAAwfUAAAAAAAA9CgAAAAD//wAAAAAAAP//PQoAAAAAAAAAAAAA/////wAAAAD//wAAPQoAAP////89CgAA//8AAAAAAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_3acxd"]
+resource_name = "basic_wall_Cube_005"
+_surfaces = [{
+"aabb": AABB(-0.100000024, -1, -2.5, 0.20000005, 3.65, 5),
+"attribute_data": PackedByteArray("/1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8//1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8/"),
+"format": 34896613399,
+"index_count": 72,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0A"),
+"material": SubResource("StandardMaterial3D_j7set"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 48,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAP//wfVU1QAA/////1TVAAAAAMH1VNUAAAAAwfX////////B9f//AAD//8H1/////wAAwfX/////AADB9VTV////////VNX/////wfVU1f//AAD//1TV//8AAP///78AAP//////v/////////+/AAAAAP///78AAAAAwfX/v///AAD///+///8AAMH1/78AAAAA////v//////B9f//AAD///////8AAP//wfX/////////////AAAAAD0KVNUAAP//AABU1QAA//89ClTVAAAAAAAAVNUAAAAAAAD///////8AAP//AAD//wAA/////wAAAAD/////AAAAAFTV/////z0KVNX/////AABU1f//AAA9ClTV//8AAD0K/78AAP//PQr/v/////89Cv+/AAAAAD0K/78AAAAAAAD/v///AAA9Cv+///8AAAAA/78AAAAAPQr/v/////8AAP//AAD//z0K//8AAP//AAD///////89Cv//VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_7xgvm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pi13y"]
+albedo_color = Color(0.03012127, 0.03134168, 0.015002052, 1)
 
 [node name="Node3D" type="Node3D" unique_id=1458460162]
 
-[node name="basic_wall" type="Node3D" parent="." unique_id=953843408]
+[node name="basic_wall" type="Node3D" parent="." unique_id=1900613033]
 
-[node name="Skeleton3D" type="Skeleton3D" parent="basic_wall" unique_id=1511362814]
+[node name="Skeleton3D" type="Skeleton3D" parent="basic_wall" unique_id=1522669273]
 bones/0/name = "Cube"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
@@ -47,12 +82,28 @@ bones/0/enabled = true
 bones/0/position = Vector3(0, 0, 0)
 bones/0/rotation = Quaternion(0, 0, 0, 1)
 bones/0/scale = Vector3(1, 1, 1)
+bones/1/name = "Cube.002"
+bones/1/parent = -1
+bones/1/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+bones/1/enabled = true
+bones/1/position = Vector3(0, 0, 0)
+bones/1/rotation = Quaternion(0, 0, 0, 1)
+bones/1/scale = Vector3(1, 1, 1)
 
-[node name="Cube" type="BoneAttachment3D" parent="basic_wall/Skeleton3D" unique_id=1270032853]
+[node name="Cube" type="BoneAttachment3D" parent="basic_wall/Skeleton3D" unique_id=1583591224]
 bone_name = "Cube"
 bone_idx = 0
 
-[node name="Cube" type="MeshInstance3D" parent="basic_wall/Skeleton3D/Cube" unique_id=710745576]
+[node name="Cube" type="MeshInstance3D" parent="basic_wall/Skeleton3D/Cube" unique_id=1460091124]
 mesh = SubResource("ArrayMesh_56m7p")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_17kg5")
+
+[node name="Cube_002" type="BoneAttachment3D" parent="basic_wall/Skeleton3D" unique_id=440452020]
+bone_name = "Cube.002"
+bone_idx = 1
+
+[node name="Cube_002" type="MeshInstance3D" parent="basic_wall/Skeleton3D/Cube_002" unique_id=59012151]
+mesh = SubResource("ArrayMesh_3acxd")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_pi13y")
