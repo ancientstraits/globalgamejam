@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cnyha7j8gdx03"]
 
 [ext_resource type="Script" uid="uid://cy04b2ow18jlo" path="res://scripts/player3d.gd" id="1_qhqgy"]
-[ext_resource type="Shader" path="res://scenes/postproc.gdshader" id="2_3v2ag"]
+[ext_resource type="Shader" uid="uid://dyvi2gawwbewk" path="res://scenes/postproc.gdshader" id="2_3v2ag"]
 [ext_resource type="Script" uid="uid://d30j6idw7vuat" path="res://scripts/gas_mask.gd" id="2_dqkch"]
-[ext_resource type="Script" path="res://scripts/gasmasklayer.gd" id="2_jej6c"]
+[ext_resource type="Script" uid="uid://da8oku04vawyq" path="res://scripts/gasmasklayer.gd" id="2_jej6c"]
 [ext_resource type="Script" uid="uid://bubq3tve6bkb2" path="res://scenes/interaction_cast.gd" id="2_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://08bmi5fllv6c" path="res://assets/gasmaskcutout.png" id="3_jej6c"]
 [ext_resource type="Script" uid="uid://dk2on0wnitumo" path="res://scenes/gas_detector.gd" id="3_qlg0r"]
@@ -21,7 +21,7 @@ shader = ExtResource("2_3v2ag")
 shader_parameter/gasmask_texture = ExtResource("3_jej6c")
 shader_parameter/gasmask_mul = Vector2(0.6, 0.535)
 shader_parameter/gasmask_off = Vector2(0.05, 0)
-shader_parameter/pixelate_factor = 8
+shader_parameter/pixelate_factor = 4.0
 shader_parameter/vignette_m = 0.0
 shader_parameter/vignette_b = 1.0
 shader_parameter/behavior = 1
@@ -81,11 +81,12 @@ collision_mask = 16
 collide_with_areas = true
 script = ExtResource("2_qlg0r")
 
-[node name="Flashlight" type="Node3D" parent="Camera3D" unique_id=1640074504 node_paths=PackedStringArray("canvas", "texture_outer", "texture_inner")]
+[node name="Flashlight" type="Node3D" parent="Camera3D" unique_id=1640074504 node_paths=PackedStringArray("canvas", "texture_outer", "texture_inner", "crosshair")]
 script = ExtResource("4_qlg0r")
 canvas = NodePath("../../FlashlightCanvas")
-texture_outer = NodePath("../../FlashlightCanvas/TextureRect")
-texture_inner = NodePath("../../FlashlightCanvas/TextureRect2")
+texture_outer = NodePath("../../FlashlightCanvas/Control/TextureRect")
+texture_inner = NodePath("../../FlashlightCanvas/Control/TextureRect2")
+crosshair = NodePath("../../GasMask/DamageOverlay/Crosshair")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Camera3D/Flashlight" unique_id=1931078391]
 light_energy = 5.0
@@ -158,36 +159,44 @@ mesh = SubResource("CapsuleMesh_tuyoq")
 
 [node name="FlashlightCanvas" type="CanvasLayer" parent="." unique_id=1141877781]
 
-[node name="TextureRect" type="TextureRect" parent="FlashlightCanvas" unique_id=1402139479]
+[node name="Control" type="Control" parent="FlashlightCanvas" unique_id=453472527]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="FlashlightCanvas/Control" unique_id=1402139479]
 modulate = Color(1, 1, 1, 0.26666668)
 material = SubResource("CanvasItemMaterial_fjrip")
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -256.0
-offset_top = -256.0
-offset_right = 256.0
-offset_bottom = 256.0
+offset_left = 684.0
+offset_top = 264.0
+offset_right = 1196.0
+offset_bottom = 776.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
 pivot_offset = Vector2(256, 256)
 texture = ExtResource("5_tuyoq")
 
-[node name="TextureRect2" type="TextureRect" parent="FlashlightCanvas" unique_id=559640303]
+[node name="TextureRect2" type="TextureRect" parent="FlashlightCanvas/Control" unique_id=559640303]
 modulate = Color(1, 1, 1, 0.3254902)
 material = SubResource("CanvasItemMaterial_fjrip")
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -256.0
-offset_top = -256.0
-offset_right = 256.0
-offset_bottom = 256.0
+offset_left = 684.00006
+offset_top = 264.0
+offset_right = 1196.0
+offset_bottom = 776.0
 grow_horizontal = 2
 grow_vertical = 2
 rotation = 1.7243853

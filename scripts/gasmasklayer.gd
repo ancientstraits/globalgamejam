@@ -14,5 +14,6 @@ func _ready():
 	initial_gasmask_mul = mat.get_shader_parameter('gasmask_mul')
 
 func _process(delta: float) -> void:
-	mat.set_shader_parameter('gasmask_off', initial_gasmask_off + gasmask_off)
-	mat.set_shader_parameter('gasmask_mul', initial_gasmask_mul + gasmask_mul)
+	if not $'..'.player_won:
+		mat.set_shader_parameter('gasmask_off', initial_gasmask_off + gasmask_off)
+		mat.set_shader_parameter('gasmask_mul', initial_gasmask_mul + gasmask_mul)
