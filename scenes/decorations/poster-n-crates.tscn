@@ -1,21 +1,25 @@
 [gd_scene format=3 uid="uid://bln40huiq2vcf"]
 
+[ext_resource type="Texture2D" uid="uid://ddqkv1vma4xea" path="res://assets/Poster.png" id="1_esjle"]
 [ext_resource type="Material" uid="uid://cslx64ihtyek7" path="res://assets/textures/crate_material_3d.tres" id="2_x3uxm"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_541x1"]
-size = Vector3(0.055, 2.035, 1.705)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x3uxm"]
+albedo_texture = ExtResource("1_esjle")
+uv1_scale = Vector3(0.57, 0.57, 0.57)
+uv1_offset = Vector3(0, -0.515, -0.5)
+uv1_triplanar = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hd2ci"]
-albedo_color = Color(0.4368339, 0.016940052, 0.4369722, 1)
+[sub_resource type="BoxMesh" id="BoxMesh_541x1"]
+material = SubResource("StandardMaterial3D_x3uxm")
+size = Vector3(0.055, 1.77, 1.705)
 
 [sub_resource type="BoxMesh" id="BoxMesh_hd2ci"]
 
 [node name="Decoration" type="Node3D" unique_id=1448339959]
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=878184239]
-transform = Transform3D(1, 0, 0, 0, 0.99558, -0.093917176, 0, 0.093917176, 0.99558, -2.4176679, 2.839638, 0.6010151)
+transform = Transform3D(1, 0, 0, 0, 0.99558, -0.0699683, 0, 0.093917176, 0.74170715, -2.4176679, 2.839638, 0.6010151)
 mesh = SubResource("BoxMesh_541x1")
-material = SubResource("StandardMaterial3D_hd2ci")
 
 [node name="CSGMesh3D2" type="CSGMesh3D" parent="." unique_id=1774631932]
 transform = Transform3D(0.7907595, 0, 0.7389449, 0, 1.0822846, 0, -0.7389449, 0, 0.7907595, -0.13342914, 0.4957502, -0.94783974)

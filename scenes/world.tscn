@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://fwmr5soew7hf" path="res://scenes/basic_enemy.tscn" id="2_k0juu"]
 [ext_resource type="PackedScene" uid="uid://d2au7sero68de" path="res://scenes/slime_enemy.tscn" id="3_i7141"]
 [ext_resource type="PackedScene" uid="uid://dmr2k3nr3ttgm" path="res://scenes/generator.tscn" id="3_w7kh3"]
-[ext_resource type="Script" path="res://scenes/gas.gd" id="4_k0juu"]
+[ext_resource type="Script" uid="uid://u305pkolf8el" path="res://scenes/gas.gd" id="4_k0juu"]
 [ext_resource type="FontFile" uid="uid://oj2726l1ruaw" path="res://assets/Pixel-UniCode.ttf" id="5_71j4m"]
 [ext_resource type="Script" uid="uid://bp8lyqul7qh87" path="res://scenes/clock.gd" id="5_qfnet"]
 [ext_resource type="PackedScene" uid="uid://4ac71w7dhyc4" path="res://scenes/ambience_event.tscn" id="10_w7kh3"]
