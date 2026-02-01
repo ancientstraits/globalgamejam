@@ -19,6 +19,8 @@ var hang_pos: Vector3 = Vector3.ZERO
 var can_move = true
 var player_won := false
 
+var time_at_death := 0.0
+
 @onready var postproc: CanvasLayer = $Mask
 
 # var camera_velocity: Vector2
@@ -93,6 +95,9 @@ func _on_invulnerability_timer_timeout() -> void:
 	
 func kill() -> void:
 	if (is_dead): return
+	
+	if time_at_death < 1:
+		time_at_death = Globals.time
 	
 	is_dead = true
 	can_move = false	
@@ -170,7 +175,24 @@ func finish_fade() -> void:
 	
 func show_labels() -> void:
 	var label := $GameOver/ColorRect/Label
+	var label2 := $GameOver/ColorRect/Label2
 	var cause := $GameOver/ColorRect/Cause
+	
+	var time_text : String
+	
+	var hour : int
+	var minutes : int
+	hour = int(floor(time_at_death)) / 60
+	minutes = int(floor(time_at_death)) % 60
+	
+	if minutes < 10:
+		time_text = str(hour) + ':0' + str(minutes)
+	else:
+		time_text = str(hour) + ':' + str(minutes)
+	
+	label2.text = 'TIME SURVIVED:\n' + time_text
+	
+	label2.visible = true
 	label.visible = true
 	
 	var delay := Timer.new()
