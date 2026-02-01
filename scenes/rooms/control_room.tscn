@@ -6,7 +6,52 @@
 [ext_resource type="Script" uid="uid://68n67synyhy5" path="res://scenes/rooms/camera_3d.gd" id="5_j4n78"]
 [ext_resource type="Script" path="res://scripts/controlpanel.gd" id="5_n1edn"]
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qba7n"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_8d6ti"]
+_surfaces = [{
+"aabb": AABB(-2.5, 0, -2.5, 5, 1e-05, 5),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAAADAAEA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAP//AAD//wAAAAAAAP//AAD//wAAAAAAAAAAAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_crse5"]
+resource_name = "basic_floor_Plane_001"
+_surfaces = [{
+"aabb": AABB(-2.5, 0, -2.5, 5, 1e-05, 5),
+"attribute_data": PackedByteArray("AAD/////AAD/////AAAAAA=="),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAAADAAEA"),
+"material": SubResource("StandardMaterial3D_qba7n"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAP///7///wAAAAD/v///AAD///+/AAAAAAAA/7////9/////f////3////9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_8d6ti")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_abtpw"]
+size = Vector3(5, 0.1, 5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n1edn"]
+shading_mode = 0
+albedo_color = Color(0.5019608, 0.003921569, 0.9843137, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_j4n78"]
+material = SubResource("StandardMaterial3D_n1edn")
+>>>>>>> Stashed changes
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qba7n"]
 
@@ -278,6 +323,26 @@ background_color = Color(1, 1, 1, 1)
 glow_intensity = 4.09
 glow_bloom = 0.2
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_rkw5e"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n1edn"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("4_rkw5e")
+shader_parameter/image = SubResource("ViewportTexture_rkw5e")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_j4n78"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_n1edn")
+orientation = 2
+
+[sub_resource type="Environment" id="Environment_n1edn"]
+background_mode = 1
+background_color = Color(1, 1, 1, 1)
+glow_intensity = 4.09
+glow_bloom = 0.2
+
 [node name="RoomGen1" type="Node3D" unique_id=1415989661]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 
@@ -302,6 +367,7 @@ layers = 4
 ignore_occlusion_culling = true
 mesh = SubResource("BoxMesh_j4n78")
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 [node name="ControlPanel" type="CSGMesh3D" parent="." unique_id=355497927]
 transform = Transform3D(2.6412685, 0, 0.52629256, 0, 3.0084274, 0, -0.8836536, 0, 1.5731051, 0.9446256, 1.2816386, 0.74468374)
@@ -321,6 +387,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5717669, 1.1071421, 4.16583
 
 [node name="BasicFloor4" type="Node3D" parent="." unique_id=1241190560]
 
+=======
+
+[node name="BasicFloor4" type="Node3D" parent="." unique_id=1241190560]
+>>>>>>> Stashed changes
 =======
 
 [node name="BasicFloor4" type="Node3D" parent="." unique_id=1241190560]
