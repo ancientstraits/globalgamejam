@@ -4,10 +4,11 @@
 [ext_resource type="Script" uid="uid://ob6kpnnneepf" path="res://scenes/level_generator.gd" id="2_sp6hj"]
 [ext_resource type="Script" uid="uid://dp65yn2l58f6y" path="res://scripts/mandatory_room.gd" id="3_1eqve"]
 [ext_resource type="PackedScene" uid="uid://bvf0l4t2kcxi5" path="res://scenes/tiles/basic_floor.tscn" id="3_v30vs"]
+[ext_resource type="PackedScene" uid="uid://bkm5uyeb16j67" path="res://scenes/placeholder/placeholderroom.tscn" id="3_wnehw"]
 [ext_resource type="PackedScene" uid="uid://txoahdybgw01" path="res://scenes/tiles/basic_wall.tscn" id="4_1eqve"]
-[ext_resource type="PackedScene" uid="uid://derwakc4ay0l" path="res://scenes/rooms/room_gen_1.tscn" id="4_v30vs"]
-[ext_resource type="PackedScene" uid="uid://vdopyv0jkbxu" path="res://scenes/rooms/room_gen_2.tscn" id="5_lp8i1"]
-[ext_resource type="PackedScene" uid="uid://c172bm4pntw2a" path="res://scenes/rooms/room_gen_3.tscn" id="6_1m8nx"]
+[ext_resource type="PackedScene" uid="uid://cvl24qop3s56h" path="res://scenes/placeholder/gas_placeholder.tscn" id="5_1eqve"]
+[ext_resource type="PackedScene" uid="uid://cbkeaygqfvg56" path="res://scenes/placeholder/enemy_placeholder.tscn" id="8_1m8nx"]
+[ext_resource type="PackedScene" uid="uid://dvtbga5saiwf2" path="res://scenes/placeholder/boss_placeholder.tscn" id="9_3auog"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lp8i1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -21,76 +22,18 @@ background_mode = 2
 sky = SubResource("Sky_1m8nx")
 tonemap_mode = 2
 
-[sub_resource type="Resource" id="Resource_1eqve"]
+[sub_resource type="Resource" id="Resource_rapvc"]
 script = ExtResource("3_1eqve")
 width = 2
 height = 3
-scene = ExtResource("4_v30vs")
 metadata/_custom_type_script = "uid://dp65yn2l58f6y"
 
-[sub_resource type="Resource" id="Resource_3auog"]
+[sub_resource type="Resource" id="Resource_sp6hj"]
 script = ExtResource("3_1eqve")
+type = 1
 width = 2
-height = 3
-scene = ExtResource("5_lp8i1")
+height = 2
 metadata/_custom_type_script = "uid://dp65yn2l58f6y"
-
-[sub_resource type="Resource" id="Resource_kvmyj"]
-script = ExtResource("3_1eqve")
-width = 2
-height = 3
-scene = ExtResource("6_1m8nx")
-metadata/_custom_type_script = "uid://dp65yn2l58f6y"
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qba7n"]
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_8d6ti"]
-_surfaces = [{
-"aabb": AABB(-2.5, 0, -2.5, 5, 1e-05, 5),
-"format": 34896613377,
-"index_count": 6,
-"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 3, 0, 1, 0),
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 4,
-"vertex_data": PackedByteArray(0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-}]
-blend_shape_mode = 0
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_crse5"]
-resource_name = "basic_floor_Plane"
-_surfaces = [{
-"aabb": AABB(-2.5, 0, -2.5, 5, 1e-05, 5),
-"attribute_data": PackedByteArray(0, 0, 255, 255, 255, 255, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0),
-"format": 34896613399,
-"index_count": 6,
-"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 3, 0, 1, 0),
-"material": SubResource("StandardMaterial3D_qba7n"),
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 4,
-"vertex_data": PackedByteArray(0, 0, 0, 0, 255, 255, 255, 191, 255, 255, 0, 0, 0, 0, 255, 191, 255, 255, 0, 0, 255, 255, 255, 191, 0, 0, 0, 0, 0, 0, 255, 191, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127)
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_8d6ti")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oamcn"]
-albedo_color = Color(0.28627452, 1, 1, 1)
-
-[sub_resource type="PackedScene" id="PackedScene_sp6hj"]
-_bundled = {
-"conn_count": 0,
-"conns": PackedInt32Array(),
-"editable_instances": [],
-"id_paths": [],
-"names": PackedStringArray("BasicFloor", "Node3D", "basic_floor", "Floor", "transform", "mesh", "skeleton", "surface_material_override/0", "MeshInstance3D"),
-"node_count": 3,
-"node_ids": PackedInt32Array(621641132, 1862166615, 887241465),
-"node_paths": [],
-"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 0, 0, 0, 0, 1, 2, -1, 0, 0, 1, 0, 8, 3, -1, 4, 4, 0, 5, 1, 6, 2, 7, 3, 0),
-"variants": [Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0), SubResource("ArrayMesh_crse5"), NodePath(""), SubResource("StandardMaterial3D_oamcn")],
-"version": 3
-}
 
 [node name="LvlGen" type="Node3D" unique_id=783191225]
 
@@ -102,16 +45,17 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="Player" parent="." unique_id=155048425 instance=ExtResource("1_rapvc")]
-transform = Transform3D(0.86788684, 0, 0.49676192, 0, 1, 0, -0.49676192, 0, 0.86788684, 0, 15.271553, 0)
+transform = Transform3D(0.86788684, 0, 0.49676192, 0, 1, 0, -0.49676192, 0, 0.86788684, 0, 33.732307, 0)
 gravity = 0.0
 
 [node name="Node3D" type="Node3D" parent="." unique_id=160167784]
 script = ExtResource("2_sp6hj")
-height = 12
-width = 8
-straightaway_bias = 0.3
-tile_size = 5.0
-mandatory_rooms = Array[ExtResource("3_1eqve")]([SubResource("Resource_1eqve"), SubResource("Resource_3auog"), SubResource("Resource_kvmyj")])
-floor = ExtResource("3_v30vs")
-room_floor = SubResource("PackedScene_sp6hj")
-wall = ExtResource("4_1eqve")
+mandatory_rooms = Array[ExtResource("3_1eqve")]([SubResource("Resource_rapvc"), SubResource("Resource_rapvc"), SubResource("Resource_rapvc"), SubResource("Resource_sp6hj")])
+placeholder_visual = ExtResource("3_wnehw")
+placeholder_gas = ExtResource("5_1eqve")
+floor_tile = ExtResource("3_v30vs")
+wall_tile = ExtResource("4_1eqve")
+gas_ratio = 0.4
+enemy_min_distance = 3
+enemy_placeholder = ExtResource("8_1m8nx")
+boss_placeholder = ExtResource("9_3auog")

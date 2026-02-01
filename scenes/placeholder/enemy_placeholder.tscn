@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cbkeaygqfvg56"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4si7p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hd4lu"]
+albedo_color = Color(1, 0.37254903, 0.18431373, 1)
+
+[node name="EnemyPlaceholder" type="Node3D" unique_id=1915012186]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1594718369]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2859497, 0)
+mesh = SubResource("BoxMesh_4si7p")
+surface_material_override/0 = SubResource("StandardMaterial3D_hd4lu")

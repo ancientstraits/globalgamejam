@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dvtbga5saiwf2"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_77bws"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ng7h3"]
+albedo_color = Color(0.3137255, 0.3647059, 0.6901961, 1)
+
+[node name="BossPlaceholder" type="Node3D" unique_id=892449903]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5897827, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=913249259]
+transform = Transform3D(1.1579016, 0, 0, 0, 1, 0, 0, 0, 1.1367981, 0, -0.3248291, 0)
+mesh = SubResource("BoxMesh_77bws")
+surface_material_override/0 = SubResource("StandardMaterial3D_ng7h3")

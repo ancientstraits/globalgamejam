@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cvl24qop3s56h"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_15yhh"]
+size = Vector3(0.8, 0.8, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tat7h"]
+albedo_color = Color(0.23529412, 0.52156866, 0.22745098, 1)
+
+[node name="GasPlaceholder" type="Node3D" unique_id=1388942914]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=605596090]
+mesh = SubResource("BoxMesh_15yhh")
+surface_material_override/0 = SubResource("StandardMaterial3D_tat7h")
