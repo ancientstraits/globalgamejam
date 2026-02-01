@@ -10,6 +10,8 @@ var move_penalty: float = 1
 @onready var cam = $Camera3D
 @onready var collider = $CollisionShape3D
 @onready var invulnerability_timer = $InvulnerabilityTimer
+@onready var damage_overlay = $GasMask/DamageOverlay
+@onready var gasmask_rect: ColorRect = $Mask/ColorRect
 
 var is_dead = false
 var can_take_damage := true
@@ -17,6 +19,7 @@ var hanging: bool = false
 var was_hanging: bool = false
 var hang_pos: Vector3 = Vector3.ZERO
 var can_move = true
+var player_won := false
 
 var time_at_death := 0.0
 
@@ -112,10 +115,57 @@ func kill() -> void:
 	tween.tween_property(self, 'rotation:z', deg_to_rad(90), 1.0)
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_OUT)
-	tween.finished.connect(begin_fade)	
+	tween.finished.connect(begin_fade)
+
+func _get_gasmask_mul() -> Vector2:
+	var mat: ShaderMaterial = gasmask_rect.material
+	return mat.get_shader_parameter('gasmask_mul')
+
+func _set_gasmask_mul(mul: Vector2) -> void:
+	var mat: ShaderMaterial = gasmask_rect.material
+	mat.set_shader_parameter('gasmask_mul', mul)
+
+func _get_pixelate_factor() -> float:
+	var mat: ShaderMaterial = $Postproc/ColorRect.material
+	return mat.get_shader_parameter('pixelate_factor')
+
+func _set_pixelate_factor(fac: float) -> void:
+	var mat: ShaderMaterial = $Postproc/ColorRect.material
+	return mat.set_shader_parameter('pixelate_factor', fac)
+
+func win_fade() -> void:
+	can_take_damage = false
+	player_won = true
+	collision_layer = 0
+	collision_mask = 0
+	gravity = 10.0
+	jump_vel = 0.0
 	
+	$GameOver/ColorRect.color = Color.WHITE
+	$GameOver/ColorRect.color.a = 0.0
+	
+	# for transition to win screen scene
+	var dupe_rect = $GameOver/ColorRect.duplicate()
+	dupe_rect.color.a = 1.0
+	TitleGlobal.add_child(dupe_rect)
+	TitleGlobal.listen = true
+	
+	var tween := create_tween()
+	
+	tween.tween_property($GameOver/ColorRect, 'color:a', 1.0, 4.0)
+	for child: Control in damage_overlay.get_children():
+		tween.parallel().tween_property(child, 'modulate:a', 0.0, 4.0)
+	tween.parallel().tween_property(self, 'move_vel', 0.0, 2.5)
+	tween.parallel().tween_method(_set_gasmask_mul, _get_gasmask_mul(), Vector2(0.3, 0.3), 3.5)
+	#tween.parallel().tween_method(_set_pixelate_factor, _get_pixelate_factor(), 1.0, 3.5)
+	tween.finished.connect(
+		func():
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			get_tree().change_scene_to_file('res://scenes/win_screen.tscn')
+	)
+
 func begin_fade() -> void:
-	var fade = $GameOver/ColorRect
+	var fade := $GameOver/ColorRect
 	fade.color.a = 0.0
 	
 	var fade_tween := create_tween()

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://08bmi5fllv6c" path="res://assets/gasmaskcutout.png" id="2_p6dhs"]
 [ext_resource type="Shader" uid="uid://c45ia4jf0n58r" path="res://shaders/title_gasmask.gdshader" id="4_b3w7a"]
 [ext_resource type="PackedScene" uid="uid://cvcs1exfgfvdm" path="res://scenes/postproc.tscn" id="4_pyl7j"]
-[ext_resource type="Script" path="res://scripts/title_tool.gd" id="6_4rr2b"]
+[ext_resource type="Script" uid="uid://hb6cud3ch5a4" path="res://scripts/title_tool.gd" id="6_4rr2b"]
 [ext_resource type="AudioStream" uid="uid://dgs7qwuxfjnpm" path="res://assets/audio/main_menu.ogg" id="7_yql1r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4rr2b"]

@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://bg72r4l7ggled"]
+
+[ext_resource type="Script" uid="uid://b8u1q1wjuxqpp" path="res://scripts/win_screen.gd" id="1_erk2x"]
+[ext_resource type="Texture2D" uid="uid://cxi5b7vhlrgnn" path="res://assets/winscreen.png" id="1_wv5lq"]
+
+[node name="WinScreen" type="Control" unique_id=751899803]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_erk2x")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1966897510]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_wv5lq")
+
+[node name="GoodJob" type="Label" parent="." unique_id=533211453]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 535.0
+offset_right = 539.0
+offset_bottom = 676.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+text = "You made it to 6 A.M.
+You survived."
+
+[node name="PlayAgain" type="Button" parent="." unique_id=547213310]
+visible = false
+layout_mode = 0
+offset_left = 1377.0
+offset_top = 512.0
+offset_right = 1709.0
+offset_bottom = 632.0
+theme_override_font_sizes/font_size = 50
+text = "Play Again"
+
+[node name="Quit" type="Button" parent="." unique_id=1178343448]
+layout_mode = 0
+offset_left = 722.0
+offset_top = 505.0
+offset_right = 1054.0
+offset_bottom = 625.0
+theme_override_font_sizes/font_size = 50
+text = "Quit
+"
+
+[node name="Overlay" type="ColorRect" parent="." unique_id=289893985]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[connection signal="pressed" from="PlayAgain" to="." method="_on_play_again_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

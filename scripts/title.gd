@@ -20,14 +20,25 @@ var gasmask_mul:
 	set(new):
 		mat.set_shader_parameter('gasmask_mul', new)
 
+func _make_color_rect() -> ColorRect:
+	var crect := ColorRect.new()
+	crect.color = Color.BLACK
+	crect.set_anchors_preset(Control.PRESET_FULL_RECT)
+	crect.position = Vector2.ZERO
+	crect.size = $ColorRect.size
+	crect.scale = $ColorRect.scale
+	return crect
+
 func _load_scene() -> void:
+	TitleGlobal.listen = true
+	
 	while ResourceLoader.load_threaded_get_status(scene_path) == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
 			await get_tree().process_frame
 	var scene := ResourceLoader.load_threaded_get(scene_path)
 	
+	#TitleGlobal.add_child(_make_color_rect())
 	TitleGlobal.add_child(gas_mask.duplicate())
 	TitleGlobal.add_child($Postproc.duplicate())
-	TitleGlobal.listen = true
 	get_tree().change_scene_to_packed(scene)
 
 func _on_start_game_pressed() -> void:

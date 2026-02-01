@@ -5,7 +5,7 @@ uniform sampler2D gasmask_texture : filter_nearest;
 uniform vec2 gasmask_mul;
 uniform vec2 gasmask_off;
 
-uniform int pixelate_factor;
+uniform float pixelate_factor;
 uniform float vignette_m;
 uniform float vignette_b;
 
