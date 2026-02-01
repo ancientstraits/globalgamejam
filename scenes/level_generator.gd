@@ -595,28 +595,6 @@ func _bfs_distances_from(sx, sy, width, height, h_walls, v_walls):
 
 	return dist
 
-func add_bosses_to_layout(layout):
-	var width = layout["width"]
-	var height = layout["height"]
-	var tiles = layout["tiles"]
-	var rooms = layout["rooms"]
-	var gas = layout["gas"] if layout.has("gas") else null
-	var h_walls = layout["h_walls"]
-	var v_walls = layout["v_walls"]
-
-	# collect candidate tiles for bosses
-	var candidates = []
-	for y in height:
-		for x in width:
-			if tiles[y][x] != TILE_EMPTY:
-				continue
-			# skip gas tiles
-			if gas != null and gas[y][x]:
-				continue
-			dist[ny][nx] = cd + 1
-			queue.append(Vector2(nx, ny))
-
-	return dist
 
 func add_bosses_to_layout(layout):
 	var width = layout["width"]
