@@ -595,6 +595,7 @@ func _bfs_distances_from(sx, sy, width, height, h_walls, v_walls):
 
 	return dist
 
+
 func add_bosses_to_layout(layout):
 	var width = layout["width"]
 	var height = layout["height"]
