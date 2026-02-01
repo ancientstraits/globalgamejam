@@ -25,7 +25,6 @@ min_distance = 25.0
 time_not_seen_threshold = 3.0
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=161381309]
-debug_enabled = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=970019306]
 mesh = SubResource("CapsuleMesh_k0juu")
