@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://08bmi5fllv6c" path="res://assets/gasmaskcutout.png" id="2_p6dhs"]
 [ext_resource type="Shader" uid="uid://c45ia4jf0n58r" path="res://shaders/title_gasmask.gdshader" id="4_b3w7a"]
 [ext_resource type="PackedScene" uid="uid://cvcs1exfgfvdm" path="res://scenes/postproc.tscn" id="4_pyl7j"]
+[ext_resource type="Script" uid="uid://hb6cud3ch5a4" path="res://scripts/title_tool.gd" id="6_4rr2b"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4rr2b"]
 shader = ExtResource("4_b3w7a")
@@ -22,7 +23,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_b3w7a")
-mul = Vector2(0.75, 0.55)
+mul = Vector2(0.6, 0.535)
 off = Vector2(0.05, 0)
 scene_path = "res://scenes/lvl_gen.tscn"
 
@@ -35,7 +36,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0)
+color = Color(0, 0, 0, 1)
 
 [node name="Generator" type="TextureRect" parent="ColorRect" unique_id=1691873785]
 layout_mode = 1
@@ -93,5 +94,8 @@ grow_horizontal = 0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 70
 text = "Begin."
+
+[node name="TitleTool" type="Node" parent="." unique_id=1474613147]
+script = ExtResource("6_4rr2b")
 
 [connection signal="pressed" from="ColorRect/StartGame" to="." method="_on_start_game_pressed"]
