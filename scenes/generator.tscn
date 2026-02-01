@@ -75,9 +75,9 @@ shadow_mesh = SubResource("ArrayMesh_10hea")
 script = ExtResource("1_w5vnv")
 defect = ExtResource("2_ef8yp")
 defect_position_padding = 0.3
-defect_spawn_rate = 5.0
-defect_spawn_rate_variability = 2.0
-defect_lose_threshold = 5
+defect_spawn_rate = 10.0
+defect_spawn_rate_variability = 3.0
+defect_lose_threshold = 6
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1629074328]
 visible = false

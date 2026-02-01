@@ -13,6 +13,7 @@ extends CharacterBody3D
 var can_take_damage := true
 var hanging: bool = false
 var hang_pos: Vector3 = Vector3.ZERO
+var can_move = true
 
 @onready var postproc: CanvasLayer = $Mask
 
@@ -41,6 +42,8 @@ func _input(event: InputEvent) -> void:
 
 # 2d is so mainstream, WE are all doing 3d now
 func _process(delta: float) -> void:
+	if (!can_move): return
+	
 	if hanging and Input.is_action_just_pressed('jump'):
 		hanging = false
 		# this stops the hanging animation
@@ -71,9 +74,10 @@ func _process(delta: float) -> void:
 		velocity.y = 0.0
 		velocity += 20.0 * to_hangpos
 	
-	
 	move_and_slide()
 	
+	if Globals.health == 0:
+		Globals.die.emit('Critical injuries')
 	
 func start_invulnerability():
 	invulnerability_timer.start(invulnerability_time)
@@ -81,3 +85,52 @@ func start_invulnerability():
 
 func _on_invulnerability_timer_timeout() -> void:
 	can_take_damage = true
+	
+func kill() -> void:
+	can_move = false	
+	invulnerability_timer.start(99)
+	can_take_damage = false
+	var tween := create_tween()
+	tween.tween_property(self, 'rotation:z', deg_to_rad(90), 1.0)
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.set_ease(Tween.EASE_OUT)
+	tween.finished.connect(begin_fade)	
+	
+func begin_fade() -> void:
+	var fade = $GameOver/ColorRect
+	fade.color.a = 0.0
+	
+	var fade_tween := create_tween()
+	fade_tween.tween_property(fade, 'color:a', 1.0, 2)
+	fade_tween.set_trans(Tween.TRANS_SINE)
+	fade_tween.set_ease(Tween.EASE_IN)
+	fade_tween.finished.connect(finish_fade)
+	
+func finish_fade() -> void:
+	var hold_timer := Timer.new()
+	hold_timer.one_shot = true
+	hold_timer.wait_time = 1.0
+	add_child(hold_timer)
+	hold_timer.start()
+	hold_timer.timeout.connect(show_labels)
+	
+func show_labels() -> void:
+	var label := $GameOver/ColorRect/Label
+	var cause := $GameOver/ColorRect/Cause
+	label.visible = true
+	
+	var delay := Timer.new()
+	delay.one_shot = true
+	delay.wait_time = 1.0
+	add_child(delay)
+	delay.start()
+	delay.timeout.connect(func(): 
+		cause.visible = true
+		delay.wait_time = 3.0
+		delay.start()
+		delay.timeout.connect(Globals.restart_game)
+	)
+	
+func set_cause(cause : String) -> void:
+	var label := $GameOver/ColorRect/Cause
+	label.text = cause
