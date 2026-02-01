@@ -8,16 +8,16 @@
 [ext_resource type="PackedScene" uid="uid://txoahdybgw01" path="res://scenes/tiles/basic_wall.tscn" id="4_1eqve"]
 [ext_resource type="PackedScene" uid="uid://derwakc4ay0l" path="res://scenes/rooms/room_gen_1.tscn" id="4_ryk2b"]
 [ext_resource type="PackedScene" uid="uid://oj5uikv0xpqo" path="res://scenes/gas.tscn" id="5_1m8nx"]
-<<<<<<< HEAD
+
 [ext_resource type="Script" uid="uid://b3onpiwnh08o8" path="res://scenes/defect.gd" id="5_ryk2b"]
 [ext_resource type="Script" uid="uid://dcetd3n62lby6" path="res://scenes/rooms/control.gd" id="7_mkhxr"]
 [ext_resource type="Shader" path="res://assets/uvshader.gdshader" id="8_5pad3"]
 [ext_resource type="PackedScene" uid="uid://420wvdt8tbyd" path="res://scenes/clock.tscn" id="9_5wwpt"]
-=======
+
 [ext_resource type="PackedScene" uid="uid://vdopyv0jkbxu" path="res://scenes/rooms/room_gen_2.tscn" id="5_mkhxr"]
 [ext_resource type="PackedScene" uid="uid://c172bm4pntw2a" path="res://scenes/rooms/room_gen_3.tscn" id="6_5pad3"]
 [ext_resource type="PackedScene" uid="uid://d18o3088qw52d" path="res://scenes/rooms/control_room.tscn" id="7_5wwpt"]
->>>>>>> 7de76370cf4bf21d32235007b44fe4b9de90c636
+
 [ext_resource type="PackedScene" uid="uid://fwmr5soew7hf" path="res://scenes/basic_enemy.tscn" id="12_mkhxr"]
 [ext_resource type="PackedScene" uid="uid://brajv7npi6yfb" path="res://scenes/angel_enemy.tscn" id="13_mkhxr"]
 [ext_resource type="PackedScene" uid="uid://d2au7sero68de" path="res://scenes/slime_enemy.tscn" id="15_5wwpt"]
