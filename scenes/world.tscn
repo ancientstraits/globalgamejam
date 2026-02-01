@@ -7,7 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://d2au7sero68de" path="res://scenes/slime_enemy.tscn" id="3_i7141"]
 [ext_resource type="PackedScene" uid="uid://dmr2k3nr3ttgm" path="res://scenes/generator.tscn" id="3_w7kh3"]
 [ext_resource type="Texture2D" uid="uid://crsls342ba7qa" path="res://assets/textures/fog-texture.webp" id="6_4mrxx"]
-[ext_resource type="Script" uid="uid://u305pkolf8el" path="res://scenes/gas.gd" id="4_k0juu"]
+[ext_resource type="Script" path="res://scenes/gas.gd" id="4_k0juu"]
+[ext_resource type="FontFile" uid="uid://oj2726l1ruaw" path="res://assets/Pixel-UniCode.ttf" id="5_71j4m"]
+[ext_resource type="Script" uid="uid://bp8lyqul7qh87" path="res://scenes/clock.gd" id="5_qfnet"]
 [ext_resource type="PackedScene" uid="uid://4ac71w7dhyc4" path="res://scenes/ambience_event.tscn" id="10_w7kh3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4wyf3"]
@@ -197,5 +199,24 @@ mesh = SubResource("BoxMesh_71j4m")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prop/RigidBody3D" unique_id=1269332892 groups=["props"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 shape = SubResource("BoxShape3D_i7141")
+
+[node name="Clock" type="StaticBody3D" parent="." unique_id=1091994544]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.641462, 1.2257318, 4.1884227)
+collision_layer = 3
+script = ExtResource("5_qfnet")
+time_stretch = 2
+
+[node name="Label3D" type="Label3D" parent="Clock" unique_id=703595484]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.10125077)
+texture_filter = 0
+font = ExtResource("5_71j4m")
+font_size = 64
+outline_size = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Clock" unique_id=2129916271]
+mesh = SubResource("BoxMesh_71j4m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Clock" unique_id=886308261]
+shape = SubResource("ConcavePolygonShape3D_qfnet")
 
 [node name="AmbienceEvent" parent="." unique_id=1584728494 instance=ExtResource("10_w7kh3")]
