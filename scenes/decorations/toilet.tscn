@@ -215,7 +215,7 @@ albedo_color = Color(0, 1, 0.13725491, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6914897, 0.0049732924, 0.41270983)
 
 [node name="Traffic Cone" type="MeshInstance3D" parent="Traffic Cones" unique_id=1297072791]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5096092, 0, 0.6409565)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.26670957, 0, -0.9577074)
 material_override = SubResource("StandardMaterial3D_yeim7")
 mesh = SubResource("ArrayMesh_hdwlt")
 skeleton = NodePath("")
@@ -223,7 +223,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_eidtd")
 surface_material_override/1 = SubResource("StandardMaterial3D_l3kww")
 
 [node name="Traffic Cone2" type="MeshInstance3D" parent="Traffic Cones" unique_id=389923618]
-transform = Transform3D(0.57357645, 0, -0.81915206, 0, 1, 0, 0.81915206, 0, 0.57357645, 0.5096092, 0, 0.24095654)
+transform = Transform3D(-0.81915206, 0, -0.5735764, 0, 1, 0, 0.5735764, 0, -0.81915206, 0.13329041, 0, -0.9577074)
 material_override = SubResource("StandardMaterial3D_yeim7")
 mesh = SubResource("ArrayMesh_hdwlt")
 skeleton = NodePath("")
@@ -231,7 +231,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_eidtd")
 surface_material_override/1 = SubResource("StandardMaterial3D_l3kww")
 
 [node name="Traffic Cone3" type="MeshInstance3D" parent="Traffic Cones" unique_id=1195834688]
-transform = Transform3D(0.9396927, 0, -0.34202012, 0, 1, 0, 0.34202012, 0, 0.9396927, 0.2111144, 0, 0.5476093)
+transform = Transform3D(-0.3420201, 0, -0.9396926, 0, 1, 0, 0.9396926, 0, -0.3420201, -0.17336237, 0, -1.2562022)
 material_override = SubResource("StandardMaterial3D_yeim7")
 mesh = SubResource("ArrayMesh_hdwlt")
 skeleton = NodePath("")
@@ -242,7 +242,7 @@ surface_material_override/1 = SubResource("StandardMaterial3D_l3kww")
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.6386957, 0.010859257, -0.0029518008)
 
 [node name="Diploma" type="MeshInstance3D" parent="Toilet" unique_id=436387535]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.614734e-09, 0, 0.20000005)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.7988611, 0, 1.7371147)
 mesh = SubResource("ArrayMesh_as63r")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_g2eba")

@@ -201,21 +201,23 @@ shadow_mesh = SubResource("ArrayMesh_ufvim")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vrfus"]
 
 [node name="Decoration2" type="Node3D" unique_id=1448339959]
+transform = Transform3D(-9.784964e-08, 0, 1, 0, 1, 0, -1, 0, -9.784964e-08, 0, 0, -0.2)
 
 [node name="CSGMesh3D2" type="CSGMesh3D" parent="." unique_id=1895850]
-transform = Transform3D(0.027, 0, 0, 0, 0.8362658, -0.081983365, 0, 0.12796666, 0.5357637, -2.4501126, 2.3697567, -0.8664499)
+transform = Transform3D(3.2968828e-10, 0.12796666, 0.5357638, 2.505001e-11, 0.83626574, -0.08198335, -0.027, -1.1333091e-08, 3.841116e-09, -0.96353513, 2.3697567, 2.3408506)
 mesh = SubResource("BoxMesh_rd4sf")
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=894567889]
-transform = Transform3D(0.049999982, 0, 0, 0, 1.5603756, -0.13595766, 0, 0.2141333, 0.99071467, -2.4272175, 2.4, -0.90000004)
+transform = Transform3D(9.312906e-11, 0.21413334, 0.9907148, 4.6388934e-11, 1.5603755, -0.13595764, -0.049999982, 2.4725e-08, 1.3586721e-08, -0.9970851, 2.4, 1.7179556)
 visible = false
 mesh = SubResource("BoxMesh_0xp1p")
 material = SubResource("StandardMaterial3D_0xp1p")
 
 [node name="Water Cooler2" type="Node3D" parent="." unique_id=348873908]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.2449737, 0, 1.0011396)
+transform = Transform3D(-1, 0, -4.4703476e-08, 0, 1, 0, 4.4703476e-08, 0, -1, 0.90405446, 0, 1.5357122)
 
 [node name="Water Cooler" type="MeshInstance3D" parent="Water Cooler2" unique_id=1441362086]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.60000014)
 mesh = SubResource("ArrayMesh_wudw2")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_hhdw3")
@@ -224,7 +226,7 @@ surface_material_override/2 = SubResource("StandardMaterial3D_ilqdg")
 surface_material_override/3 = SubResource("StandardMaterial3D_q3fso")
 
 [node name="Traffic Cone2" type="MeshInstance3D" parent="." unique_id=1424116279]
-transform = Transform3D(0.57357645, 0, -0.81915206, 0, 1, 0, 0.81915206, 0, 0.57357645, -1.6903908, 0, 0.34095654)
+transform = Transform3D(0.8191521, 0, 0.57357645, 0, 1, 0, -0.57357645, 0, 0.8191521, 0.24387123, 0, 1.581129)
 material_override = SubResource("StandardMaterial3D_eppp6")
 mesh = SubResource("ArrayMesh_rd4sf")
 skeleton = NodePath("")

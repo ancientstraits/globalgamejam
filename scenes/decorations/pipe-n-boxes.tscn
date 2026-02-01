@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://iysfbscvui47" path="res://assets/textures/steel-2.jpg" id="2_hvehs"]
 [ext_resource type="Texture2D" uid="uid://cx08ym6tes47y" path="res://assets/textures/milled-steel.jpg" id="3_k3eya"]
 [ext_resource type="Material" uid="uid://bbnt1ev8xqnkm" path="res://assets/textures/cardboard_material.tres" id="4_b0fop"]
-[ext_resource type="Material" uid="uid://cslx64ihtyek7" path="res://assets/textures/crate_material_3d.tres" id="4_dy7xk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wdf5i"]
 albedo_texture = ExtResource("1_b0fop")
@@ -28,46 +27,41 @@ albedo_texture = ExtResource("3_k3eya")
 [node name="Decoration" type="Node3D" unique_id=1448339959]
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=76456606]
-transform = Transform3D(-0.39999998, 0, 3.2455702e-08, 0, 1.04, 0, -3.4969105e-08, 0, -0.37124994, -2.1815507, 1.0855174, -1.2983491)
+transform = Transform3D(0.39999998, 0, -5.348077e-08, 0, 1.0399998, 0, 8.081449e-08, 0, 0.37124997, 2.0096824, 1.0855174, 1.4630437)
 material_override = SubResource("StandardMaterial3D_wdf5i")
 mesh = SubResource("CylinderMesh_ue7ln")
 
 [node name="CSGMesh3D3" type="CSGMesh3D" parent="." unique_id=530200898]
-transform = Transform3D(-0.39999995, 0, 3.2455702e-08, 0, 1.5287997, 0, -3.4969105e-08, 0, -0.37124994, -2.1815507, 3.9855177, 1.4016509)
+transform = Transform3D(0.4, 0, -5.3480754e-08, 0, 2.0868113, 0, 6.963861e-08, 0, 0.3712499, 2.0096824, 4.4855175, -1.2369567)
 material_override = SubResource("StandardMaterial3D_bfxrn")
 mesh = SubResource("CylinderMesh_ue7ln")
 
 [node name="CSGMesh3D2" type="CSGMesh3D" parent="." unique_id=1407998446]
-transform = Transform3D(-0.39999995, -1.0143226e-07, -1.4186836e-15, 0, -5.0716128e-08, 0.37124994, -3.4969105e-08, 1.1602498, 1.6227848e-08, -2.1815507, 2.3496153, 0.061554007)
+transform = Transform3D(0.39999998, 2.2207946e-07, 2.903142e-15, 5.268332e-16, -5.071613e-08, 0.37124994, 7.708919e-08, -1.1602496, -1.6227842e-08, 2.0096824, 2.3496153, 0.10314026)
 material_override = SubResource("StandardMaterial3D_qddfu")
 mesh = SubResource("CylinderMesh_ue7ln")
 
 [node name="CSGMesh3D4" type="CSGMesh3D" parent="." unique_id=466382210]
-transform = Transform3D(-0.43476287, 0, 3.7033196e-08, 0, 0.44961244, 0, -3.8008174e-08, 0, -0.42361036, -2.1658394, 2.3213847, -1.3057536)
+transform = Transform3D(0.43476275, 0, -7.4395956e-08, 0, 0.44961244, 0, 8.233402e-08, 0, 0.42361036, 1.9939711, 2.3213847, 1.470448)
 material_override = SubResource("StandardMaterial3D_lv7va")
 mesh = SubResource("BoxMesh_n7di7")
 
 [node name="CSGMesh3D5" type="CSGMesh3D" parent="." unique_id=1455518626]
-transform = Transform3D(-0.43476287, 0, 3.7033196e-08, 0, 0.44961244, 0, -3.8008174e-08, 0, -0.42361036, -2.1658394, 2.3213847, 1.3765141)
+transform = Transform3D(0.43476275, 0, -7.4395956e-08, 0, 0.44961244, 0, 8.233402e-08, 0, 0.42361036, 1.9939715, 2.3213847, -1.2118198)
 material_override = SubResource("StandardMaterial3D_y68fo")
 mesh = SubResource("BoxMesh_n7di7")
 
 [node name="CSGMesh3D9" type="CSGMesh3D" parent="." unique_id=308352452]
-transform = Transform3D(-0.34687302, 0, -0.103861764, 0, 0.33720928, 0, 0.09294432, 0, -0.38761756, -1.670381, 0.12138467, 1.2077208)
+transform = Transform3D(0.33745247, 0, 0.13724959, 0, 0.3372092, 0, -0.1228226, 0, 0.37709033, 1.8752713, 0.12138462, -1.5420116)
 material_override = ExtResource("4_b0fop")
 mesh = SubResource("BoxMesh_n7di7")
 
 [node name="CSGMesh3D10" type="CSGMesh3D" parent="." unique_id=1947884489]
-transform = Transform3D(-0.32712045, 0, -0.16556464, 0, 0.33720925, 0, 0.14816125, 0, -0.36554474, -1.670381, 0.12138467, 0.70772076)
+transform = Transform3D(0.31296262, 0, 0.19679394, 0, 0.33720922, 0, -0.17610784, 0, 0.34972382, 1.9188489, 0.12138462, -1.0439144)
 material_override = ExtResource("4_b0fop")
 mesh = SubResource("BoxMesh_n7di7")
 
 [node name="CSGMesh3D11" type="CSGMesh3D" parent="." unique_id=257840927]
-transform = Transform3D(0.3577428, 0, 0.034974813, 0, 0.33720922, 0, -0.031298414, 0, 0.3997642, -1.670381, 0.45824182, 0.90772074)
+transform = Transform3D(-0.35365367, 0, -0.06968345, 0, 0.33720922, 0, 0.062358618, 0, -0.39519477, 1.901418, 0.45824182, -1.2431532)
 mesh = SubResource("BoxMesh_n7di7")
 material = ExtResource("4_b0fop")
-
-[node name="CSGMesh3D6" type="CSGMesh3D" parent="." unique_id=1544407486]
-transform = Transform3D(0.92562234, 0, 0.55732125, 0, 1.0386047, 0, -0.5344083, 0, 0.96530867, -0.058247328, 0.52138466, -0.5191635)
-mesh = SubResource("BoxMesh_n7di7")
-material = ExtResource("4_dy7xk")

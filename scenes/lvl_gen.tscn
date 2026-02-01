@@ -10,11 +10,20 @@
 [ext_resource type="PackedScene" uid="uid://oj5uikv0xpqo" path="res://scenes/gas.tscn" id="5_1m8nx"]
 [ext_resource type="Script" uid="uid://b3onpiwnh08o8" path="res://scenes/defect.gd" id="5_ryk2b"]
 [ext_resource type="Script" uid="uid://dcetd3n62lby6" path="res://scenes/rooms/control.gd" id="7_mkhxr"]
-[ext_resource type="Shader" uid="uid://8m85mr4x630x" path="res://assets/uvshader.gdshader" id="8_5pad3"]
+[ext_resource type="Shader" path="res://assets/uvshader.gdshader" id="8_5pad3"]
 [ext_resource type="PackedScene" uid="uid://420wvdt8tbyd" path="res://scenes/clock.tscn" id="9_5wwpt"]
 [ext_resource type="PackedScene" uid="uid://fwmr5soew7hf" path="res://scenes/basic_enemy.tscn" id="12_mkhxr"]
 [ext_resource type="PackedScene" uid="uid://brajv7npi6yfb" path="res://scenes/angel_enemy.tscn" id="13_mkhxr"]
 [ext_resource type="PackedScene" uid="uid://d2au7sero68de" path="res://scenes/slime_enemy.tscn" id="15_5wwpt"]
+[ext_resource type="PackedScene" uid="uid://bln40huiq2vcf" path="res://scenes/decorations/poster-n-crates.tscn" id="16_5pad3"]
+[ext_resource type="PackedScene" uid="uid://cwsfwubf6qenx" path="res://scenes/decorations/wet-floor.tscn" id="17_5wwpt"]
+[ext_resource type="PackedScene" uid="uid://cqstwuwk0kds" path="res://scenes/decorations/toilet.tscn" id="18_kl7iw"]
+[ext_resource type="PackedScene" uid="uid://duqgukf7cmwbx" path="res://scenes/decorations/poster-n-water.tscn" id="19_gdo6g"]
+[ext_resource type="PackedScene" uid="uid://78p5jl65wq46" path="res://scenes/decorations/pipe-n-workbench.tscn" id="19_gk76l"]
+[ext_resource type="PackedScene" uid="uid://c2sbco2w508an" path="res://scenes/decorations/pipe-n-boxes.tscn" id="20_xbugx"]
+[ext_resource type="PackedScene" uid="uid://dj7nvkneq8qls" path="res://scenes/decorations/boiler-thing.tscn" id="21_ggb0u"]
+[ext_resource type="PackedScene" uid="uid://8acjeg0ycda3" path="res://scenes/decorations/big-boiler.tscn" id="22_ygtp0"]
+[ext_resource type="PackedScene" uid="uid://x64561e6wfot" path="res://scenes/decorations/pipe.tscn" id="23_3yivh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lp8i1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -248,6 +257,8 @@ gas_ratio = 0.4
 enemy_min_distance = 2
 enemy_placeholder = ExtResource("12_mkhxr")
 boss_placeholder = Array[PackedScene]([ExtResource("13_mkhxr"), ExtResource("13_mkhxr"), ExtResource("15_5wwpt")])
+wall_decos = Array[PackedScene]([ExtResource("16_5pad3"), ExtResource("18_kl7iw"), ExtResource("19_gdo6g"), ExtResource("19_gk76l"), ExtResource("20_xbugx"), ExtResource("21_ggb0u"), ExtResource("22_ygtp0"), ExtResource("23_3yivh")])
+free_decos = Array[PackedScene]([ExtResource("17_5wwpt")])
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1420581911]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 6.999756, 21.394775, 8.184433)
