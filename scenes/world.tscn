@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bvpqcfq2fku1"]
 
 [ext_resource type="PackedScene" uid="uid://cnyha7j8gdx03" path="res://scenes/player.tscn" id="1_4wyf3"]
-[ext_resource type="PackedScene" uid="uid://dex8ha1cwedsc" path="res://scenes/basic_enemy.tscn" id="2_k0juu"]
-[ext_resource type="PackedScene" uid="uid://dnjglam3v7436" path="res://scenes/generator.tscn" id="3_w7kh3"]
+[ext_resource type="PackedScene" path="res://scenes/basic_enemy.tscn" id="2_k0juu"]
+[ext_resource type="PackedScene" uid="uid://dmr2k3nr3ttgm" path="res://scenes/generator.tscn" id="3_w7kh3"]
 [ext_resource type="Script" uid="uid://u305pkolf8el" path="res://scenes/gas.gd" id="4_k0juu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4wyf3"]
@@ -113,3 +113,30 @@ mesh = SubResource("PlaneMesh_k0juu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Gas" unique_id=768314873]
 shape = SubResource("BoxShape3D_71j4m")
+
+[node name="GasMeter" type="ProgressBar" parent="." unique_id=801314967]
+offset_left = 26.0
+offset_top = 24.0
+offset_right = 270.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(0.18690777, 0.99999994, 0.103041, 1)
+theme_override_styles/fill = SubResource("StyleBoxFlat_71j4m")
+
+[node name="Node3D" type="Node3D" parent="GasMeter" unique_id=1866581080]
+
+[node name="Prop" type="Node3D" parent="." unique_id=712604432 groups=["props"]]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Prop" unique_id=1580565900 groups=["props"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+collision_layer = 16
+collision_mask = 17
+mass = 0.5
+physics_material_override = SubResource("PhysicsMaterial_4wyf3")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Prop/RigidBody3D" unique_id=1746570891 groups=["props"]]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.60064304, 0)
+mesh = SubResource("BoxMesh_4wyf3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prop/RigidBody3D" unique_id=1269332892 groups=["props"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+shape = SubResource("BoxShape3D_k0juu")

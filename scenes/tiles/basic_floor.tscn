@@ -2,7 +2,50 @@
 
 [ext_resource type="PackedScene" uid="uid://vnvqiu2nxm05" path="res://assets/models/basic_floor.glb" id="1_abtpw"]
 
-[node name="BasicFloor" type="Node3D" unique_id=621641132]
-transform = Transform3D(4, 0, 0, 0, 2, 0, 0, 0, 4, 0, 0, 0)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qba7n"]
 
-[node name="basic_floor" parent="." unique_id=58713971 instance=ExtResource("1_abtpw")]
+[sub_resource type="ArrayMesh" id="ArrayMesh_8d6ti"]
+_surfaces = [{
+"aabb": AABB(-2.5, 0, -2.5, 5, 1e-05, 5),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 3, 0, 1, 0),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_crse5"]
+resource_name = "basic_floor_Plane"
+_surfaces = [{
+"aabb": AABB(-2.5, 0, -2.5, 5, 1e-05, 5),
+"attribute_data": PackedByteArray(0, 0, 255, 255, 255, 255, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 3, 0, 1, 0),
+"material": SubResource("StandardMaterial3D_qba7n"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 255, 255, 255, 191, 255, 255, 0, 0, 0, 0, 255, 191, 255, 255, 0, 0, 255, 255, 255, 191, 0, 0, 0, 0, 0, 0, 255, 191, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_8d6ti")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_abtpw"]
+albedo_color = Color(0.2574758, 0.25747576, 0.25747573, 1)
+
+[node name="BasicFloor" type="Node3D" unique_id=621641132]
+
+[node name="basic_floor" parent="." unique_id=1862166615 instance=ExtResource("1_abtpw")]
+
+[node name="basic_floor2" type="Node3D" parent="." unique_id=1743439765]
+transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 0, 3.5169933, 0)
+
+[node name="Floor" type="MeshInstance3D" parent="basic_floor2" unique_id=887241465]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0561872, 0)
+mesh = SubResource("ArrayMesh_crse5")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_abtpw")

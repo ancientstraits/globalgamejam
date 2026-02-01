@@ -390,15 +390,22 @@ func _v_wall_grid_pos_to_world(x, y) -> Vector3:
 @export var wall: PackedScene
 
 func _place_tiles(result) -> void:
+	for rm in result['rooms']:
+		var node = rm.room.scene.instantiate()
+		add_child(node)
+		if rm.w < rm.h:
+			node.global_position = _grid_pos_to_world(rm.y, rm.x + 1)
+			node.rotation_degrees.y = -90
+		else:
+			node.global_position = _grid_pos_to_world(rm.y, rm.x)
+
 	for y in range(height):
 		for x in range(width):
 			var node = 0
 			if result['tiles'][x][y] == TILE_EMPTY:
 				node = floor.instantiate()
-			else:
-				node = room_floor.instantiate()
-			add_child(node)
-			node.global_position = _grid_pos_to_world(x, y)
+				add_child(node)
+				node.global_position = _grid_pos_to_world(x, y)
 
 	for y in range(height + 1):
 		for x in range(width + 1):
