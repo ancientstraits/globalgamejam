@@ -12,6 +12,7 @@ radius = 1.5
 
 [node name="SlimeEnemy" type="CharacterBody3D" unique_id=662068]
 collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_057e2")
 speed = 1.0
 always_see_player = true

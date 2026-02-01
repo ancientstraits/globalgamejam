@@ -66,7 +66,6 @@ environment = SubResource("Environment_71j4m")
 
 [node name="Player" parent="." unique_id=155048425 groups=["player"] instance=ExtResource("1_4wyf3")]
 transform = Transform3D(0.86788684, 0, 0.49676192, 0, 1, 0, -0.49676192, 0, 0.86788684, 0, 4.7243547, 0)
-collision_layer = 2
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=442866872]
 transform = Transform3D(1, 0, 0, 0, 0.20000072, 0.9797958, 0, -0.9797958, 0.20000072, 0, 8.979358, -1.1422927)
@@ -143,7 +142,6 @@ offset_top = 24.0
 offset_right = 270.0
 offset_bottom = 51.0
 theme_override_colors/font_color = Color(0.18690777, 0.99999994, 0.103041, 1)
-theme_override_styles/fill = SubResource("StyleBoxFlat_71j4m")
 
 [node name="Node3D" type="Node3D" parent="GasMeter" unique_id=1866581080]
 
@@ -152,12 +150,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.662492, 0, 0)
 
 [node name="RigidBody3D" type="RigidBody3D" parent="Prop" unique_id=1580565900 groups=["props"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
-collision_layer = 16
+collision_layer = 19
 collision_mask = 17
 mass = 0.5
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="Prop/RigidBody3D" unique_id=1746570891 groups=["props"]]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.60064304, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.60064304, 0)
 mesh = SubResource("BoxMesh_71j4m")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prop/RigidBody3D" unique_id=1269332892 groups=["props"]]
