@@ -6,20 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://bvf0l4t2kcxi5" path="res://scenes/tiles/basic_floor.tscn" id="3_v30vs"]
 [ext_resource type="PackedScene" uid="uid://bkm5uyeb16j67" path="res://scenes/placeholder/placeholderroom.tscn" id="3_wnehw"]
 [ext_resource type="PackedScene" uid="uid://txoahdybgw01" path="res://scenes/tiles/basic_wall.tscn" id="4_1eqve"]
-[ext_resource type="PackedScene" uid="uid://derwakc4ay0l" path="res://scenes/rooms/room_gen_1.tscn" id="4_ryk2b"]
 [ext_resource type="PackedScene" uid="uid://bb8qsj72dnhrh" path="res://scenes/rooms/spawn_room.tscn" id="4_5pad3"]
-[ext_resource type="PackedScene" uid="uid://dmr2k3nr3ttgm" path="res://scenes/generator.tscn" id="4_vqau2"]
+[ext_resource type="PackedScene" uid="uid://derwakc4ay0l" path="res://scenes/rooms/room_gen_1.tscn" id="4_ryk2b"]
 [ext_resource type="PackedScene" uid="uid://oj5uikv0xpqo" path="res://scenes/gas.tscn" id="5_1m8nx"]
-
-[ext_resource type="Script" uid="uid://b3onpiwnh08o8" path="res://scenes/defect.gd" id="5_ryk2b"]
-[ext_resource type="Script" uid="uid://dcetd3n62lby6" path="res://scenes/rooms/control.gd" id="7_mkhxr"]
-[ext_resource type="Shader" path="res://assets/uvshader.gdshader" id="8_5pad3"]
-[ext_resource type="PackedScene" uid="uid://420wvdt8tbyd" path="res://scenes/clock.tscn" id="9_5wwpt"]
-
 [ext_resource type="PackedScene" uid="uid://vdopyv0jkbxu" path="res://scenes/rooms/room_gen_2.tscn" id="5_mkhxr"]
 [ext_resource type="PackedScene" uid="uid://c172bm4pntw2a" path="res://scenes/rooms/room_gen_3.tscn" id="6_5pad3"]
 [ext_resource type="PackedScene" uid="uid://d18o3088qw52d" path="res://scenes/rooms/control_room.tscn" id="7_5wwpt"]
-
 [ext_resource type="PackedScene" uid="uid://fwmr5soew7hf" path="res://scenes/basic_enemy.tscn" id="12_mkhxr"]
 [ext_resource type="PackedScene" uid="uid://brajv7npi6yfb" path="res://scenes/angel_enemy.tscn" id="13_mkhxr"]
 [ext_resource type="PackedScene" uid="uid://d2au7sero68de" path="res://scenes/slime_enemy.tscn" id="15_5wwpt"]
@@ -31,7 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://c2sbco2w508an" path="res://scenes/decorations/pipe-n-boxes.tscn" id="20_xbugx"]
 [ext_resource type="PackedScene" uid="uid://dj7nvkneq8qls" path="res://scenes/decorations/boiler-thing.tscn" id="21_ggb0u"]
 [ext_resource type="PackedScene" uid="uid://8acjeg0ycda3" path="res://scenes/decorations/big-boiler.tscn" id="22_ygtp0"]
-[ext_resource type="PackedScene" uid="uid://x64561e6wfot" path="res://scenes/decorations/pipe.tscn" id="23_3yivh"]
+[ext_resource type="PackedScene" path="res://scenes/decorations/pipe.tscn" id="23_3yivh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lp8i1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -52,7 +44,7 @@ glow_bloom = 0.1
 [sub_resource type="NavigationMesh" id="NavigationMesh_mkhxr"]
 geometry_parsed_geometry_type = 1
 
-[sub_resource type="Resource" id="Resource_mkhxr"]
+[sub_resource type="Resource" id="Resource_3yivh"]
 script = ExtResource("3_1eqve")
 type = 2
 width = 2
@@ -60,99 +52,28 @@ height = 2
 scene = ExtResource("4_5pad3")
 metadata/_custom_type_script = "uid://dp65yn2l58f6y"
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v77um"]
-resource_local_to_scene = true
-transparency = 1
-shading_mode = 0
-albedo_color = Color(0.6156863, 0, 0, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_qfnet"]
-resource_local_to_scene = true
-material = SubResource("StandardMaterial3D_v77um")
-radius = 0.2
-height = 0.2
-radial_segments = 4
-rings = 4
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v77um"]
-direction = Vector3(0, 1, 0.3)
-spread = 23.824
-flatness = 1.0
-initial_velocity_min = 2.0
-initial_velocity_max = 3.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1int6"]
-albedo_color = Color(0.9999998, 0.5882031, 0.17387584, 1)
-emission_enabled = true
-emission = Color(0.8659228, 0.29551876, 0, 1)
-emission_energy_multiplier = 6.52
-
-[sub_resource type="SphereMesh" id="SphereMesh_v77um"]
-material = SubResource("StandardMaterial3D_1int6")
-radius = 0.05
-height = 0.1
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_1int6"]
-radius = 0.19624786
-
-[sub_resource type="PackedScene" id="PackedScene_rnvb2"]
-_bundled = {
-"conn_count": 2,
-"conns": PackedInt32Array(1073741831, 1073741830, 32, 31, 2, 0, 0, 1073741833, 1073741832, 34, 33, 2, 0, 0),
-"editable_instances": [],
-"id_paths": [PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array()],
-"names": PackedStringArray("Defect", "Node3D", "script", "fix_threshold", "fix_rate", "MeshInstance3D", "MeshInstance3D", "transform", "mesh", "GPUParticles3D", "GPUParticles3D", "amount", "lifetime", "interp_to_end", "explosiveness", "randomness", "process_material", "draw_pass_1", "Timer", "Timer", "one_shot", "Timer2", "Timer", "one_shot", "Area3D", "Area3D", "collision_layer", "collision_mask", "CollisionShape3D", "CollisionShape3D", "shape", "_on_timer_timeout", "timeout", "_on_timer_2_timeout", "timeout"),
-"node_count": 7,
-"node_ids": PackedInt32Array(237752016, 2079029932, 497550902, 418576988, 427914553, 431084789, 1228512276),
-"node_paths": [NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("./Area3D"), NodePath("."), NodePath("Timer"), NodePath("."), NodePath("Timer2")],
-"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 3, 2, 0, 3, 1, 4, 2, 0, 1073741824, 0, 6, 5, -1, 2, 7, 3, 8, 4, 0, 1073741825, 0, 10, 9, -1, 7, 11, 5, 12, 6, 13, 7, 14, 8, 15, 9, 16, 10, 17, 11, 0, 1073741826, 0, 19, 18, -1, 1, 20, 12, 0, 1073741827, 0, 22, 21, -1, 1, 23, 13, 0, 1073741828, 0, 25, 24, -1, 2, 26, 14, 27, 15, 0, 1073741829, 0, 29, 28, -1, 1, 30, 16, 0),
-"variants": [ExtResource("5_ryk2b"), 3.0, 1.0, Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0), SubResource("SphereMesh_qfnet"), 3, 2.69, 1.0, 1.0, 0.52, SubResource("ParticleProcessMaterial_v77um"), SubResource("SphereMesh_v77um"), true, true, 16, 16, SubResource("SphereShape3D_1int6")],
-"version": 3
-}
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rkfgp"]
-albedo_color = Color(0.11372549, 0.59607846, 0, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_yat5j"]
-material = SubResource("StandardMaterial3D_rkfgp")
-
-[sub_resource type="PackedScene" id="PackedScene_kl7iw"]
-_bundled = {
-"conn_count": 0,
-"conns": PackedInt32Array(),
-"editable_instances": [],
-"id_paths": [],
-"names": PackedStringArray("RoomGen1", "transform", "Node3D", "Generator", "defect", "BasicFloor", "BasicFloor5", "BasicFloor4", "BasicFloor2", "BasicFloor3", "BasicFloor6", "CSGMesh3D", "mesh"),
-"node_count": 9,
-"node_ids": PackedInt32Array(1415989661, 1422162699, 621641132, 77373297, 1241190560, 640939305, 953700829, 2115010538, 850481141),
-"node_paths": [],
-"nodes": PackedInt32Array(-1, -1, 2, 0, -1, 1, 1, 0, 0, 0, 0, 2147483647, 3, 1, 2, 1, 2, 4, 3, 0, 0, 0, 2147483647, 5, 4, 0, 0, 0, 0, 2147483647, 6, 4, 1, 1, 5, 0, 0, 0, 2147483647, 7, 4, 1, 1, 6, 0, 0, 0, 2147483647, 8, 4, 1, 1, 7, 0, 0, 0, 2147483647, 9, 4, 1, 1, 8, 0, 0, 0, 2147483647, 10, 4, 1, 1, 9, 0, 0, 0, 11, 11, -1, 2, 1, 10, 12, 11, 0),
-"variants": [Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0), ExtResource("4_vqau2"), Transform3D(-0.47863063, 0, -0.87801635, 0, 1, 0, 0.87801635, 0, -0.47863063, 3.346099, 0.95262694, 3.7936282), SubResource("PackedScene_rnvb2"), ExtResource("3_v30vs"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 10), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3486009, 1.0276675, 9.909467), SubResource("BoxMesh_yat5j")],
-"version": 3
-}
-
-[sub_resource type="Resource" id="Resource_rapvc"]
+[sub_resource type="Resource" id="Resource_gqgvm"]
 script = ExtResource("3_1eqve")
 width = 2
 height = 3
 scene = ExtResource("4_ryk2b")
 metadata/_custom_type_script = "uid://dp65yn2l58f6y"
 
-[sub_resource type="Resource" id="Resource_gdo6g"]
+[sub_resource type="Resource" id="Resource_se6u0"]
 script = ExtResource("3_1eqve")
 width = 2
 height = 3
 scene = ExtResource("5_mkhxr")
 metadata/_custom_type_script = "uid://dp65yn2l58f6y"
 
-[sub_resource type="Resource" id="Resource_gk76l"]
+[sub_resource type="Resource" id="Resource_vkt4n"]
 script = ExtResource("3_1eqve")
 width = 2
 height = 3
 scene = ExtResource("6_5pad3")
 metadata/_custom_type_script = "uid://dp65yn2l58f6y"
 
-[sub_resource type="Resource" id="Resource_xbugx"]
+[sub_resource type="Resource" id="Resource_egpkt"]
 script = ExtResource("3_1eqve")
 type = 1
 width = 2
@@ -175,7 +96,7 @@ transform = Transform3D(0.86788684, 0, 0.49676192, 0, 1, 0, -0.49676192, 0, 0.86
 navigation_mesh = SubResource("NavigationMesh_mkhxr")
 use_edge_connections = false
 script = ExtResource("2_sp6hj")
-mandatory_rooms = Array[ExtResource("3_1eqve")]([SubResource("Resource_mkhxr"), SubResource("Resource_rapvc"), SubResource("Resource_7uevp"), SubResource("Resource_vqau2"), SubResource("Resource_ryk2b")])
+mandatory_rooms = Array[ExtResource("3_1eqve")]([SubResource("Resource_3yivh"), SubResource("Resource_gqgvm"), SubResource("Resource_se6u0"), SubResource("Resource_vkt4n"), SubResource("Resource_egpkt")])
 placeholder_visual = ExtResource("3_wnehw")
 placeholder_gas = ExtResource("5_1m8nx")
 floor_tile = ExtResource("3_v30vs")
@@ -194,7 +115,6 @@ projection = 1
 size = 22.951809
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1936218640]
-visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=2119944278]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.054337, 0)
