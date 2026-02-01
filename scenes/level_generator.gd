@@ -4,48 +4,11 @@ class_name LevelGenerator
 const TILE_EMPTY = -1
 
 class PlacedRoom:
-	var room
-	var x
-	var y
-	var w
-	var h
-
-# ----------------------------------------------------------------------
-# PUBLIC API
-# ----------------------------------------------------------------------
-
-func generate_map(width, height, mandatory_rooms, straight_bias = 0.85):
-	randomize()
-
-	# assign ids (0..n-1) to rooms so tiles can store them
-	for i in range(mandatory_rooms.size()):
-		mandatory_rooms[i].id = i
-
-	var tiles = _create_tiles(width, height)
-	var placed_rooms = _place_rooms(width, height, tiles, mandatory_rooms)
-	if placed_rooms.size() != mandatory_rooms.size():
-		push_error("Failed to place all mandatory rooms")
-		return {}
-
-	var h_walls = []
-	var v_walls = []
-	_init_walls(width, height, h_walls, v_walls)
-
-	_generate_maze(width, height, h_walls, v_walls, straight_bias)
-	_open_room_interior(placed_rooms, h_walls, v_walls)
-	_remove_dead_ends(width, height, h_walls, v_walls)
-	_ensure_two_exits(width, height, tiles, placed_rooms, h_walls, v_walls)
-
-	return {
-		"tiles": tiles,          # 2D: tiles[y][x] = room_id or TILE_EMPTY
-		"rooms": placed_rooms,   # Array of PlacedRoom
-		"h_walls": h_walls,      # (height+1) x width, true = wall
-		"v_walls": v_walls       # height x (width+1), true = wall
-	}
-
-# ----------------------------------------------------------------------
-# 1. Tiles and room placement
-# ----------------------------------------------------------------------
+	var room      # MandatoryRoom resource
+	var x         # top-left tile x
+	var y         # top-left tile y
+	var w         # width in tiles
+	var h         # height in tiles
 
 func _create_tiles(width, height):
 	var tiles = []
@@ -57,8 +20,8 @@ func _create_tiles(width, height):
 
 func _place_rooms(width, height, tiles, mandatory_rooms):
 	var placed_rooms = []
-	var max_layout_attempts = 50
-	var max_room_attempts = 200
+	var max_layout_attempts = 500
+	var max_room_attempts = 10000
 
 	for attempt in range(max_layout_attempts):
 		# clear tiles
@@ -69,20 +32,24 @@ func _place_rooms(width, height, tiles, mandatory_rooms):
 
 		var layout_ok = true
 
-		for room_res in mandatory_rooms:
+		for i in range(mandatory_rooms.size()):
+			var room_res = mandatory_rooms[i]
+			room_res.id = i  # assign a stable id
+
 			var placed = false
 			for t in range(max_room_attempts):
 				var rotated = randf() < 0.5
 				var size = room_res.size_for_rotation(rotated)
 				var rw = size.x
 				var rh = size.y
+
 				if rw > width or rh > height:
 					continue
 
 				var x0 = randi() % (width - rw + 1)
 				var y0 = randi() % (height - rh + 1)
 
-				# check overlap
+				# overlap check
 				var overlap = false
 				for yy in range(rh):
 					for xx in range(rw):
@@ -94,7 +61,7 @@ func _place_rooms(width, height, tiles, mandatory_rooms):
 				if overlap:
 					continue
 
-				# commit room
+				# commit this room
 				for yy in range(rh):
 					for xx in range(rw):
 						tiles[y0 + yy][x0 + xx] = room_res.id
@@ -117,8 +84,29 @@ func _place_rooms(width, height, tiles, mandatory_rooms):
 		if layout_ok:
 			return placed_rooms
 
-	# failed after many attempts
+	# Failed after many attempts (e.g. rooms too big for grid)
 	return placed_rooms
+
+func generate_base_layout(width, height, mandatory_rooms):
+	randomize()
+
+	var tiles = _create_tiles(width, height)
+	var placed_rooms = _place_rooms(width, height, tiles, mandatory_rooms)
+
+	if placed_rooms.size() != mandatory_rooms.size():
+		push_error("Could not place all mandatory rooms with given constraints.")
+		return {}
+
+	# At this point:
+	# tiles[y][x] is either TILE_EMPTY or a room id (0..mandatory_rooms.size()-1)
+	# placed_rooms has the bounds and MandatoryRoom refs.
+
+	return {
+		"width": width,
+		"height": height,
+		"tiles": tiles,
+		"rooms": placed_rooms
+	} 
 
 # ----------------------------------------------------------------------
 # WALL ARRAYS
@@ -128,19 +116,20 @@ func _init_walls(width, height, h_walls, v_walls):
 	h_walls.clear()
 	v_walls.clear()
 
-	# horizontal walls: (height+1) x width
+	# Horizontal walls: (height+1) x width
 	for y in range(height + 1):
 		h_walls.append([])
 		for x in range(width):
-			h_walls[y].append(true)
+			h_walls[y].append(true)  # true = wall present
 
-	# vertical walls: height x (width+1)
+	# Vertical walls: height x (width+1)
 	for y in range(height):
 		v_walls.append([])
 		for x in range(width + 1):
-			v_walls[y].append(true)
+			v_walls[y].append(true)  # true = wall present
 
 func _open_wall_between(x1, y1, x2, y2, h_walls, v_walls):
+	# Opens the wall between two neighboring tiles
 	if x1 == x2:
 		# vertical neighbors -> horizontal wall
 		if y2 == y1 + 1:
@@ -166,7 +155,6 @@ func _generate_maze(width, height, h_walls, v_walls, straight_bias):
 		for x in range(width):
 			visited[y].append(false)
 
-	# 0=up, 1=down, 2=left, 3=right
 	var dir_vecs = [
 		Vector2(0, -1),
 		Vector2(0, 1),
@@ -199,7 +187,7 @@ func _generate_maze(width, height, h_walls, v_walls, straight_bias):
 			stack.pop_back()
 			continue
 
-		# choose direction with bias to continue straight
+		# choose neighbor, biased to keep going straight
 		var chosen = candidates[randi() % candidates.size()]
 		if last_dir != -1 and randf() < straight_bias:
 			for c in candidates:
@@ -214,10 +202,6 @@ func _generate_maze(width, height, h_walls, v_walls, straight_bias):
 		_open_wall_between(cx, cy, nx2, ny2, h_walls, v_walls)
 		visited[ny2][nx2] = true
 		stack.append({"x": nx2, "y": ny2, "last_dir": d2})
-
-# ----------------------------------------------------------------------
-# 4. Open room interiors (rooms become big open spaces)
-# ----------------------------------------------------------------------
 
 func _open_room_interior(placed_rooms, h_walls, v_walls):
 	for pr in placed_rooms:
@@ -238,31 +222,35 @@ func _open_room_interior(placed_rooms, h_walls, v_walls):
 				if yy + 1 < h:
 					_open_wall_between(x, y, x, y + 1, h_walls, v_walls)
 
-# ----------------------------------------------------------------------
-# 5. Remove dead ends (no cul-de-sacs)
-# ----------------------------------------------------------------------
-
 func _open_neighbor_count(x, y, width, height, h_walls, v_walls):
 	var c = 0
+	# up
 	if y > 0 and not h_walls[y][x]:
 		c += 1
-	if y + 1 < height and not h_walls[y + 1][x]:
+	# down
+	if y < height - 1 and not h_walls[y + 1][x]:
 		c += 1
+	# left
 	if x > 0 and not v_walls[y][x]:
 		c += 1
-	if x + 1 < width and not v_walls[y][x + 1]:
+	# right
+	if x < width - 1 and not v_walls[y][x + 1]:
 		c += 1
 	return c
 
 func _closed_neighbors(x, y, width, height, h_walls, v_walls):
 	var res = []
+	# up
 	if y > 0 and h_walls[y][x]:
 		res.append(Vector2(x, y - 1))
-	if y + 1 < height and h_walls[y + 1][x]:
+	# down
+	if y < height - 1 and h_walls[y + 1][x]:
 		res.append(Vector2(x, y + 1))
+	# left
 	if x > 0 and v_walls[y][x]:
 		res.append(Vector2(x - 1, y))
-	if x + 1 < width and v_walls[y][x + 1]:
+	# right
+	if x < width - 1 and v_walls[y][x + 1]:
 		res.append(Vector2(x + 1, y))
 	return res
 
@@ -280,11 +268,13 @@ func _remove_dead_ends(width, height, h_walls, v_walls):
 				if closed.is_empty():
 					continue
 
-				# prefer neighbors with lower degree (fewer big hubs)
+				# Prefer neighbors with lower degree to avoid huge hubs
 				var best = []
 				var min_deg = 99
 				for n in closed:
-					var nd = _open_neighbor_count(int(n.x), int(n.y), width, height, h_walls, v_walls)
+					var nx = int(n.x)
+					var ny = int(n.y)
+					var nd = _open_neighbor_count(nx, ny, width, height, h_walls, v_walls)
 					if nd < min_deg:
 						min_deg = nd
 						best = [n]
@@ -294,10 +284,6 @@ func _remove_dead_ends(width, height, h_walls, v_walls):
 				var target = best[randi() % best.size()]
 				_open_wall_between(x, y, int(target.x), int(target.y), h_walls, v_walls)
 				changed = true
-
-# ----------------------------------------------------------------------
-# 6. Ensure each room has at least 2 exits
-# ----------------------------------------------------------------------
 
 func _ensure_two_exits(width, height, tiles, placed_rooms, h_walls, v_walls):
 	for pr in placed_rooms:
@@ -330,9 +316,9 @@ func _ensure_two_exits(width, height, tiles, placed_rooms, h_walls, v_walls):
 					if not _in_bounds(nx, ny, width, height):
 						continue
 					if tiles[ny][nx] == room_id:
-						continue  # internal
+						continue  # neighbor inside same room
 
-					# boundary edge: check wall
+					# boundary edge: check if wall between them is open
 					var open = false
 					if nx == x and ny == y - 1:      # up
 						open = not h_walls[y][x]
@@ -363,115 +349,192 @@ func _ensure_two_exits(width, height, tiles, placed_rooms, h_walls, v_walls):
 			)
 			exits += 1
 
-func _collect_walkable_tiles(width, height):
-	var coords = []
-	for y in range(height):
-		for x in range(width):
-			coords.append(Vector2(x, y))
-	return coords
+func add_walls_to_layout(layout, straight_bias = 0.85):
+	var width = layout["width"]
+	var height = layout["height"]
+	var tiles = layout["tiles"]
+	var rooms = layout["rooms"]
+
+	var h_walls = []
+	var v_walls = []
+	_init_walls(width, height, h_walls, v_walls)
+
+	_generate_maze(width, height, h_walls, v_walls, straight_bias)
+	_open_room_interior(rooms, h_walls, v_walls)
+	_remove_dead_ends(width, height, h_walls, v_walls)
+	_ensure_two_exits(width, height, tiles, rooms, h_walls, v_walls)
+
+	layout["h_walls"] = h_walls
+	layout["v_walls"] = v_walls
+	return layout
 
 func _create_gas_layer(width, height):
 	var gas = []
-	for y in range(height):
+	for y in height:
 		gas.append([])
-		for x in range(width):
+		for x in width:
 			gas[y].append(false)
 	return gas
 
-func add_gas(width, height, tiles, rooms, target_ratio = 0.3):
+func add_gas_to_layout(layout, target_ratio = 0.3):
+	var width = layout["width"]
+	var height = layout["height"]
+	var tiles = layout["tiles"]
+	var rooms = layout["rooms"]   # not used yet, but handy if you want to avoid certain rooms
+
 	var gas = _create_gas_layer(width, height)
 
-	var walkable = _collect_walkable_tiles(width, height)
+	# collect all candidate tiles
+	var coords = []
+	for y in height:
+		for x in width:
+			coords.append(Vector2(x, y))
 
-	var target = int(target_ratio * walkable.size())
+	if coords.size() == 0:
+		layout["gas"] = gas
+		return layout
+
+	var target = int(target_ratio * coords.size())
 	if target <= 0:
-		return gas
+		layout["gas"] = gas
+		return layout
 
-	var filled = 0
-
-	# optional: exclude special rooms from gas
-	var forbidden_room_ids = []
-	# e.g. don’t gas CONTROL room:
+	# optional: avoid certain room types
+	# var forbidden_room_ids = []
 	# for pr in rooms:
 	#     if pr.room.type == MandatoryRoom.RoomType.CONTROL:
 	#         forbidden_room_ids.append(pr.room.id)
+	#
+	# func _is_valid_gas_tile(x, y):
+	#     if tiles[y][x] in forbidden_room_ids:
+	#         return false
+	#     return true
 
+	# for now, allow gas anywhere:
 	var _is_valid_gas_tile = func _is_valid_gas_tile(x, y):
 		if x == 0 and y == 0: return false
 		return true
 
-	# pick some random seeds
-	walkable.shuffle()
-	var seed_count = clamp(int(target / 20), 2, 10) # tweak
-	var seeds = walkable.slice(0, min(seed_count, walkable.size()))
+	coords.shuffle()
 
-	var frontier = []
-	for s in seeds:
-		if not _is_valid_gas_tile.call(int(s.x), int(s.y)):
+	var filled = 0
+	var max_patch_attempts = 1000
+
+	# parameters controlling blob sizes
+	var min_patch_size = 5
+	var max_patch_size = 25
+
+	var dirs = [
+		Vector2(0, -1),
+		Vector2(0, 1),
+		Vector2(-1, 0),
+		Vector2(1, 0)
+	]
+
+	var attempt = 0
+	while filled < target and attempt < max_patch_attempts:
+		attempt += 1
+
+		# pick a random seed tile that is not yet gas
+		var seed = coords[randi() % coords.size()]
+		var sx = int(seed.x)
+		var sy = int(seed.y)
+
+		if gas[sy][sx]:
 			continue
-		gas[int(s.y)][int(s.x)] = true
-		filled += 1
-		frontier.append(s)
+		if not _is_valid_gas_tile.call(sx, sy):
+			continue
 
-	var dir4 = [Vector2(0,-1), Vector2(0,1), Vector2(-1,0), Vector2(1,0)]
-
-	while filled < target and frontier.size() > 0:
-		var idx = randi() % frontier.size()
-		var cur = frontier[idx]
-		frontier.remove_at(idx)
-
-		for d in dir4:
-			var nx = int(cur.x + d.x)
-			var ny = int(cur.y + d.y)
-			if nx < 0 or nx >= width or ny < 0 or ny >= height:
-				continue
-			if gas[ny][nx]:
-				continue
-			if not _is_valid_gas_tile.call(nx, ny):
-				continue
-
-			gas[ny][nx] = true
-			filled += 1
-			frontier.append(Vector2(nx, ny))
-
-			if filled >= target:
-				break
-		if filled >= target:
+		# decide patch size (clamped by remaining capacity)
+		var remaining = target - filled
+		var desired = min_patch_size + randi() % max(1, (max_patch_size - min_patch_size + 1))
+		var patch_target = min(desired, remaining)
+		if patch_target <= 0:
 			break
 
-	return gas
+		# grow a local patch via BFS from this seed
+		var queue = [Vector2(sx, sy)]
+		gas[sy][sx] = true
+		filled += 1
+		var patch_size = 1
 
-func add_enemy_spawns(width, height, tiles, gas, desired_count, min_distance = 4):
-	# enemy_spawns[y][x] = true if spawn here
-	var enemy_spawns = []
-	for y in range(height):
-		enemy_spawns.append([])
-		for x in range(width):
-			enemy_spawns[y].append(false)
+		while queue.size() > 0 and patch_size < patch_target:
+			var cur = queue.pop_back()
+			var cx = int(cur.x)
+			var cy = int(cur.y)
 
-	var walkable = _collect_walkable_tiles(width, height)
-	walkable.shuffle()
+			# randomize neighbor order for organic shapes
+			var local_dirs = dirs.duplicate()
+			local_dirs.shuffle()
+
+			for d in local_dirs:
+				var nx = cx + int(d.x)
+				var ny = cy + int(d.y)
+				if nx < 0 or nx >= width or ny < 0 or ny >= height:
+					continue
+				if gas[ny][nx]:
+					continue
+				if not _is_valid_gas_tile.call(nx, ny):
+					continue
+
+				gas[ny][nx] = true
+				filled += 1
+				patch_size += 1
+				queue.append(Vector2(nx, ny))
+
+				if patch_size >= patch_target or filled >= target:
+					break
+
+			if filled >= target or patch_size >= patch_target:
+				break
+
+	layout["gas"] = gas
+	return layout
+
+func _create_bool_grid(width, height):
+	var grid = []
+	for y in height:
+		grid.append([])
+		for x in width:
+			grid[y].append(false)
+	return grid
+
+func add_enemy_spawns_to_layout(layout, desired_count, min_distance):
+	var width = layout["width"]
+	var height = layout["height"]
+	var tiles = layout["tiles"]
+	var gas = layout["gas"] if layout.has("gas") else null
+
+	var enemy_spawns = _create_bool_grid(width, height)
+
+	# collect all candidate tiles
+	var candidates = []
+	for y in height:
+		for x in width:
+			candidates.append(Vector2(x, y))
+
+	candidates.shuffle()
 
 	var positions = []
 
-	var _too_close = func _too_close(px, py):
+	var too_close = func too_close(px, py):
 		for p in positions:
-			var dx = p.x - px
-			var dy = p.y - py
-			# Manhattan or Euclidean; Manhattan is cheaper
+			var dx = int(p.x) - px
+			var dy = int(p.y) - py
 			if abs(dx) + abs(dy) < min_distance:
 				return true
 		return false
 
-	for pos in walkable:
+	for pos in candidates:
 		if positions.size() >= desired_count:
 			break
+
 		var x = int(pos.x)
 		var y = int(pos.y)
 
-		# optional: avoid gas or rooms
-		if gas[y][x]:
-			continue
+		# optional: avoid gas tiles for enemies
+		# if gas != null and gas[y][x]:
+		#     continue
 
 		# optional: avoid certain room types
 		if tiles[y][x] != TILE_EMPTY:
@@ -485,7 +548,8 @@ func add_enemy_spawns(width, height, tiles, gas, desired_count, min_distance = 4
 		positions.append(Vector2(x, y))
 		enemy_spawns[y][x] = true
 
-	return enemy_spawns
+	layout["enemy_spawns"] = enemy_spawns
+	return layout
 
 func _open_neighbors(x, y, width, height, h_walls, v_walls):
 	var res = []
@@ -549,102 +613,29 @@ func add_bosses_to_layout(layout):
 			# skip gas tiles
 			if gas != null and gas[y][x]:
 				continue
-			# optional: prefer rooms / big spaces
-			# Here we accept any non-gas floor
+			dist[ny][nx] = cd + 1
+			queue.append(Vector2(nx, ny))
+
+	return dist
+
+func add_bosses_to_layout(layout):
+	var width = layout["width"]
+	var height = layout["height"]
+	var tiles = layout["tiles"]
+	var gas = layout["gas"] if layout.has("gas") else null
+	var h_walls = layout["h_walls"]
+	var v_walls = layout["v_walls"]
+
+	# collect candidate tiles for bosses
+	var candidates = []
+	for y in height:
+		for x in width:
+			# skip gas tiles
+			if gas != null and gas[y][x]:
+				continue
+			# optional: prefer/require rooms or hallways, etc.
+			# for now, allow any non-gas floor:
 			candidates.append(Vector2(x, y))
-	return candidates
-
-func choose_boss_positions(width, height, tiles, gas):
-	var candidates = _collect_candidate_tiles_for_bosses(width, height, tiles, gas)
-	if candidates.size() < 2:
-		return []
-
-	candidates.shuffle()
-	var boss1 = candidates[0]
-
-	var best_dist = -1
-	var boss2 = candidates[1]
-
-	for c in candidates:
-		var d = abs(c.x - boss1.x) + abs(c.y - boss1.y)
-		if d > best_dist:
-			best_dist = d
-			boss2 = c
-
-	return [boss1, boss2]
-
-func _has_wall_up(x, y, h_walls):
-	return h_walls[y][x]
-
-func _has_wall_down(x, y, height, h_walls):
-	return h_walls[y + 1][x]
-
-func _has_wall_left(x, y, v_walls):
-	return v_walls[y][x]
-
-func _has_wall_right(x, y, v_walls):
-	return v_walls[y][x + 1]
-
-# returns an array of decoration placements like:
-# [{"x": x, "y": y, "type": "crate", "facing": "north"}, ...]
-func add_decorations(width, height, tiles, gas, h_walls, v_walls):
-	var decos = []
-
-	for y in range(height):
-		for x in range(width):
-			# skip gas if you don’t want deco in gas
-			# if gas[y][x]:
-			#     continue
-
-			# Example: small chance of wall prop against a single wall
-			var wall_count = 0
-			var up = _has_wall_up(x, y, h_walls) if y > 0 else true
-			var down = _has_wall_down(x, y, height - 1, h_walls) if y < height - 1 else true
-			var left = _has_wall_left(x, y, v_walls) if x > 0 else true
-			var right = _has_wall_right(x, y, v_walls) if x < width - 1 else true
-
-			if up: wall_count += 1
-			if down: wall_count += 1
-			if left: wall_count += 1
-			if right: wall_count += 1
-
-			# e.g. wall_count == 1 => tile touching exactly one wall => good for shelves, consoles, etc.
-			if wall_count == 1 and randf() < 0.1:
-				var facing = ""
-				if up: facing = "south"
-				elif down: facing = "north"
-				elif left: facing = "east"
-				elif right: facing = "west"
-
-				decos.append({
-					"x": x,
-					"y": y,
-					"type": "wall_prop",
-					"facing": facing
-				})
-
-			# Example: random floor clutter, low chance, avoid blocking bosses
-			if randf() < 0.03:
-				decos.append({
-					"x": x,
-					"y": y,
-					"type": "floor_clutter"
-				})
-
-	return decos
-
-func _grid_pos_to_world(x, y) -> Vector3:
-	return Vector3(-x, 0, -y) * tile_size
-
-func _h_wall_grid_pos_to_world(x, y) -> Vector3:
-	var out = _grid_pos_to_world(x, y)
-	out.x += 0.5 * tile_size
-	return out
-
-func _v_wall_grid_pos_to_world(x, y) -> Vector3:
-	var out = _grid_pos_to_world(x, y)
-	out.z += 0.5 * tile_size
-	return out
 
 	if candidates.size() < 3:
 		layout["boss_positions"] = []
@@ -689,31 +680,13 @@ func _wall_sides_for_tile(x, y, width, height, h_walls, v_walls):
 @export var placeholder_visual: PackedScene
 @export var placeholder_gas: PackedScene
 
-func _place_tiles(result) -> void:
-	for rm in result['rooms']:
-		var node = rm.room.scene.instantiate()
-		add_child(node)
-		if rm.w < rm.h:
-			node.global_position = _grid_pos_to_world(rm.y, rm.x + 1)
-			node.rotation_degrees.y = -90
-		else:
-			node.global_position = _grid_pos_to_world(rm.y, rm.x)
+@export var floor_tile: PackedScene
+@export var wall_tile: PackedScene
 
-	for y in range(height):
-		for x in range(width):
-			var node = 0
-			if result['tiles'][x][y] == TILE_EMPTY:
-				node = floor.instantiate()
-				add_child(node)
-				node.global_position = _grid_pos_to_world(x, y)
+@export var gas_ratio: float = 0.3
 
-	for y in range(height + 1):
-		for x in range(width + 1):
-			if y < height and result['h_walls'][x][y]:
-				var node = 0
-				node = wall.instantiate()
-				add_child(node)
-				node.global_position = _h_wall_grid_pos_to_world(x, y)
+@export var enemy_count: int = 20
+@export var enemy_min_distance: int = 4
 
 @export var enemy_placeholder: PackedScene
 @export var boss_placeholder: Array[PackedScene]
@@ -867,18 +840,22 @@ func _populate(layout) -> void:
 				node_h.rotation_degrees.y = 90
 
 func _ready() -> void:
-	var result: Dictionary = generate_map(height, width, mandatory_rooms, straightaway_bias)
-	var tiles   = result["tiles"]
-	var rooms   = result["rooms"]
-	var h_walls = result["h_walls"]
-	var v_walls = result["v_walls"]
-	var gas = add_gas(width, height, tiles, rooms, 0.3)
-	var enemy_spawns = add_enemy_spawns(width, height, tiles, gas, 8, 3)
-	var boss_positions = choose_boss_positions(width, height, tiles, gas)
-	var decorations = add_decorations(width, height, tiles, gas, h_walls, v_walls)
+	var base = generate_base_layout(width, height, mandatory_rooms)
+	if base.size() == 0:
+		push_error("Base failed")
+		return
 
-	if result.size() == 0:
-		print("generation failed")
-	else:
-		_place_tiles(result)
-		print("success")
+	var full = add_walls_to_layout(base, straightaway_weight)
+	full = add_gas_to_layout(full, gas_ratio)
+	full = add_enemy_spawns_to_layout(full, enemy_count, enemy_min_distance)
+	full = add_bosses_to_layout(full)
+
+	var tiles   = full["tiles"]
+	var rooms   = full["rooms"]
+	var h_walls = full["h_walls"]
+	var v_walls = full["v_walls"]
+	var gas     = full["gas"]
+	var enemy_spawns  = full["enemy_spawns"]
+	var boss_positions = full["boss_positions"]
+
+	_populate(full)
