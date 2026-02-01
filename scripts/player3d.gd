@@ -10,6 +10,7 @@ extends CharacterBody3D
 @onready var collider = $CollisionShape3D
 @onready var invulnerability_timer = $InvulnerabilityTimer
 
+var is_dead = false
 var can_take_damage := true
 var hanging: bool = false
 var hang_pos: Vector3 = Vector3.ZERO
@@ -88,6 +89,9 @@ func _on_invulnerability_timer_timeout() -> void:
 	can_take_damage = true
 	
 func kill() -> void:
+	if (is_dead): return
+	
+	is_dead = true
 	can_move = false	
 	invulnerability_timer.start(99)
 	can_take_damage = false
