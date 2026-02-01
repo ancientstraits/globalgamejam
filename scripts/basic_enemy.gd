@@ -9,10 +9,12 @@ extends CharacterBody3D
 @onready var hitbox := $Hitbox
 @onready var repel : Area3D = $Repel
 @onready var nav_update_timer := $NavigationUpdateTimer
+@onready var mesh = $MeshInstance3D
 
 var see_player := false
 var nav_rid : RID
 var can_update_navigation := true
+var squish : float = 0
 
 func _ready() -> void:
 	if !always_see_player:
@@ -20,6 +22,15 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	
+	if name.contains('Slime'):
+		squish += delta
+		
+		
+		
+		mesh.scale.y = 1/(cos(squish) + 1.5)
+		mesh.scale.x = 1 + cos(squish)/4
+		mesh.scale.z = 1 + cos(squish)/4
+		
 	if can_update_navigation:
 		if nav_agent.is_navigation_finished() and !see_player and !always_see_player:
 			pick_random_destination()
