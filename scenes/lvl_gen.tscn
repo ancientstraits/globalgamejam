@@ -4,10 +4,11 @@
 [ext_resource type="Script" uid="uid://ob6kpnnneepf" path="res://scenes/level_generator.gd" id="2_sp6hj"]
 [ext_resource type="Script" uid="uid://dp65yn2l58f6y" path="res://scripts/mandatory_room.gd" id="3_1eqve"]
 [ext_resource type="PackedScene" uid="uid://bvf0l4t2kcxi5" path="res://scenes/tiles/basic_floor.tscn" id="3_v30vs"]
-[ext_resource type="PackedScene" uid="uid://dqlta5edfll3l" path="res://scenes/tiles/basic_wall.tscn" id="4_1eqve"]
-[ext_resource type="PackedScene" uid="uid://derwakc4ay0l" path="res://scenes/rooms/room_gen_1.tscn" id="4_v30vs"]
-[ext_resource type="PackedScene" uid="uid://vdopyv0jkbxu" path="res://scenes/rooms/room_gen_2.tscn" id="5_lp8i1"]
-[ext_resource type="PackedScene" uid="uid://c172bm4pntw2a" path="res://scenes/rooms/room_gen_3.tscn" id="6_1m8nx"]
+[ext_resource type="PackedScene" uid="uid://bkm5uyeb16j67" path="res://scenes/placeholder/placeholderroom.tscn" id="3_wnehw"]
+[ext_resource type="PackedScene" uid="uid://txoahdybgw01" path="res://scenes/tiles/basic_wall.tscn" id="4_1eqve"]
+[ext_resource type="PackedScene" path="res://scenes/placeholder/gas_placeholder.tscn" id="5_1eqve"]
+[ext_resource type="PackedScene" path="res://scenes/placeholder/enemy_placeholder.tscn" id="8_1m8nx"]
+[ext_resource type="PackedScene" path="res://scenes/placeholder/boss_placeholder.tscn" id="9_3auog"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lp8i1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
