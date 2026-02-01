@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://dmr2k3nr3ttgm"]
 
-[ext_resource type="Script" uid="uid://b053u7yx5kp8r" path="res://scripts/generator.gd" id="1_w5vnv"]
+[ext_resource type="Script" path="res://scripts/generator.gd" id="1_w5vnv"]
 [ext_resource type="PackedScene" uid="uid://c4ujeyr0po3jj" path="res://scenes/defect.tscn" id="2_ef8yp"]
 [ext_resource type="Texture2D" uid="uid://y1qfgvamgahv" path="res://assets/dih.png" id="3_ef8yp"]
 
@@ -51,9 +51,9 @@ shadow_mesh = SubResource("ArrayMesh_10hea")
 script = ExtResource("1_w5vnv")
 defect = ExtResource("2_ef8yp")
 defect_position_padding = 0.3
-defect_spawn_rate = 5.0
-defect_spawn_rate_variability = 2.0
-defect_lose_threshold = 5
+defect_spawn_rate = 10.0
+defect_spawn_rate_variability = 3.0
+defect_lose_threshold = 6
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=830310474]
 shape = SubResource("BoxShape3D_ef8yp")

@@ -15,7 +15,7 @@ func _ready() -> void:
 func _on_timer_timeout() -> void:
 	
 	if defect_count >= defect_lose_threshold:
-		Globals.die.emit('Generator broke')
+		Globals.timeout.emit('Generator malfunction')
 		
 		# lose type shi
 	else:

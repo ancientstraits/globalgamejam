@@ -24,7 +24,7 @@ grow_vertical = 2
 script = ExtResource("1_b3w7a")
 mul = Vector2(0.75, 0.55)
 off = Vector2(0.05, 0)
-scene_path = "res://scenes/world.tscn"
+scene_path = "res://scenes/lvl_gen.tscn"
 
 [node name="Postproc" parent="." unique_id=1075234556 instance=ExtResource("4_pyl7j")]
 
@@ -35,7 +35,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0, 0)
 
 [node name="Generator" type="TextureRect" parent="ColorRect" unique_id=1691873785]
 layout_mode = 1

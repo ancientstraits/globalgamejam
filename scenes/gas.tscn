@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://ddmgp842fgcck"]
+[gd_scene format=3 uid="uid://oj5uikv0xpqo"]
 
-[ext_resource type="Script" uid="uid://u305pkolf8el" path="res://scenes/gas.gd" id="1_gy5lb"]
+[ext_resource type="Script" path="res://scenes/gas.gd" id="1_gy5lb"]
 [ext_resource type="Shader" path="res://scenes/gas.gdshader" id="2_cm45x"]
-[ext_resource type="Texture2D" uid="uid://crsls342ba7qa" path="res://assets/textures/fog-texture.webp" id="3_gohih"]
+[ext_resource type="Texture2D" path="res://assets/textures/fog-texture.webp" id="3_gohih"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gohih"]
 render_priority = 0
