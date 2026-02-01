@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b3ly0e4a7g7ei"]
 
-[ext_resource type="Script" path="res://scripts/title_global.gd" id="1_sy3c6"]
+[ext_resource type="Script" uid="uid://c2byggb7rj7gk" path="res://scripts/title_global.gd" id="1_sy3c6"]
 
 [node name="TitleGlobal" type="Control" unique_id=471672971]
 layout_mode = 3
@@ -11,7 +11,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_sy3c6")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1397915739]
+[node name="Essential" type="Control" parent="." unique_id=1247305071]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Essential" unique_id=1397915739]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

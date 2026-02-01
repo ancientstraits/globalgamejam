@@ -140,6 +140,7 @@ func win_fade() -> void:
 	var dupe_rect = $GameOver/ColorRect.duplicate()
 	dupe_rect.color.a = 1.0
 	TitleGlobal.add_child(dupe_rect)
+	TitleGlobal.listen = true
 	
 	var tween := create_tween()
 	
