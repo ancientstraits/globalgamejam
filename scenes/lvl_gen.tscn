@@ -225,7 +225,7 @@ scene = SubResource("PackedScene_xbugx")
 metadata/_custom_type_script = "uid://dp65yn2l58f6y"
 
 [sub_resource type="BoxMesh" id="BoxMesh_mkhxr"]
-size = Vector3(100, 1, 100)
+size = Vector3(300, 1, 300)
 
 [node name="LvlGen" type="Node3D" unique_id=783191225]
 
