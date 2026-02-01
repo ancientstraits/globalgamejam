@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://derwakc4ay0l"]
+
+[ext_resource type="PackedScene" uid="uid://bvf0l4t2kcxi5" path="res://scenes/tiles/basic_floor.tscn" id="1_laqjl"]
+[ext_resource type="PackedScene" uid="uid://dmr2k3nr3ttgm" path="res://scenes/generator.tscn" id="2_rkfgp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rkfgp"]
+albedo_color = Color(0.11372549, 0.59607846, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_yat5j"]
+material = SubResource("StandardMaterial3D_rkfgp")
+
+[node name="RoomGen1" type="Node3D" unique_id=1415989661]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="Generator" parent="." unique_id=1422162699 instance=ExtResource("2_rkfgp")]
+transform = Transform3D(-0.47863063, 0, -0.87801635, 0, 1, 0, 0.87801635, 0, -0.47863063, 3.346099, 0.95262694, 3.7936282)
+
+[node name="BasicFloor" parent="." unique_id=621641132 instance=ExtResource("1_laqjl")]
+
+[node name="BasicFloor5" parent="." unique_id=77373297 instance=ExtResource("1_laqjl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+
+[node name="BasicFloor4" parent="." unique_id=1241190560 instance=ExtResource("1_laqjl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
+[node name="BasicFloor2" parent="." unique_id=640939305 instance=ExtResource("1_laqjl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
+[node name="BasicFloor3" parent="." unique_id=953700829 instance=ExtResource("1_laqjl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
+
+[node name="BasicFloor6" parent="." unique_id=2115010538 instance=ExtResource("1_laqjl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 10)
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=850481141]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3486009, 1.0276675, 9.909467)
+mesh = SubResource("BoxMesh_yat5j")

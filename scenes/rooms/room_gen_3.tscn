@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://c172bm4pntw2a"]
+
+[ext_resource type="PackedScene" uid="uid://dmr2k3nr3ttgm" path="res://scenes/generator.tscn" id="1_aigjk"]
+[ext_resource type="PackedScene" uid="uid://bvf0l4t2kcxi5" path="res://scenes/tiles/basic_floor.tscn" id="2_phys1"]
+
+[node name="RoomGen1" type="Node3D" unique_id=1415989661]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="Generator" parent="." unique_id=1422162699 instance=ExtResource("1_aigjk")]
+transform = Transform3D(0.8935517, 0, -0.44896033, 0, 1, 0, 0.44896033, 0, 0.8935517, 2.1396844, 0.95262694, 1.7452526)
+
+[node name="BasicFloor" parent="." unique_id=621641132 instance=ExtResource("2_phys1")]
+
+[node name="BasicFloor5" parent="." unique_id=77373297 instance=ExtResource("2_phys1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+
+[node name="BasicFloor4" parent="." unique_id=1241190560 instance=ExtResource("2_phys1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
+[node name="BasicFloor2" parent="." unique_id=640939305 instance=ExtResource("2_phys1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
+[node name="BasicFloor3" parent="." unique_id=953700829 instance=ExtResource("2_phys1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
+
+[node name="BasicFloor6" parent="." unique_id=2115010538 instance=ExtResource("2_phys1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 10)
