@@ -3,7 +3,8 @@ class_name MandatoryRoom
 
 enum RoomType {
 	GENERATOR,
-	CONTROL
+	CONTROL,
+	SPAWN,
 }
 
 @export var type: RoomType
