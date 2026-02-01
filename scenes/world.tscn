@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bvpqcfq2fku1"]
 
 [ext_resource type="PackedScene" uid="uid://cnyha7j8gdx03" path="res://scenes/player.tscn" id="1_4wyf3"]
-[ext_resource type="PackedScene" uid="uid://dex8ha1cwedsc" path="res://scenes/basic_enemy.tscn" id="2_k0juu"]
+[ext_resource type="PackedScene" uid="uid://fwmr5soew7hf" path="res://scenes/basic_enemy.tscn" id="2_k0juu"]
 [ext_resource type="PackedScene" uid="uid://d2au7sero68de" path="res://scenes/slime_enemy.tscn" id="3_i7141"]
-[ext_resource type="PackedScene" uid="uid://dnjglam3v7436" path="res://scenes/generator.tscn" id="3_w7kh3"]
+[ext_resource type="PackedScene" uid="uid://dmr2k3nr3ttgm" path="res://scenes/generator.tscn" id="3_w7kh3"]
 [ext_resource type="Script" uid="uid://u305pkolf8el" path="res://scenes/gas.gd" id="4_k0juu"]
 [ext_resource type="FontFile" uid="uid://oj2726l1ruaw" path="res://assets/Pixel-UniCode.ttf" id="5_71j4m"]
 [ext_resource type="Script" uid="uid://bp8lyqul7qh87" path="res://scenes/clock.gd" id="5_qfnet"]
@@ -53,7 +53,8 @@ size = Vector2(5, 5)
 size = Vector3(5, 5, 5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_71j4m"]
-size = Vector3(1, 0.5, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i7141"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_qfnet"]
 data = PackedVector3Array(-0.5, 0.25, 0.099999994, 0.5, 0.25, 0.099999994, -0.5, -0.25, 0.099999994, 0.5, 0.25, 0.099999994, 0.5, -0.25, 0.099999994, -0.5, -0.25, 0.099999994, 0.5, 0.25, -0.099999994, -0.5, 0.25, -0.099999994, 0.5, -0.25, -0.099999994, -0.5, 0.25, -0.099999994, -0.5, -0.25, -0.099999994, 0.5, -0.25, -0.099999994, 0.5, 0.25, 0.099999994, 0.5, 0.25, -0.099999994, 0.5, -0.25, 0.099999994, 0.5, 0.25, -0.099999994, 0.5, -0.25, -0.099999994, 0.5, -0.25, 0.099999994, -0.5, 0.25, -0.099999994, -0.5, 0.25, 0.099999994, -0.5, -0.25, -0.099999994, -0.5, 0.25, 0.099999994, -0.5, -0.25, 0.099999994, -0.5, -0.25, -0.099999994, 0.5, 0.25, 0.099999994, -0.5, 0.25, 0.099999994, 0.5, 0.25, -0.099999994, -0.5, 0.25, 0.099999994, -0.5, 0.25, -0.099999994, 0.5, 0.25, -0.099999994, -0.5, -0.25, 0.099999994, 0.5, -0.25, 0.099999994, -0.5, -0.25, -0.099999994, 0.5, -0.25, 0.099999994, 0.5, -0.25, -0.099999994, -0.5, -0.25, -0.099999994)
@@ -75,7 +76,6 @@ wander_radius = 30.0
 
 [node name="SlimeEnemy" parent="." unique_id=1656645037 instance=ExtResource("3_i7141")]
 transform = Transform3D(0.9991725, -0.040672403, 0, 0.040672403, 0.9991725, 0, 0, 0, 1, 0, 1.9400036, 28.289738)
-collision_layer = 2
 speed = 2.0
 wander_radius = 30.0
 
@@ -141,26 +141,26 @@ offset_top = 24.0
 offset_right = 270.0
 offset_bottom = 51.0
 theme_override_colors/font_color = Color(0.18690777, 0.99999994, 0.103041, 1)
-theme_override_styles/fill = SubResource("StyleBoxFlat_71j4m")
 
 [node name="Node3D" type="Node3D" parent="GasMeter" unique_id=1866581080]
 
 [node name="Prop" type="Node3D" parent="." unique_id=712604432 groups=["props"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.550044, 0, 0)
 
 [node name="RigidBody3D" type="RigidBody3D" parent="Prop" unique_id=1580565900 groups=["props"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 collision_layer = 16
 collision_mask = 17
 mass = 0.5
-physics_material_override = SubResource("PhysicsMaterial_4wyf3")
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="Prop/RigidBody3D" unique_id=1746570891 groups=["props"]]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.60064304, 0)
-mesh = SubResource("BoxMesh_4wyf3")
+mesh = SubResource("BoxMesh_71j4m")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prop/RigidBody3D" unique_id=1269332892 groups=["props"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
-shape = SubResource("BoxShape3D_k0juu")
+shape = SubResource("BoxShape3D_i7141")
+
 [node name="Clock" type="StaticBody3D" parent="." unique_id=1091994544]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.641462, 1.2257318, 4.1884227)
 collision_layer = 3
