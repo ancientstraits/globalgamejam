@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bb8qsj72dnhrh"]
+
+[ext_resource type="PackedScene" uid="uid://bvf0l4t2kcxi5" path="res://scenes/tiles/basic_floor.tscn" id="1_lyxga"]
+
+[node name="SpawnRoom" type="Node3D" unique_id=611779894]
+
+[node name="BasicFloor" parent="." unique_id=621641132 instance=ExtResource("1_lyxga")]
+
+[node name="BasicFloor2" parent="." unique_id=1044339270 instance=ExtResource("1_lyxga")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+
+[node name="BasicFloor3" parent="." unique_id=907406311 instance=ExtResource("1_lyxga")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5)
+
+[node name="BasicFloor4" parent="." unique_id=843376507 instance=ExtResource("1_lyxga")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)

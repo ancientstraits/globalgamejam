@@ -6,18 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://bvf0l4t2kcxi5" path="res://scenes/tiles/basic_floor.tscn" id="3_v30vs"]
 [ext_resource type="PackedScene" uid="uid://bkm5uyeb16j67" path="res://scenes/placeholder/placeholderroom.tscn" id="3_wnehw"]
 [ext_resource type="PackedScene" uid="uid://txoahdybgw01" path="res://scenes/tiles/basic_wall.tscn" id="4_1eqve"]
+[ext_resource type="PackedScene" uid="uid://bb8qsj72dnhrh" path="res://scenes/rooms/spawn_room.tscn" id="4_5pad3"]
 [ext_resource type="PackedScene" uid="uid://derwakc4ay0l" path="res://scenes/rooms/room_gen_1.tscn" id="4_ryk2b"]
 [ext_resource type="PackedScene" uid="uid://oj5uikv0xpqo" path="res://scenes/gas.tscn" id="5_1m8nx"]
-
-[ext_resource type="Script" uid="uid://b3onpiwnh08o8" path="res://scenes/defect.gd" id="5_ryk2b"]
-[ext_resource type="Script" uid="uid://dcetd3n62lby6" path="res://scenes/rooms/control.gd" id="7_mkhxr"]
-[ext_resource type="Shader" path="res://assets/uvshader.gdshader" id="8_5pad3"]
-[ext_resource type="PackedScene" uid="uid://420wvdt8tbyd" path="res://scenes/clock.tscn" id="9_5wwpt"]
-
 [ext_resource type="PackedScene" uid="uid://vdopyv0jkbxu" path="res://scenes/rooms/room_gen_2.tscn" id="5_mkhxr"]
 [ext_resource type="PackedScene" uid="uid://c172bm4pntw2a" path="res://scenes/rooms/room_gen_3.tscn" id="6_5pad3"]
 [ext_resource type="PackedScene" uid="uid://d18o3088qw52d" path="res://scenes/rooms/control_room.tscn" id="7_5wwpt"]
-
 [ext_resource type="PackedScene" uid="uid://fwmr5soew7hf" path="res://scenes/basic_enemy.tscn" id="12_mkhxr"]
 [ext_resource type="PackedScene" uid="uid://brajv7npi6yfb" path="res://scenes/angel_enemy.tscn" id="13_mkhxr"]
 [ext_resource type="PackedScene" uid="uid://d2au7sero68de" path="res://scenes/slime_enemy.tscn" id="15_5wwpt"]
@@ -29,7 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://c2sbco2w508an" path="res://scenes/decorations/pipe-n-boxes.tscn" id="20_xbugx"]
 [ext_resource type="PackedScene" uid="uid://dj7nvkneq8qls" path="res://scenes/decorations/boiler-thing.tscn" id="21_ggb0u"]
 [ext_resource type="PackedScene" uid="uid://8acjeg0ycda3" path="res://scenes/decorations/big-boiler.tscn" id="22_ygtp0"]
-[ext_resource type="PackedScene" uid="uid://x64561e6wfot" path="res://scenes/decorations/pipe.tscn" id="23_3yivh"]
+[ext_resource type="PackedScene" path="res://scenes/decorations/pipe.tscn" id="23_3yivh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lp8i1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -50,28 +44,36 @@ glow_bloom = 0.1
 [sub_resource type="NavigationMesh" id="NavigationMesh_mkhxr"]
 geometry_parsed_geometry_type = 1
 
-[sub_resource type="Resource" id="Resource_kl7iw"]
+[sub_resource type="Resource" id="Resource_3yivh"]
+script = ExtResource("3_1eqve")
+type = 2
+width = 2
+height = 2
+scene = ExtResource("4_5pad3")
+metadata/_custom_type_script = "uid://dp65yn2l58f6y"
+
+[sub_resource type="Resource" id="Resource_gqgvm"]
 script = ExtResource("3_1eqve")
 width = 2
 height = 3
 scene = ExtResource("4_ryk2b")
 metadata/_custom_type_script = "uid://dp65yn2l58f6y"
 
-[sub_resource type="Resource" id="Resource_gdo6g"]
+[sub_resource type="Resource" id="Resource_se6u0"]
 script = ExtResource("3_1eqve")
 width = 2
 height = 3
 scene = ExtResource("5_mkhxr")
 metadata/_custom_type_script = "uid://dp65yn2l58f6y"
 
-[sub_resource type="Resource" id="Resource_gk76l"]
+[sub_resource type="Resource" id="Resource_vkt4n"]
 script = ExtResource("3_1eqve")
 width = 2
 height = 3
 scene = ExtResource("6_5pad3")
 metadata/_custom_type_script = "uid://dp65yn2l58f6y"
 
-[sub_resource type="Resource" id="Resource_xbugx"]
+[sub_resource type="Resource" id="Resource_egpkt"]
 script = ExtResource("3_1eqve")
 type = 1
 width = 2
@@ -94,7 +96,7 @@ transform = Transform3D(0.86788684, 0, 0.49676192, 0, 1, 0, -0.49676192, 0, 0.86
 navigation_mesh = SubResource("NavigationMesh_mkhxr")
 use_edge_connections = false
 script = ExtResource("2_sp6hj")
-mandatory_rooms = Array[ExtResource("3_1eqve")]([SubResource("Resource_kl7iw"), SubResource("Resource_gdo6g"), SubResource("Resource_gk76l"), SubResource("Resource_xbugx")])
+mandatory_rooms = Array[ExtResource("3_1eqve")]([SubResource("Resource_3yivh"), SubResource("Resource_gqgvm"), SubResource("Resource_se6u0"), SubResource("Resource_vkt4n"), SubResource("Resource_egpkt")])
 placeholder_visual = ExtResource("3_wnehw")
 placeholder_gas = ExtResource("5_1m8nx")
 floor_tile = ExtResource("3_v30vs")
@@ -113,7 +115,6 @@ projection = 1
 size = 22.951809
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1936218640]
-visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=2119944278]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.054337, 0)

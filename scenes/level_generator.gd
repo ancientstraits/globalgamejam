@@ -400,19 +400,14 @@ func add_gas_to_layout(layout, target_ratio = 0.3):
 		return layout
 
 	# optional: avoid certain room types
-	# var forbidden_room_ids = []
-	# for pr in rooms:
-	#     if pr.room.type == MandatoryRoom.RoomType.CONTROL:
-	#         forbidden_room_ids.append(pr.room.id)
-	#
-	# func _is_valid_gas_tile(x, y):
-	#     if tiles[y][x] in forbidden_room_ids:
-	#         return false
-	#     return true
-
-	# for now, allow gas anywhere:
+	var forbidden_room_ids = [0]
+	for pr in rooms:
+		if pr.room.type == MandatoryRoom.RoomType.SPAWN:
+			forbidden_room_ids.append(pr.room.id)
+	
 	var _is_valid_gas_tile = func _is_valid_gas_tile(x, y):
-		if x == 0 and y == 0: return false
+		if tiles[y][x] in forbidden_room_ids:
+			return false
 		return true
 
 	coords.shuffle()
@@ -567,35 +562,6 @@ func _open_neighbors(x, y, width, height, h_walls, v_walls):
 		res.append(Vector2(x + 1, y))
 	return res
 
-func _bfs_distances_from(sx, sy, width, height, h_walls, v_walls):
-	var dist = []
-	for y in height:
-		dist.append([])
-		for x in width:
-			dist[y].append(-1)  # -1 = unreachable/unvisited
-
-	var queue = []
-	queue.append(Vector2(sx, sy))
-	dist[sy][sx] = 0
-
-	while queue.size() > 0:
-		var cur = queue.pop_front()
-		var cx = int(cur.x)
-		var cy = int(cur.y)
-		var cd = dist[cy][cx]
-
-		var neighs = _open_neighbors(cx, cy, width, height, h_walls, v_walls)
-		for n in neighs:
-			var nx = int(n.x)
-			var ny = int(n.y)
-			if dist[ny][nx] != -1:
-				continue
-			dist[ny][nx] = cd + 1
-			queue.append(Vector2(nx, ny))
-
-	return dist
-
-
 func add_bosses_to_layout(layout):
 	var width = layout["width"]
 	var height = layout["height"]
@@ -609,7 +575,9 @@ func add_bosses_to_layout(layout):
 	for y in height:
 		for x in width:
 			# skip gas tiles
-			if gas != null and gas[y][x]:
+			# if gas != null and gas[y][x]:
+			# 	continue
+			if tiles[y][x] == 0: # omit spawn
 				continue
 			# optional: prefer/require rooms or hallways, etc.
 			# for now, allow any non-gas floor:
@@ -750,10 +718,12 @@ func _populate(layout) -> void:
 			# DECORATIONS (skip important tiles)
 			if gas != null and gas[y][x]:
 				continue
-			if enemy_spawns != null and enemy_spawns[y][x]:
+			if tiles[y][x] != TILE_EMPTY:
 				continue
-			if boss_grid[y][x]:
-				continue
+			# if enemy_spawns != null and enemy_spawns[y][x]:
+			# 	continue
+			# if boss_grid[y][x]:
+			# 	continue
 
 			# Decide if we spawn any deco here
 			# First see if this tile touches any wall edges
@@ -843,4 +813,6 @@ func _ready() -> void:
 
 	_populate(full)
 	
-	
+	for rm in rooms:
+		if (rm.room.type == MandatoryRoom.RoomType.SPAWN):
+			Globals.player.global_position = _grid2world(rm.x, rm.y)
