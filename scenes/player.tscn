@@ -132,10 +132,11 @@ gas_drain_rate = 3.0
 [node name="DamageOverlay" type="CanvasLayer" parent="GasMask" unique_id=1118804646]
 
 [node name="GasMeter" parent="GasMask/DamageOverlay" unique_id=1262088993 instance=ExtResource("7_y4r1p")]
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 4.0
-offset_bottom = 4.0
+offset_left = 50.0
+offset_top = 41.0
+offset_right = 691.0
+offset_bottom = 133.0
+size_flags_vertical = 1
 show_percentage = false
 
 [node name="Crosshair" parent="GasMask/DamageOverlay" unique_id=22330358 instance=ExtResource("8_d2wvv")]
