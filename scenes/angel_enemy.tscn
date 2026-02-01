@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cx3cj0t1ggixs" path="res://scripts/angel_enemy.gd" id="1_1p1gb"]
 [ext_resource type="Texture2D" uid="uid://bkervevfim1s1" path="res://assets/icon.svg" id="2_ty40x"]
+[ext_resource type="AudioStream" uid="uid://b74qg3dceji5l" path="res://assets/audio/screech.ogg" id="3_1g3p5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1g3p5"]
 albedo_texture = ExtResource("2_ty40x")
@@ -19,8 +20,8 @@ collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_1p1gb")
 speed = 20.0
-wander_radius = 30.0
-min_distance = 15.0
+wander_radius = 45.0
+min_distance = 25.0
 time_not_seen_threshold = 3.0
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=161381309]
@@ -40,5 +41,9 @@ shape = SubResource("CapsuleShape3D_3i4hm")
 [node name="NavigationUpdateTimer" type="Timer" parent="." unique_id=1178282199]
 wait_time = 0.1
 one_shot = true
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1340786314]
+stream = ExtResource("3_1g3p5")
+max_polyphony = 2
 
 [connection signal="timeout" from="NavigationUpdateTimer" to="." method="_on_navigation_update_timer_timeout"]
