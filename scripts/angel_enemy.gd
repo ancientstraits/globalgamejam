@@ -42,7 +42,7 @@ func _physics_process(delta: float) -> void:
 			velocity = direction * speed
 		elif seen_once == true:
 			velocity = Vector3.ZERO
-			time_not_seen += delta
+			time_not_seen += delta_cache
 			if time_not_seen > time_not_seen_threshold:
 				seen_once = false
 				time_not_seen = 0
@@ -53,6 +53,7 @@ func _physics_process(delta: float) -> void:
 		can_update_navigation = false
 		nav_update_timer.start()
 		
+		delta_cache = 0
 	
 	move_and_slide()
 
@@ -64,11 +65,11 @@ func _physics_process(delta: float) -> void:
 
 func pick_random_destination():
 	
-	print('MOVE MF')
+	print('Angel moving!')
 	
 	var nav_map := nav_agent.get_navigation_map()
 	var random_offset = Vector3(
-	randf_range(-wander_radius + min_distance, wander_radius - min_distance),2,randf_range(-wander_radius + min_distance, wander_radius - min_distance))
+	randf_range(-wander_radius + min_distance, wander_radius - min_distance),3,randf_range(-wander_radius + min_distance, wander_radius - min_distance))
 	var target_position = global_position + random_offset
 	var valid_point = NavigationServer3D.map_get_closest_point(nav_map,target_position)
 	global_position = valid_point

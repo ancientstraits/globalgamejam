@@ -86,6 +86,7 @@ environment = SubResource("Environment_71j4m")
 
 [node name="AngelEnemy" parent="." unique_id=662068 instance=ExtResource("1_4mrxx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.106892, 2.048719, 0)
+min_distance = 20.0
 
 [node name="Player" parent="." unique_id=155048425 groups=["player"] instance=ExtResource("1_4wyf3")]
 transform = Transform3D(0.86788684, 0, 0.49676192, 0, 1, 0, -0.49676192, 0, 0.86788684, -12.845917, 4.7243547, 0)
