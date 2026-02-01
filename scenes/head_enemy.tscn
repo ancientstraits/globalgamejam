@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://h0davlc5c7dy"]
+
+[ext_resource type="Script" uid="uid://d2dq43tiiein0" path="res://scripts/head_enemy.gd" id="1_grqg7"]
+[ext_resource type="AudioStream" uid="uid://dg0sa03axs8wr" path="res://assets/audio/giggle.ogg" id="2_grqg7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_d3qwb"]
+size = Vector3(4, 0.5, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d3qwb"]
+size = Vector3(4, 0.5, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_grqg7"]
+size = Vector3(4.1, 5.8924317, 4.1)
+
+[node name="HeadEnemy" type="CharacterBody3D" unique_id=662068]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_grqg7")
+drop_speed = 20.0
+wander_radius = 20.0
+min_distance = 10.0
+time_since_dropped_threshold = 3.0
+y_offset = 6.0
+giggle_distance = 4.5
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=161381309]
+debug_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=970019306]
+mesh = SubResource("BoxMesh_d3qwb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=328318335]
+shape = SubResource("BoxShape3D_d3qwb")
+
+[node name="Hitbox" type="Area3D" parent="." unique_id=221746655]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" unique_id=465245950]
+shape = SubResource("BoxShape3D_grqg7")
+
+[node name="PlayerDetector" type="Area3D" parent="." unique_id=1760449087]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetector" unique_id=1477819491]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.6462157, 0)
+shape = SubResource("BoxShape3D_grqg7")
+
+[node name="NavigationUpdateTimer" type="Timer" parent="." unique_id=1178282199]
+wait_time = 0.1
+one_shot = true
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1329779032]
+stream = ExtResource("2_grqg7")
+volume_db = -5.455
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
+[connection signal="timeout" from="NavigationUpdateTimer" to="." method="_on_navigation_update_timer_timeout"]

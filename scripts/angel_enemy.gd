@@ -8,6 +8,7 @@ extends CharacterBody3D
 @onready var nav_agent : NavigationAgent3D = $NavigationAgent3D
 @onready var hitbox := $Hitbox
 @onready var nav_update_timer := $NavigationUpdateTimer
+@onready var audio_player = $AudioStreamPlayer3D
 
 var can_update_navigation := true
 var flashed := false
@@ -25,12 +26,17 @@ func _physics_process(delta: float) -> void:
 		
 		if flashlight_hits_enemy(Globals.player.get_node('Camera3D/Flashlight/SpotLight3D')):
 			flashed = true
+			audio_player.stream_paused = false
 
 		else:
 			flashed = false
-			
+			audio_player.stream_paused = true
 			
 		if flashed:
+			
+			if !audio_player.playing:
+				audio_player.play()
+			
 			time_not_seen = 0
 			seen_once = true
 			nav_agent.set_target_position(Globals.player.position)
@@ -67,10 +73,24 @@ func pick_random_destination():
 	
 	print('Angel moving!')
 	
+	audio_player.stop()
 	var nav_map := nav_agent.get_navigation_map()
+	var randx = randf_range(-1,1)
+	var x_offset : float
+	if randx < 0:
+		x_offset = -min_distance
+	else:
+		x_offset = min_distance
+	var randy = randf_range(-1,1)
+	var y_offset : float
+	if randy < 0:
+		y_offset = -min_distance
+	else:
+		y_offset = min_distance
+	
 	var random_offset = Vector3(
-	randf_range(-wander_radius + min_distance, wander_radius - min_distance),3,randf_range(-wander_radius + min_distance, wander_radius - min_distance))
-	var target_position = global_position + random_offset
+	randx * wander_radius + x_offset,0,randy * wander_radius + y_offset)
+	var target_position = Globals.player.global_position + random_offset
 	var valid_point = NavigationServer3D.map_get_closest_point(nav_map,target_position)
 	global_position = valid_point
 
