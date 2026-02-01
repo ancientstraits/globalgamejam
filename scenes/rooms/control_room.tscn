@@ -1,9 +1,16 @@
 [gd_scene format=3 uid="uid://d18o3088qw52d"]
 
+[ext_resource type="PackedScene" uid="uid://420wvdt8tbyd" path="res://scenes/clock.tscn" id="2_mpooj"]
 [ext_resource type="PackedScene" uid="uid://bvf0l4t2kcxi5" path="res://scenes/tiles/basic_floor.tscn" id="2_wfb1n"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_af5mn"]
 
 [node name="RoomGen1" type="Node3D" unique_id=1415989661]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=355497927]
+transform = Transform3D(2.6412685, 0, 0.52629256, 0, 3.0084274, 0, -0.8836536, 0, 1.5731051, 0.9446256, 1.2816386, 0.74468374)
+mesh = SubResource("BoxMesh_af5mn")
 
 [node name="BasicFloor" parent="." unique_id=621641132 instance=ExtResource("2_wfb1n")]
 
@@ -15,3 +22,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
 
 [node name="BasicFloor3" parent="." unique_id=953700829 instance=ExtResource("2_wfb1n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
+
+[node name="Clock" parent="." unique_id=658867521 instance=ExtResource("2_mpooj")]
+transform = Transform3D(0.8679822, 0, 0.4965953, 0, 1, 0, -0.4965953, 0, 0.8679822, 1.285862, 3.0278537, 0.91184676)

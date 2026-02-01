@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://420wvdt8tbyd"]
+
+[ext_resource type="Script" uid="uid://bp8lyqul7qh87" path="res://scenes/clock.gd" id="1_y58p0"]
+[ext_resource type="FontFile" uid="uid://oj2726l1ruaw" path="res://assets/Pixel-UniCode.ttf" id="2_eptq3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_71j4m"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_qfnet"]
+data = PackedVector3Array(-0.5, 0.25, 0.099999994, 0.5, 0.25, 0.099999994, -0.5, -0.25, 0.099999994, 0.5, 0.25, 0.099999994, 0.5, -0.25, 0.099999994, -0.5, -0.25, 0.099999994, 0.5, 0.25, -0.099999994, -0.5, 0.25, -0.099999994, 0.5, -0.25, -0.099999994, -0.5, 0.25, -0.099999994, -0.5, -0.25, -0.099999994, 0.5, -0.25, -0.099999994, 0.5, 0.25, 0.099999994, 0.5, 0.25, -0.099999994, 0.5, -0.25, 0.099999994, 0.5, 0.25, -0.099999994, 0.5, -0.25, -0.099999994, 0.5, -0.25, 0.099999994, -0.5, 0.25, -0.099999994, -0.5, 0.25, 0.099999994, -0.5, -0.25, -0.099999994, -0.5, 0.25, 0.099999994, -0.5, -0.25, 0.099999994, -0.5, -0.25, -0.099999994, 0.5, 0.25, 0.099999994, -0.5, 0.25, 0.099999994, 0.5, 0.25, -0.099999994, -0.5, 0.25, 0.099999994, -0.5, 0.25, -0.099999994, 0.5, 0.25, -0.099999994, -0.5, -0.25, 0.099999994, 0.5, -0.25, 0.099999994, -0.5, -0.25, -0.099999994, 0.5, -0.25, 0.099999994, 0.5, -0.25, -0.099999994, -0.5, -0.25, -0.099999994)
+
+[node name="Clock" type="StaticBody3D" unique_id=658867521]
+collision_layer = 3
+script = ExtResource("1_y58p0")
+time_stretch = 2
+
+[node name="Label3D" type="Label3D" parent="." unique_id=292133330]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.10125077)
+texture_filter = 0
+font = ExtResource("2_eptq3")
+font_size = 64
+outline_size = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1487707478]
+transform = Transform3D(1, 0, 0, 0, 0.4915948, 0, 0, 0, 0.15351337, 0, 0, 0)
+mesh = SubResource("BoxMesh_71j4m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1809773828]
+shape = SubResource("ConcavePolygonShape3D_qfnet")

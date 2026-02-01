@@ -536,8 +536,8 @@ func add_enemy_spawns_to_layout(layout, desired_count, min_distance):
 		#     continue
 
 		# optional: avoid certain room types
-		# if tiles[y][x] != TILE_EMPTY:
-		#     continue
+		if tiles[y][x] != TILE_EMPTY:
+			continue
 
 		if too_close.call(x, y):
 			continue
@@ -596,6 +596,7 @@ func add_bosses_to_layout(layout):
 	var width = layout["width"]
 	var height = layout["height"]
 	var tiles = layout["tiles"]
+	var rooms = layout["rooms"]
 	var gas = layout["gas"] if layout.has("gas") else null
 	var h_walls = layout["h_walls"]
 	var v_walls = layout["v_walls"]
@@ -604,6 +605,8 @@ func add_bosses_to_layout(layout):
 	var candidates = []
 	for y in height:
 		for x in width:
+			if tiles[y][x] != TILE_EMPTY:
+				continue
 			# skip gas tiles
 			if gas != null and gas[y][x]:
 				continue
@@ -698,6 +701,7 @@ func _vwgrid2world(x: int, y: int) -> Vector3:
 
 func _populate(layout) -> void:
 	var tiles = layout["tiles"]
+	var rooms = layout["rooms"]
 	var h_walls = layout["h_walls"]
 	var v_walls = layout["v_walls"]
 
@@ -717,6 +721,15 @@ func _populate(layout) -> void:
 		var by = int(bp.y)
 		if bx >= 0 and bx < width and by >= 0 and by < height:
 			boss_grid[by][bx] = true
+
+	for rm in rooms:
+		var node = rm.room.scene.instantiate()
+		add_child(node)
+		if rm.w > rm.h:
+			node.global_position = _grid2world(rm.x, rm.y - 1)
+			node.rotation_degrees.y = -90
+		else:
+			node.global_position = _grid2world(rm.x, rm.y)
 
 	# 1) Floors, gas, enemies, bosses, decorations
 	for y in height:

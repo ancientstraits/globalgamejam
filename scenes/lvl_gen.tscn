@@ -6,7 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://bvf0l4t2kcxi5" path="res://scenes/tiles/basic_floor.tscn" id="3_v30vs"]
 [ext_resource type="PackedScene" uid="uid://bkm5uyeb16j67" path="res://scenes/placeholder/placeholderroom.tscn" id="3_wnehw"]
 [ext_resource type="PackedScene" uid="uid://txoahdybgw01" path="res://scenes/tiles/basic_wall.tscn" id="4_1eqve"]
-[ext_resource type="PackedScene" uid="uid://cvl24qop3s56h" path="res://scenes/placeholder/gas_placeholder.tscn" id="5_1eqve"]
+[ext_resource type="PackedScene" uid="uid://derwakc4ay0l" path="res://scenes/rooms/room_gen_1.tscn" id="4_v30vs"]
+[ext_resource type="PackedScene" uid="uid://ddmgp842fgcck" path="res://scenes/gas.tscn" id="5_1m8nx"]
+[ext_resource type="PackedScene" uid="uid://vdopyv0jkbxu" path="res://scenes/rooms/room_gen_2.tscn" id="5_lp8i1"]
+[ext_resource type="PackedScene" uid="uid://c172bm4pntw2a" path="res://scenes/rooms/room_gen_3.tscn" id="6_1m8nx"]
+[ext_resource type="PackedScene" uid="uid://d18o3088qw52d" path="res://scenes/rooms/control_room.tscn" id="7_vqau2"]
 [ext_resource type="PackedScene" uid="uid://cbkeaygqfvg56" path="res://scenes/placeholder/enemy_placeholder.tscn" id="8_1m8nx"]
 [ext_resource type="PackedScene" uid="uid://dvtbga5saiwf2" path="res://scenes/placeholder/boss_placeholder.tscn" id="9_3auog"]
 
@@ -26,13 +30,29 @@ tonemap_mode = 2
 script = ExtResource("3_1eqve")
 width = 2
 height = 3
+scene = ExtResource("4_v30vs")
 metadata/_custom_type_script = "uid://dp65yn2l58f6y"
 
-[sub_resource type="Resource" id="Resource_sp6hj"]
+[sub_resource type="Resource" id="Resource_7uevp"]
+script = ExtResource("3_1eqve")
+width = 2
+height = 3
+scene = ExtResource("5_lp8i1")
+metadata/_custom_type_script = "uid://dp65yn2l58f6y"
+
+[sub_resource type="Resource" id="Resource_vqau2"]
+script = ExtResource("3_1eqve")
+width = 2
+height = 3
+scene = ExtResource("6_1m8nx")
+metadata/_custom_type_script = "uid://dp65yn2l58f6y"
+
+[sub_resource type="Resource" id="Resource_ryk2b"]
 script = ExtResource("3_1eqve")
 type = 1
 width = 2
 height = 2
+scene = ExtResource("7_vqau2")
 metadata/_custom_type_script = "uid://dp65yn2l58f6y"
 
 [node name="LvlGen" type="Node3D" unique_id=783191225]
@@ -45,14 +65,14 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="Player" parent="." unique_id=155048425 instance=ExtResource("1_rapvc")]
-transform = Transform3D(0.86788684, 0, 0.49676192, 0, 1, 0, -0.49676192, 0, 0.86788684, 0, 33.732307, 0)
+transform = Transform3D(0.86788684, 0, 0.49676192, 0, 1, 0, -0.49676192, 0, 0.86788684, 0, 16.911182, 0)
 gravity = 0.0
 
 [node name="Node3D" type="Node3D" parent="." unique_id=160167784]
 script = ExtResource("2_sp6hj")
-mandatory_rooms = Array[ExtResource("3_1eqve")]([SubResource("Resource_rapvc"), SubResource("Resource_rapvc"), SubResource("Resource_rapvc"), SubResource("Resource_sp6hj")])
+mandatory_rooms = Array[ExtResource("3_1eqve")]([SubResource("Resource_rapvc"), SubResource("Resource_7uevp"), SubResource("Resource_vqau2"), SubResource("Resource_ryk2b")])
 placeholder_visual = ExtResource("3_wnehw")
-placeholder_gas = ExtResource("5_1eqve")
+placeholder_gas = ExtResource("5_1m8nx")
 floor_tile = ExtResource("3_v30vs")
 wall_tile = ExtResource("4_1eqve")
 gas_ratio = 0.4
