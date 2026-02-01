@@ -35,7 +35,7 @@ func fade_in():
 	var og_intensity := flashlight.light_energy
 	_set_canvas_opacity(0.0)
 	_set_light_intensity(0.0)
-	crosshair.modulate.a = 0.0
+	# crosshair.modulate.a = 0.0
 	var tween := create_tween()
 	tween.tween_method(_set_canvas_opacity, 0.0, 1.0, 0.5)
 	tween.parallel().tween_method(_set_light_intensity, 0.0, og_intensity, 0.5)

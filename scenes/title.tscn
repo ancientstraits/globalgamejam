@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://bbubk3klgti8q"]
 
-[ext_resource type="Script" path="res://scripts/title.gd" id="1_b3w7a"]
+[ext_resource type="Script" uid="uid://cklkww8yf80oq" path="res://scripts/title.gd" id="1_b3w7a"]
 [ext_resource type="Texture2D" uid="uid://dydaxuxmspkwv" path="res://assets/generator.png" id="1_wosw1"]
 [ext_resource type="Texture2D" uid="uid://08bmi5fllv6c" path="res://assets/gasmaskcutout.png" id="2_p6dhs"]
 [ext_resource type="Shader" uid="uid://c45ia4jf0n58r" path="res://shaders/title_gasmask.gdshader" id="4_b3w7a"]
 [ext_resource type="PackedScene" uid="uid://cvcs1exfgfvdm" path="res://scenes/postproc.tscn" id="4_pyl7j"]
-[ext_resource type="Script" uid="uid://hb6cud3ch5a4" path="res://scripts/title_tool.gd" id="6_4rr2b"]
+[ext_resource type="Script" path="res://scripts/title_tool.gd" id="6_4rr2b"]
 [ext_resource type="AudioStream" uid="uid://dgs7qwuxfjnpm" path="res://assets/audio/main_menu.ogg" id="7_yql1r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4rr2b"]
@@ -34,8 +34,6 @@ script = ExtResource("1_b3w7a")
 mul = Vector2(0.6, 0.535)
 off = Vector2(0.05, 0)
 scene_path = "res://scenes/lvl_gen.tscn"
-
-[node name="Postproc" parent="." unique_id=1075234556 instance=ExtResource("4_pyl7j")]
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1748298576]
 layout_mode = 1
@@ -110,5 +108,7 @@ script = ExtResource("6_4rr2b")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=143601856]
 stream = ExtResource("7_yql1r")
 autoplay = true
+
+[node name="Postproc" parent="." unique_id=1075234556 instance=ExtResource("4_pyl7j")]
 
 [connection signal="pressed" from="ColorRect/StartGame" to="." method="_on_start_game_pressed"]
