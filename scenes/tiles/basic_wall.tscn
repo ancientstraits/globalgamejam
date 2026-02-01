@@ -113,6 +113,7 @@ skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_pi13y")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="basic_wall" unique_id=557151688]
+collision_layer = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="basic_wall/StaticBody3D" unique_id=910438635]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8303325, 0)

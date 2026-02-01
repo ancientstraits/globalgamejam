@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d18o3088qw52d"]
 
-[ext_resource type="Shader" uid="uid://8m85mr4x630x" path="res://assets/uvshader.gdshader" id="1_wfb1n"]
+[ext_resource type="Shader" path="res://assets/uvshader.gdshader" id="1_wfb1n"]
 [ext_resource type="PackedScene" uid="uid://420wvdt8tbyd" path="res://scenes/clock.tscn" id="2_mpooj"]
 [ext_resource type="PackedScene" uid="uid://bvf0l4t2kcxi5" path="res://scenes/tiles/basic_floor.tscn" id="2_wfb1n"]
 

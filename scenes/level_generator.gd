@@ -1,4 +1,4 @@
-extends Node3D
+extends NavigationRegion3D
 class_name LevelGenerator
 
 const TILE_EMPTY = -1
@@ -595,26 +595,6 @@ func _bfs_distances_from(sx, sy, width, height, h_walls, v_walls):
 
 	return dist
 
-
-func add_bosses_to_layout(layout):
-	var width = layout["width"]
-	var height = layout["height"]
-	var tiles = layout["tiles"]
-	var gas = layout["gas"] if layout.has("gas") else null
-	var h_walls = layout["h_walls"]
-	var v_walls = layout["v_walls"]
-
-	# collect candidate tiles for bosses
-	var candidates = []
-	for y in range(height):
-		for x in range(width):
-			if gas[y][x]:
-				continue
-			dist[ny][nx] = cd + 1
-			queue.append(Vector2(nx, ny))
-
-	return dist
-
 func add_bosses_to_layout(layout):
 	var width = layout["width"]
 	var height = layout["height"]
@@ -761,6 +741,8 @@ func _populate(layout) -> void:
 				var e = enemy_placeholder.instantiate()
 				add_child(e)
 				e.global_position = _grid2world(x, y)
+				e.global_position.y += 2
+			
 
 			# Boss markers will be spawned later, but we mark them in boss_grid
 
@@ -835,6 +817,9 @@ func _populate(layout) -> void:
 				add_child(node_h)
 				node_h.global_position = _hwgrid2world(x, y)
 				node_h.rotation_degrees.y = 90
+				
+	
+	bake_navigation_mesh()
 
 func _ready() -> void:
 	var base = generate_base_layout(width, height, mandatory_rooms)
@@ -856,3 +841,5 @@ func _ready() -> void:
 	var boss_positions = full["boss_positions"]
 
 	_populate(full)
+	
+	

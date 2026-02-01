@@ -24,7 +24,6 @@ y_offset = 6.0
 giggle_distance = 4.5
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=161381309]
-debug_enabled = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=970019306]
 mesh = SubResource("BoxMesh_d3qwb")

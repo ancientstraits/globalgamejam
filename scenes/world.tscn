@@ -6,10 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://fwmr5soew7hf" path="res://scenes/basic_enemy.tscn" id="2_k0juu"]
 [ext_resource type="PackedScene" uid="uid://d2au7sero68de" path="res://scenes/slime_enemy.tscn" id="3_i7141"]
 [ext_resource type="PackedScene" uid="uid://dmr2k3nr3ttgm" path="res://scenes/generator.tscn" id="3_w7kh3"]
-[ext_resource type="Texture2D" uid="uid://crsls342ba7qa" path="res://assets/textures/fog-texture.webp" id="6_4mrxx"]
-[ext_resource type="Script" path="res://scenes/gas.gd" id="4_k0juu"]
+[ext_resource type="Script" uid="uid://u305pkolf8el" path="res://scenes/gas.gd" id="4_k0juu"]
 [ext_resource type="FontFile" uid="uid://oj2726l1ruaw" path="res://assets/Pixel-UniCode.ttf" id="5_71j4m"]
 [ext_resource type="Script" uid="uid://bp8lyqul7qh87" path="res://scenes/clock.gd" id="5_qfnet"]
+[ext_resource type="Texture2D" uid="uid://crsls342ba7qa" path="res://assets/textures/fog-texture.webp" id="6_4mrxx"]
 [ext_resource type="PackedScene" uid="uid://4ac71w7dhyc4" path="res://scenes/ambience_event.tscn" id="10_w7kh3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4wyf3"]
@@ -39,9 +39,6 @@ data = PackedVector3Array(-50, -0.125, 50, -50, -0.125, -50, -50, 0.125, -50, 50
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jhx03"]
 data = PackedVector3Array(-6.5, -2.5, 0.5, -6.5, -2.5, -0.5, -6.5, 2.5, -0.5, 6.5, -2.5, -0.5, -6.5, -2.5, -0.5, -6.5, -2.5, 0.5, -6.5, 2.5, -0.5, -6.5, -2.5, -0.5, 6.5, -2.5, -0.5, -6.5, 2.5, -0.5, -6.5, 2.5, 0.5, -6.5, -2.5, 0.5, -6.5, -2.5, 0.5, -6.5, 2.5, 0.5, 6.5, 2.5, 0.5, 6.5, 2.5, 0.5, -6.5, 2.5, 0.5, -6.5, 2.5, -0.5, -6.5, -2.5, 0.5, 6.5, -2.5, 0.5, 6.5, -2.5, -0.5, 6.5, 2.5, 0.5, 6.5, -2.5, 0.5, -6.5, -2.5, 0.5, 6.5, -2.5, -0.5, 6.5, -2.5, 0.5, 6.5, 2.5, 0.5, 6.5, -2.5, -0.5, 6.5, 2.5, -0.5, -6.5, 2.5, -0.5, -6.5, 2.5, -0.5, 6.5, 2.5, -0.5, 6.5, 2.5, 0.5, 6.5, 2.5, 0.5, 6.5, 2.5, -0.5, 6.5, -2.5, -0.5)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_e3hyu"]
-data = PackedVector3Array(-0.5, -2.5, 4.5, -0.5, -2.5, -4.5, -0.5, 2.5, -4.5, 0.5, -2.5, -4.5, -0.5, -2.5, -4.5, -0.5, -2.5, 4.5, -0.5, 2.5, -4.5, -0.5, -2.5, -4.5, 0.5, -2.5, -4.5, -0.5, 2.5, -4.5, -0.5, 2.5, 4.5, -0.5, -2.5, 4.5, -0.5, -2.5, 4.5, -0.5, 2.5, 4.5, 0.5, 2.5, 4.5, 0.5, 2.5, 4.5, -0.5, 2.5, 4.5, -0.5, 2.5, -4.5, -0.5, -2.5, 4.5, 0.5, -2.5, 4.5, 0.5, -2.5, -4.5, 0.5, 2.5, 4.5, 0.5, -2.5, 4.5, -0.5, -2.5, 4.5, 0.5, -2.5, -4.5, 0.5, -2.5, 4.5, 0.5, 2.5, 4.5, 0.5, -2.5, -4.5, 0.5, 2.5, -4.5, -0.5, 2.5, -4.5, -0.5, 2.5, -4.5, 0.5, 2.5, -4.5, 0.5, 2.5, 4.5, 0.5, 2.5, 4.5, 0.5, 2.5, -4.5, 0.5, -2.5, -4.5)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_q5onr"]
 data = PackedVector3Array(-1.5, -2.5, 4, -1.5, -2.5, -4, -1.5, 2.5, -4, 1.5, -2.5, -4, -1.5, -2.5, -4, -1.5, -2.5, 4, -1.5, 2.5, -4, -1.5, -2.5, -4, 1.5, -2.5, -4, -1.5, 2.5, -4, -1.5, 2.5, 4, -1.5, -2.5, 4, -1.5, -2.5, 4, -1.5, 2.5, 4, 1.5, 2.5, 4, 1.5, 2.5, 4, -1.5, 2.5, 4, -1.5, 2.5, -4, -1.5, -2.5, 4, 1.5, -2.5, 4, 1.5, -2.5, -4, 1.5, 2.5, 4, 1.5, -2.5, 4, -1.5, -2.5, 4, 1.5, -2.5, -4, 1.5, -2.5, 4, 1.5, 2.5, 4, 1.5, -2.5, -4, 1.5, 2.5, -4, -1.5, 2.5, -4, -1.5, 2.5, -4, 1.5, 2.5, -4, 1.5, 2.5, 4, 1.5, 2.5, 4, 1.5, 2.5, -4, 1.5, -2.5, -4)
@@ -146,10 +143,6 @@ shape = SubResource("ConcavePolygonShape3D_jhx03")
 [node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/Wall" unique_id=284648823]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2, 14)
 size = Vector3(1, 5, 9)
-
-[node name="CSGBakedCollisionShape3D2" type="CollisionShape3D" parent="NavigationRegion3D/Wall" unique_id=504262339]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2, 14)
-shape = SubResource("ConcavePolygonShape3D_e3hyu")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D/Wall" unique_id=1893572060]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2, 18.5)

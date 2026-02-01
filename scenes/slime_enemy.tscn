@@ -18,7 +18,6 @@ speed = 1.0
 always_see_player = true
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=161381309]
-debug_enabled = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=970019306]
 mesh = SubResource("CylinderMesh_057e2")
