@@ -45,6 +45,7 @@ outline_color = Color(0, 0, 0, 1)
 
 [node name="Player" type="CharacterBody3D" unique_id=155048425]
 transform = Transform3D(0.86788684, 0, 0.49676192, 0, 1, 0, -0.49676192, 0, 0.86788684, 0, 0, 0)
+collision_layer = 513
 script = ExtResource("1_qhqgy")
 gravity = -40.0
 jump_vel = 10.0

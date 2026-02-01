@@ -10,10 +10,8 @@ var pressed := false
 
 var gasmask_off:
 	get():
-		print('GETTTT')
 		return mat.get_shader_parameter('gasmask_off')
 	set(new):
-		print('SETTTT')
 		mat.set_shader_parameter('gasmask_off', new)
 
 var gasmask_mul:

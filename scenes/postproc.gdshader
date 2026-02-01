@@ -20,7 +20,7 @@ float vignette(vec2 uv) {
 vec2 pixelate_uv(vec2 uv, vec2 px_size, float factor) {
 	vec2 scaling = px_size * factor;
 	vec2 scaled = uv / scaling;
-	vec2 floored = floor(scaled);
+	vec2 floored = floor(scaled) + vec2(0.5);
 	return floored * scaling;
 }
 

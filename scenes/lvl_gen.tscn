@@ -95,6 +95,7 @@ projection = 1
 size = 22.951809
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1936218640]
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=2119944278]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.054337, 0)
