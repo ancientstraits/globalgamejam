@@ -3,9 +3,11 @@ extends CharacterBody3D
 @export var speed : float
 @export var wander_radius : float
 @export var always_see_player := false
+@export var push_force : float
 
 @onready var nav_agent : NavigationAgent3D = $NavigationAgent3D
 @onready var hitbox := $Hitbox
+@onready var repel : Area3D = $Repel
 @onready var nav_update_timer := $NavigationUpdateTimer
 
 var see_player := false
@@ -48,6 +50,13 @@ func _physics_process(delta: float) -> void:
 	var direction = local_destination.normalized()
 		
 	velocity = direction * speed
+	if repel:
+		for i in repel.get_overlapping_bodies():
+			if i.is_in_group('enemy') and i != self:
+				var push_displacement : Vector3 = i.global_position - global_position
+				var push_direction = push_displacement.normalized()
+				var push_distance : float = push_displacement.length()
+				velocity -= push_direction * push_force *(1/push_distance)
 	move_and_slide()
 
 	for i in hitbox.get_overlapping_bodies():
@@ -55,6 +64,9 @@ func _physics_process(delta: float) -> void:
 			if i.can_take_damage == true:
 				Globals.take_damage.emit()
 				Globals.health -= 1
+	
+	
+			
 
 func pick_random_destination():
 	var nav_map := nav_agent.get_navigation_map()

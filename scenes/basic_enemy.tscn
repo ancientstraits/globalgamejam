@@ -4,16 +4,20 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_k0juu"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_71j4m"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_md22f"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3i4hm"]
-radius = 0.55322266
+radius = 0.2
 
-[node name="BasicEnemy" type="CharacterBody3D" unique_id=662068]
-collision_layer = 2
+[sub_resource type="SphereShape3D" id="SphereShape3D_3i4hm"]
+radius = 3.5
+
+[node name="BasicEnemy" type="CharacterBody3D" unique_id=662068 groups=["enemy"]]
+collision_layer = 66
 collision_mask = 2
 script = ExtResource("1_3i4hm")
-speed = 5.0
+speed = 3.0
+push_force = 3.0
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=161381309]
 
@@ -21,7 +25,7 @@ speed = 5.0
 mesh = SubResource("CapsuleMesh_k0juu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=328318335]
-shape = SubResource("CapsuleShape3D_71j4m")
+shape = SubResource("CapsuleShape3D_md22f")
 
 [node name="Hitbox" type="Area3D" parent="." unique_id=221746655]
 
@@ -31,5 +35,12 @@ shape = SubResource("CapsuleShape3D_3i4hm")
 [node name="NavigationUpdateTimer" type="Timer" parent="." unique_id=1178282199]
 wait_time = 0.2
 one_shot = true
+
+[node name="Repel" type="Area3D" parent="." unique_id=1157103438]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Repel" unique_id=550452085]
+shape = SubResource("SphereShape3D_3i4hm")
 
 [connection signal="timeout" from="NavigationUpdateTimer" to="." method="_on_navigation_update_timer_timeout"]
