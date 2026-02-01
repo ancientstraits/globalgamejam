@@ -4,8 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://fwmr5soew7hf" path="res://scenes/basic_enemy.tscn" id="2_k0juu"]
 [ext_resource type="PackedScene" uid="uid://d2au7sero68de" path="res://scenes/slime_enemy.tscn" id="3_i7141"]
 [ext_resource type="PackedScene" uid="uid://dmr2k3nr3ttgm" path="res://scenes/generator.tscn" id="3_w7kh3"]
-[ext_resource type="Script" uid="uid://u305pkolf8el" path="res://scenes/gas.gd" id="4_k0juu"]
-[ext_resource type="PackedScene" uid="uid://420wvdt8tbyd" path="res://scenes/clock.tscn" id="6_qfnet"]
+[ext_resource type="Script" path="res://scenes/gas.gd" id="4_k0juu"]
+[ext_resource type="FontFile" uid="uid://oj2726l1ruaw" path="res://assets/Pixel-UniCode.ttf" id="5_71j4m"]
+[ext_resource type="Script" path="res://scenes/clock.gd" id="5_qfnet"]
+[ext_resource type="Texture2D" uid="uid://crsls342ba7qa" path="res://assets/textures/fog-texture.webp" id="6_4mrxx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4wyf3"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -51,6 +53,27 @@ size = Vector2(5, 5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_71j4m"]
 size = Vector3(5, 5, 5)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7r4gi"]
+shading_mode = 0
+albedo_color = Color(0, 0.81960785, 0.44705883, 0.42352942)
+albedo_texture = ExtResource("6_4mrxx")
+heightmap_enabled = true
+heightmap_scale = 0.0
+billboard_mode = 1
+grow = true
+fixed_size = true
+point_size = 128.0
+use_fov_override = true
+fov_override = 50.0
+proximity_fade_enabled = true
+proximity_fade_distance = 0.01
+distance_fade_mode = 1
+distance_fade_min_distance = 180.54
+distance_fade_max_distance = 6.5
+stencil_flags = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_w7kh3"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_71j4m"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i7141"]
@@ -76,6 +99,7 @@ speed = 2.0
 wander_radius = 30.0
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=2024323905]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.017570019, -0.012681246, 0.03398943)
 navigation_mesh = SubResource("NavigationMesh_e3hyu")
 
 [node name="Ground" type="StaticBody3D" parent="NavigationRegion3D" unique_id=103679757]
@@ -131,6 +155,11 @@ mesh = SubResource("PlaneMesh_k0juu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Gas" unique_id=768314873]
 shape = SubResource("BoxShape3D_71j4m")
+
+[node name="GasEffect" type="MeshInstance3D" parent="Gas" unique_id=851939614]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0131959915, 0.06878209, -0.030583143)
+material_override = SubResource("StandardMaterial3D_7r4gi")
+mesh = SubResource("QuadMesh_w7kh3")
 
 [node name="GasMeter" type="ProgressBar" parent="." unique_id=801314967]
 offset_left = 26.0

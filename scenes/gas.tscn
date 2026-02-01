@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://ddmgp842fgcck"]
 
-[ext_resource type="Script" uid="uid://u305pkolf8el" path="res://scenes/gas.gd" id="1_gy5lb"]
+[ext_resource type="Script" path="res://scenes/gas.gd" id="1_gy5lb"]
 [ext_resource type="Shader" path="res://scenes/gas.gdshader" id="2_cm45x"]
+[ext_resource type="Texture2D" uid="uid://crsls342ba7qa" path="res://assets/textures/fog-texture.webp" id="3_gohih"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gohih"]
 render_priority = 0
@@ -15,14 +16,37 @@ size = Vector3(5, 5, 5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_71j4m"]
 size = Vector3(5, 6.3155518, 5)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0un20"]
+shading_mode = 0
+albedo_color = Color(0, 0.5921569, 0.023529412, 0.5803922)
+albedo_texture = ExtResource("3_gohih")
+billboard_mode = 1
+billboard_keep_scale = true
+grow_amount = -5.38
+point_size = 0.1
+use_fov_override = true
+fov_override = 70.0
+proximity_fade_enabled = true
+proximity_fade_distance = 0.01
+distance_fade_mode = 1
+distance_fade_max_distance = 0.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_5jbjy"]
+
 [node name="Gas" type="Area3D" unique_id=1774086628 groups=["gas"]]
 script = ExtResource("1_gy5lb")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1323726499]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015947342, 0)
+transform = Transform3D(1.0372924, 0, 0, 0, 1.0372924, 0, 0, 0, 1.0372924, 0, 0.015947342, 0)
+visible = false
 mesh = SubResource("BoxMesh_0un20")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1078279226]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6577759, 0)
 shape = SubResource("BoxShape3D_71j4m")
+
+[node name="GasEffect" type="MeshInstance3D" parent="." unique_id=725522717]
+transform = Transform3D(-5.7356253, 0, 0, 0, -5.1620626, 0, 0, 0, 1, 0, -1.6428883, 0)
+material_override = SubResource("StandardMaterial3D_0un20")
+mesh = SubResource("QuadMesh_5jbjy")

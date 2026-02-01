@@ -6,4 +6,6 @@ func _physics_process(delta: float) -> void:
 		
 		for i in get_collision_count():
 			col = get_collider(i)
-			col.get_parent().interacting = true
+			var parent = col.get_parent()
+			if (parent.has_method('interact')):
+				parent.interact()

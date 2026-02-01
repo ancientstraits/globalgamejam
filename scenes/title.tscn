@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bbubk3klgti8q"]
 
-[ext_resource type="Script" uid="uid://cklkww8yf80oq" path="res://scripts/title.gd" id="1_b3w7a"]
+[ext_resource type="Script" path="res://scripts/title.gd" id="1_b3w7a"]
 [ext_resource type="Texture2D" uid="uid://dydaxuxmspkwv" path="res://assets/generator.png" id="1_wosw1"]
 [ext_resource type="Texture2D" uid="uid://08bmi5fllv6c" path="res://assets/gasmaskcutout.png" id="2_p6dhs"]
 [ext_resource type="Shader" uid="uid://c45ia4jf0n58r" path="res://shaders/title_gasmask.gdshader" id="4_b3w7a"]

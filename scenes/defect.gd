@@ -30,3 +30,6 @@ func _on_timer_timeout() -> void:
 func _on_timer_2_timeout() -> void:
 	$GPUParticles3D.restart()
 	$GPUParticles3D.emitting = false
+	
+func interact() -> void:
+	interacting = true

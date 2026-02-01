@@ -66,7 +66,6 @@ shadow_enabled = true
 
 [node name="Player" parent="." unique_id=155048425 instance=ExtResource("1_rapvc")]
 transform = Transform3D(0.86788684, 0, 0.49676192, 0, 1, 0, -0.49676192, 0, 0.86788684, 0, 16.911182, 0)
-gravity = 0.0
 
 [node name="Node3D" type="Node3D" parent="." unique_id=160167784]
 script = ExtResource("2_sp6hj")
