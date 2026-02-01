@@ -10,6 +10,7 @@
 radius = 0.55322266
 
 [node name="BasicEnemy" type="CharacterBody3D" unique_id=662068]
+collision_layer = 2
 script = ExtResource("1_3i4hm")
 speed = 5.0
 

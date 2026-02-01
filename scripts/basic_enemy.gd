@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 @export var speed : float
 @export var wander_radius : float
+@export var always_see_player := false
 
 @onready var nav_agent : NavigationAgent3D = $NavigationAgent3D
 @onready var hitbox := $Hitbox
@@ -11,30 +12,33 @@ var see_player := false
 var nav_rid : RID
 var can_update_navigation := true
 
-
 func _ready() -> void:
-	pick_random_destination()
+	if !always_see_player:
+		pick_random_destination()
 
 func _physics_process(delta: float) -> void:
 	
 	if can_update_navigation:
-		if nav_agent.is_navigation_finished() and !see_player:
+		if nav_agent.is_navigation_finished() and !see_player and !always_see_player:
 			pick_random_destination()
 		
 		
 		
 		var player_position = Globals.player.global_position
 		
-		var space_state = get_world_3d().direct_space_state
-		var query = PhysicsRayQueryParameters3D.create(global_position, player_position)
-		query.exclude = [self]
-		var result = space_state.intersect_ray(query)
-		if result and result['collider'].is_in_group('player'):
-			see_player = true
-			nav_agent.set_target_position(Globals.player.position)
-			print('see u')
+		if !always_see_player:
+			var space_state = get_world_3d().direct_space_state
+			var query = PhysicsRayQueryParameters3D.create(global_position, player_position)
+			query.exclude = [self]
+			var result = space_state.intersect_ray(query)
+			if result and result['collider'].is_in_group('player'):
+				see_player = true
+				nav_agent.set_target_position(Globals.player.position)
+			else:
+				see_player = false
 		else:
-			see_player = false
+			nav_agent.set_target_position(Globals.player.position)
+		
 		
 		can_update_navigation = false
 		nav_update_timer.start()
