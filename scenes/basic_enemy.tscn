@@ -16,8 +16,8 @@ radius = 2.5
 collision_layer = 66
 collision_mask = 2
 script = ExtResource("1_3i4hm")
-speed = 5.0
-wander_radius = 30.0
+speed = 3.5
+wander_radius = 50.0
 push_force = 6.0
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=161381309]

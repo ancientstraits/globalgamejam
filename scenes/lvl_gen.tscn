@@ -6,22 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://bvf0l4t2kcxi5" path="res://scenes/tiles/basic_floor.tscn" id="3_v30vs"]
 [ext_resource type="PackedScene" uid="uid://bkm5uyeb16j67" path="res://scenes/placeholder/placeholderroom.tscn" id="3_wnehw"]
 [ext_resource type="PackedScene" uid="uid://txoahdybgw01" path="res://scenes/tiles/basic_wall.tscn" id="4_1eqve"]
-
-
-[ext_resource type="PackedScene" uid="uid://cvl24qop3s56h" path="res://scenes/placeholder/gas_placeholder.tscn" id="5_1eqve"]
-[ext_resource type="PackedScene" uid="uid://cbkeaygqfvg56" path="res://scenes/placeholder/enemy_placeholder.tscn" id="8_1m8nx"]
-[ext_resource type="PackedScene" uid="uid://dvtbga5saiwf2" path="res://scenes/placeholder/boss_placeholder.tscn" id="9_3auog"]
-
 [ext_resource type="PackedScene" uid="uid://dmr2k3nr3ttgm" path="res://scenes/generator.tscn" id="4_vqau2"]
-[ext_resource type="PackedScene" uid="uid://ddmgp842fgcck" path="res://scenes/gas.tscn" id="5_1m8nx"]
+[ext_resource type="PackedScene" uid="uid://oj5uikv0xpqo" path="res://scenes/gas.tscn" id="5_1m8nx"]
 [ext_resource type="Script" uid="uid://b3onpiwnh08o8" path="res://scenes/defect.gd" id="5_ryk2b"]
-[ext_resource type="Script" uid="uid://cx31ei5upgebc" path="res://scenes/rooms/control.gd" id="7_mkhxr"]
-[ext_resource type="Shader" path="res://assets/uvshader.gdshader" id="8_5pad3"]
+[ext_resource type="Script" uid="uid://dcetd3n62lby6" path="res://scenes/rooms/control.gd" id="7_mkhxr"]
+[ext_resource type="Shader" uid="uid://8m85mr4x630x" path="res://assets/uvshader.gdshader" id="8_5pad3"]
 [ext_resource type="PackedScene" uid="uid://420wvdt8tbyd" path="res://scenes/clock.tscn" id="9_5wwpt"]
 [ext_resource type="PackedScene" uid="uid://fwmr5soew7hf" path="res://scenes/basic_enemy.tscn" id="12_mkhxr"]
 [ext_resource type="PackedScene" uid="uid://brajv7npi6yfb" path="res://scenes/angel_enemy.tscn" id="13_mkhxr"]
-
-
 [ext_resource type="PackedScene" uid="uid://d2au7sero68de" path="res://scenes/slime_enemy.tscn" id="15_5wwpt"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lp8i1"]
@@ -253,7 +245,6 @@ placeholder_gas = ExtResource("5_1m8nx")
 floor_tile = ExtResource("3_v30vs")
 wall_tile = ExtResource("4_1eqve")
 gas_ratio = 0.4
-enemy_count = 60
 enemy_min_distance = 2
 enemy_placeholder = ExtResource("12_mkhxr")
 boss_placeholder = Array[PackedScene]([ExtResource("13_mkhxr"), ExtResource("13_mkhxr"), ExtResource("15_5wwpt")])
