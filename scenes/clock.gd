@@ -4,6 +4,11 @@ extends StaticBody3D
 
 @onready var label = $Label3D
 
+func game_end() -> bool:
+	var hour : int
+	hour = int(floor(Globals.time)) / (60 * time_stretch)
+	return hour >= 6
+
 func _process(delta: float) -> void:
 	Globals.time += delta
 	var hour : int
