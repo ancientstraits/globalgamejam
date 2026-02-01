@@ -74,6 +74,8 @@ func _process(delta: float) -> void:
 	
 	move_and_slide()
 	
+	if Globals.health == 0:
+		Globals.die.emit('No lives')
 	
 func start_invulnerability():
 	invulnerability_timer.start(invulnerability_time)
