@@ -56,7 +56,7 @@ func _process(delta: float) -> void:
 	postproc.gasmask_mul = \
 		postproc.gasmask_mul.lerp(0.03 * vel_vec.y * Vector2.ONE, 0.5)
 	
-	if is_on_floor():
+	if is_on_floor():		
 		if Input.is_action_just_pressed('jump'):
 			velocity.y = jump_vel
 	else:

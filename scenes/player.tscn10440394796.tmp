@@ -1,36 +1,13 @@
 [gd_scene format=3 uid="uid://cnyha7j8gdx03"]
 
 [ext_resource type="Script" uid="uid://cy04b2ow18jlo" path="res://scripts/player3d.gd" id="1_qhqgy"]
-[ext_resource type="Shader" path="res://scenes/postproc.gdshader" id="2_3v2ag"]
 [ext_resource type="Script" uid="uid://d30j6idw7vuat" path="res://scripts/gas_mask.gd" id="2_dqkch"]
-[ext_resource type="Script" path="res://scripts/gasmasklayer.gd" id="2_jej6c"]
-[ext_resource type="Script" path="res://scenes/interaction_cast.gd" id="2_qlg0r"]
-[ext_resource type="Texture2D" uid="uid://08bmi5fllv6c" path="res://assets/gasmaskcutout.png" id="3_jej6c"]
 [ext_resource type="Script" path="res://scenes/gas_detector.gd" id="3_qlg0r"]
 [ext_resource type="Script" uid="uid://bi07tabyspqoh" path="res://scenes/interaction.gd" id="3_tuyoq"]
 [ext_resource type="Script" uid="uid://ohaiknv2vxd7" path="res://scenes/flashlight.gd" id="4_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://et2qpq8ojjqa" path="res://assets/flashlight_texture.jpg" id="5_tuyoq"]
-[ext_resource type="PackedScene" path="res://scenes/postproc.tscn" id="7_fjrip"]
-[ext_resource type="PackedScene" path="res://scenes/gas_meter.tscn" id="7_y4r1p"]
-[ext_resource type="PackedScene" path="res://scenes/crosshair.tscn" id="8_d2wvv"]
-[ext_resource type="PackedScene" path="res://scenes/ouch_hud.tscn" id="9_3v2ag"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jej6c"]
-shader = ExtResource("2_3v2ag")
-shader_parameter/gasmask_texture = ExtResource("3_jej6c")
-shader_parameter/gasmask_mul = Vector2(0.8, 0.55)
-shader_parameter/gasmask_off = Vector2(0.05, 0)
-shader_parameter/pixelate_factor = 8
-shader_parameter/vignette_m = 0.6
-shader_parameter/vignette_b = 0.0
-shader_parameter/behavior = 1
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mf8r0"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_qhqgy"]
-size = Vector3(0.3, 0.3, 4)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_tuyoq"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fjrip"]
 blend_mode = 1
@@ -40,46 +17,29 @@ transform = Transform3D(0.86788684, 0, 0.49676192, 0, 1, 0, -0.49676192, 0, 0.86
 script = ExtResource("1_qhqgy")
 gravity = -40.0
 jump_vel = 10.0
-move_vel = 10.0
+move_vel = 30.0
 camera_speed = 0.001
-invulnerability_time = 2.0
-
-[node name="Mask" type="CanvasLayer" parent="." unique_id=235587990]
-script = ExtResource("2_jej6c")
-
-[node name="ColorRect" type="ColorRect" parent="Mask" unique_id=2073402615]
-texture_filter = 1
-texture_repeat = 1
-material = SubResource("ShaderMaterial_jej6c")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+health = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1528320197]
 shape = SubResource("CapsuleShape3D_mf8r0")
 
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=470689448]
+
 [node name="Camera3D" type="Camera3D" parent="." unique_id=260826829]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6030874, -0.1589483)
 
-[node name="InteractionCast" type="ShapeCast3D" parent="Camera3D" unique_id=231130860]
-shape = SubResource("BoxShape3D_qhqgy")
-target_position = Vector3(0, 0, -2.03)
-collision_mask = 16
-collide_with_areas = true
-script = ExtResource("2_qlg0r")
-
 [node name="Flashlight" type="Node3D" parent="Camera3D" unique_id=1640074504 node_paths=PackedStringArray("canvas", "texture_outer", "texture_inner")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6030874, 0.1589483)
 script = ExtResource("4_qlg0r")
-canvas = NodePath("../../FlashlightCanvas")
-texture_outer = NodePath("../../FlashlightCanvas/TextureRect")
-texture_inner = NodePath("../../FlashlightCanvas/TextureRect2")
+canvas = NodePath("../../CanvasLayer")
+texture_outer = NodePath("../../CanvasLayer/TextureRect")
+texture_inner = NodePath("../../CanvasLayer/TextureRect2")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Camera3D/Flashlight" unique_id=1931078391]
 light_energy = 5.0
 spot_range = 10.0
-spot_angle = 40.0
+spot_angle = 90.0
 
 [node name="Interaction" type="Node3D" parent="Camera3D" unique_id=763953744]
 script = ExtResource("3_tuyoq")
@@ -104,16 +64,6 @@ max_gas = 100.0
 gas_gain_rate = 7.0
 gas_drain_rate = 3.0
 
-[node name="DamageOverlay" type="CanvasLayer" parent="GasMask" unique_id=1118804646]
-
-[node name="GasMeter" parent="GasMask/DamageOverlay" unique_id=1262088993 instance=ExtResource("7_y4r1p")]
-scale = Vector2(2.7600012, 2.7600012)
-show_percentage = false
-
-[node name="Crosshair" parent="GasMask/DamageOverlay" unique_id=22330358 instance=ExtResource("8_d2wvv")]
-
-[node name="OuchHUD" parent="GasMask/DamageOverlay" unique_id=530555860 instance=ExtResource("9_3v2ag")]
-
 [node name="GasDetector" type="Area3D" parent="GasMask" unique_id=216936063]
 transform = Transform3D(0.86788684, 0, -0.49676192, 0, 1, 0, 0.49676192, 0, 0.86788684, 0, 0, 0)
 script = ExtResource("3_qlg0r")
@@ -121,14 +71,9 @@ script = ExtResource("3_qlg0r")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GasMask/GasDetector" unique_id=2012420051]
 shape = SubResource("CapsuleShape3D_mf8r0")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1295110005]
-mesh = SubResource("CapsuleMesh_tuyoq")
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1141877781]
 
-[node name="InvulnerabilityTimer" type="Timer" parent="." unique_id=1793104084]
-
-[node name="FlashlightCanvas" type="CanvasLayer" parent="." unique_id=1141877781]
-
-[node name="TextureRect" type="TextureRect" parent="FlashlightCanvas" unique_id=1402139479]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1402139479]
 modulate = Color(1, 1, 1, 0.26666668)
 material = SubResource("CanvasItemMaterial_fjrip")
 anchors_preset = 8
@@ -142,11 +87,11 @@ offset_right = 256.0
 offset_bottom = 256.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(2, 2)
+scale = Vector2(1, 1.0043501)
 pivot_offset = Vector2(256, 256)
 texture = ExtResource("5_tuyoq")
 
-[node name="TextureRect2" type="TextureRect" parent="FlashlightCanvas" unique_id=559640303]
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer" unique_id=559640303]
 modulate = Color(1, 1, 1, 0.3254902)
 material = SubResource("CanvasItemMaterial_fjrip")
 anchors_preset = 8
@@ -163,7 +108,3 @@ grow_vertical = 2
 rotation = 1.7243853
 pivot_offset = Vector2(256, 256)
 texture = ExtResource("5_tuyoq")
-
-[node name="Postproc" parent="." unique_id=1075234556 instance=ExtResource("7_fjrip")]
-
-[connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]
