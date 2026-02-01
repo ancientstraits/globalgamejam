@@ -59,6 +59,9 @@ size = Vector3(5, 5, 5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i7141"]
 
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_w7kh3"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
 [node name="3Dworld" type="Node3D" unique_id=513478039]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=853303836]
@@ -188,7 +191,7 @@ outline_size = 0
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Clock" unique_id=2129916271]
 mesh = SubResource("BoxMesh_71j4m")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Clock" unique_id=886308261]
-shape = SubResource("ConcavePolygonShape3D_qfnet")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Clock" unique_id=1334565379]
+shape = SubResource("ConcavePolygonShape3D_w7kh3")
 
 [node name="AmbienceEvent" parent="." unique_id=1584728494 instance=ExtResource("10_w7kh3")]
