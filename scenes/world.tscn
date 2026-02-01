@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bvpqcfq2fku1"]
 
+[ext_resource type="PackedScene" uid="uid://brajv7npi6yfb" path="res://scenes/angel_enemy.tscn" id="1_4mrxx"]
 [ext_resource type="PackedScene" uid="uid://cnyha7j8gdx03" path="res://scenes/player.tscn" id="1_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://fwmr5soew7hf" path="res://scenes/basic_enemy.tscn" id="2_k0juu"]
 [ext_resource type="PackedScene" uid="uid://d2au7sero68de" path="res://scenes/slime_enemy.tscn" id="3_i7141"]
@@ -83,13 +84,16 @@ stencil_flags = 2
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=853303836]
 environment = SubResource("Environment_71j4m")
 
+[node name="AngelEnemy" parent="." unique_id=662068 instance=ExtResource("1_4mrxx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.106892, 2.048719, 0)
+
 [node name="Player" parent="." unique_id=155048425 groups=["player"] instance=ExtResource("1_4wyf3")]
-transform = Transform3D(0.86788684, 0, 0.49676192, 0, 1, 0, -0.49676192, 0, 0.86788684, 0, 4.7243547, 0)
+transform = Transform3D(0.86788684, 0, 0.49676192, 0, 1, 0, -0.49676192, 0, 0.86788684, -12.845917, 4.7243547, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=442866872]
 transform = Transform3D(1, 0, 0, 0, 0.20000072, 0.9797958, 0, -0.9797958, 0.20000072, 0, 8.979358, -1.1422927)
 
-[node name="BasicEnemy" parent="." unique_id=662068 groups=["enemy"] instance=ExtResource("2_k0juu")]
+[node name="BasicEnemy" parent="." unique_id=708643120 groups=["enemy"] instance=ExtResource("2_k0juu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7771378, 13.095138)
 wander_radius = 30.0
 
