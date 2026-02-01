@@ -2,6 +2,15 @@
 
 [ext_resource type="PackedScene" uid="uid://vnvqiu2nxm05" path="res://assets/models/basic_floor.glb" id="1_abtpw"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_abtpw"]
+size = Vector3(5, 0.1, 5)
+
 [node name="BasicFloor" type="Node3D" unique_id=621641132]
 
 [node name="basic_floor" parent="." unique_id=444274420 instance=ExtResource("1_abtpw")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="basic_floor" unique_id=1877455822]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="basic_floor/StaticBody3D" unique_id=821147601]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0450269, 0)
+shape = SubResource("BoxShape3D_abtpw")

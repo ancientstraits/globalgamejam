@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dtlf21dyu26cy"]
+
+[ext_resource type="Material" uid="uid://cslx64ihtyek7" path="res://assets/textures/crate_material_3d.tres" id="1_phgsj"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_jwibk"]
+
+[node name="Decoration" type="Node3D" unique_id=1448339959]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=2056769188]
+transform = Transform3D(-0.81915206, 0, -0.57357645, 0, 1, 0, 0.57357645, 0, -0.81915206, -1.2860339, 0.5, 0.67921793)
+material_override = ExtResource("1_phgsj")
+mesh = SubResource("BoxMesh_jwibk")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="." unique_id=1055690305]
+transform = Transform3D(-5.9604645e-08, 0, -1, 0, 1, 0, 1, 0, -5.9604645e-08, -1.2860339, 0.5, -0.62078214)
+material_override = ExtResource("1_phgsj")
+mesh = SubResource("BoxMesh_jwibk")
+
+[node name="CSGMesh3D3" type="CSGMesh3D" parent="." unique_id=1549399824]
+transform = Transform3D(0.9063078, 0, -0.4226183, 0, 1, 0, 0.4226183, 0, 0.9063078, -1.2860339, 1.5, -0.020782113)
+material_override = ExtResource("1_phgsj")
+mesh = SubResource("BoxMesh_jwibk")

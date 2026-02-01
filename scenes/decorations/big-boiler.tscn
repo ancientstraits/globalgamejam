@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://8acjeg0ycda3"]
+
+[ext_resource type="Texture2D" uid="uid://iysfbscvui47" path="res://assets/textures/steel-2.jpg" id="3_gm823"]
+[ext_resource type="Texture2D" uid="uid://bf4j0ygk4dbv6" path="res://assets/textures/steel.jpg" id="4_oln4g"]
+[ext_resource type="Texture2D" uid="uid://cx08ym6tes47y" path="res://assets/textures/milled-steel.jpg" id="5_3hg0m"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uukyc"]
+albedo_texture = ExtResource("3_gm823")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_pfsh2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lg72o"]
+albedo_texture = ExtResource("4_oln4g")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s6k22"]
+albedo_texture = ExtResource("4_oln4g")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_nxo7y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oltw4"]
+albedo_texture = ExtResource("4_oln4g")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0jrtt"]
+albedo_texture = ExtResource("5_3hg0m")
+
+[sub_resource type="BoxMesh" id="BoxMesh_4mg21"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bq77d"]
+albedo_texture = ExtResource("3_gm823")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yuss6"]
+albedo_texture = ExtResource("5_3hg0m")
+
+[node name="Decoration" type="Node3D" unique_id=1448339959]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=1254010579]
+transform = Transform3D(1.8899999, 0, 0, 0, 2.5740001, 0, 0, 0, 1.8899999, -1.3000001, 2.4, 0)
+material_override = SubResource("StandardMaterial3D_uukyc")
+mesh = SubResource("CylinderMesh_pfsh2")
+
+[node name="CSGMesh3D7" type="CSGMesh3D" parent="." unique_id=1279781131]
+transform = Transform3D(1.9844998, 0, 0, 0, 0.12870003, 0, 0, 0, 1.9844998, -1.3000001, 0.046483517, 0)
+material_override = SubResource("StandardMaterial3D_lg72o")
+mesh = SubResource("CylinderMesh_pfsh2")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="." unique_id=1958693743]
+transform = Transform3D(-0.39999998, 0, 3.2455702e-08, 0, 1.04, 0, -3.4969105e-08, 0, -0.37124994, -1.1815507, 1.0855174, -1.2983491)
+material_override = SubResource("StandardMaterial3D_s6k22")
+mesh = SubResource("CylinderMesh_nxo7y")
+
+[node name="CSGMesh3D6" type="CSGMesh3D" parent="." unique_id=467382316]
+transform = Transform3D(-0.39999998, 0, 3.2455702e-08, 0, 1.04, 0, -3.4969105e-08, 0, -0.37124994, -1.1815507, 1.0855174, 1.301651)
+material_override = SubResource("StandardMaterial3D_oltw4")
+mesh = SubResource("CylinderMesh_nxo7y")
+
+[node name="CSGMesh3D4" type="CSGMesh3D" parent="." unique_id=1552497762]
+transform = Transform3D(-0.43476287, 0, 3.7033196e-08, 0, 0.44961244, 0, -3.8008174e-08, 0, -0.42361036, -1.1658394, 2.3213847, -1.3057536)
+material_override = SubResource("StandardMaterial3D_0jrtt")
+mesh = SubResource("BoxMesh_4mg21")
+
+[node name="CSGMesh3D3" type="CSGMesh3D" parent="." unique_id=679281247]
+transform = Transform3D(-0.39999995, 0, 3.24557e-08, 3.49691e-08, -5.5006407e-08, 0.3712499, 1.528548e-15, 1.2583998, 1.622785e-08, -1.1815507, 2.299749, -0.01998496)
+material_override = SubResource("StandardMaterial3D_bq77d")
+mesh = SubResource("CylinderMesh_nxo7y")
+
+[node name="CSGMesh3D5" type="CSGMesh3D" parent="." unique_id=1331687787]
+transform = Transform3D(-0.43476287, 0, 3.7033196e-08, 3.8008174e-08, -1.9653184e-08, 0.42361036, -1.427786e-15, 0.4496124, 1.8516596e-08, -1.1658394, 2.3071532, 1.3158823)
+material_override = SubResource("StandardMaterial3D_yuss6")
+mesh = SubResource("BoxMesh_4mg21")

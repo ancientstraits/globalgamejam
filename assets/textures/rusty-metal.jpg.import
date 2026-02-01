@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3mfmx1ojm73k"
-path.s3tc="res://.godot/imported/crosshair.png-7a5ee98d03b748045923e3a0fa977b20.s3tc.ctex"
+uid="uid://ltg1kaijs3hm"
+path.s3tc="res://.godot/imported/rusty-metal.jpg-1f3db7cd2901cceee78c8acffb06592b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/crosshair.png"
-dest_files=["res://.godot/imported/crosshair.png-7a5ee98d03b748045923e3a0fa977b20.s3tc.ctex"]
+source_file="res://assets/textures/rusty-metal.jpg"
+dest_files=["res://.godot/imported/rusty-metal.jpg-1f3db7cd2901cceee78c8acffb06592b.s3tc.ctex"]
 
 [params]
 

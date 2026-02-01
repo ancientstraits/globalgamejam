@@ -70,9 +70,13 @@ shadow_mesh = SubResource("ArrayMesh_7xgvm")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pi13y"]
 albedo_color = Color(0.03012127, 0.03134168, 0.015002052, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_17kg5"]
+size = Vector3(0.1, 3.7, 5.02)
+
 [node name="Node3D" type="Node3D" unique_id=1458460162]
 
 [node name="basic_wall" type="Node3D" parent="." unique_id=1900613033]
+transform = Transform3D(1, 0, 0, 0, 1.4997742, 0, 0, 0, 1, 0, 0.7822875, 0)
 
 [node name="Skeleton3D" type="Skeleton3D" parent="basic_wall" unique_id=1522669273]
 bones/0/name = "Cube"
@@ -107,3 +111,9 @@ bone_idx = 1
 mesh = SubResource("ArrayMesh_3acxd")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_pi13y")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="basic_wall" unique_id=557151688]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="basic_wall/StaticBody3D" unique_id=910438635]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8303325, 0)
+shape = SubResource("BoxShape3D_17kg5")

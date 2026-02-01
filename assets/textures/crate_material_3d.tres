@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cslx64ihtyek7"]
+
+[ext_resource type="Texture2D" uid="uid://d27wbk86mg8ab" path="res://assets/textures/crate.jpg" id="1_46go3"]
+
+[resource]
+albedo_texture = ExtResource("1_46go3")
+bent_normal_enabled = true
+uv1_scale = Vector3(1.045, 1.045, 1.045)
+uv1_offset = Vector3(-0.51, 0.48, 0.475)
+uv1_triplanar = true

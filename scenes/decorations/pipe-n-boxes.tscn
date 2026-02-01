@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://c2sbco2w508an"]
+
+[ext_resource type="Texture2D" uid="uid://bf4j0ygk4dbv6" path="res://assets/textures/steel.jpg" id="1_b0fop"]
+[ext_resource type="Texture2D" uid="uid://iysfbscvui47" path="res://assets/textures/steel-2.jpg" id="2_hvehs"]
+[ext_resource type="Texture2D" uid="uid://cx08ym6tes47y" path="res://assets/textures/milled-steel.jpg" id="3_k3eya"]
+[ext_resource type="Material" uid="uid://bbnt1ev8xqnkm" path="res://assets/textures/cardboard_material.tres" id="4_b0fop"]
+[ext_resource type="Material" uid="uid://cslx64ihtyek7" path="res://assets/textures/crate_material_3d.tres" id="4_dy7xk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wdf5i"]
+albedo_texture = ExtResource("1_b0fop")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ue7ln"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bfxrn"]
+albedo_texture = ExtResource("1_b0fop")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qddfu"]
+albedo_texture = ExtResource("2_hvehs")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lv7va"]
+albedo_texture = ExtResource("3_k3eya")
+
+[sub_resource type="BoxMesh" id="BoxMesh_n7di7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y68fo"]
+albedo_texture = ExtResource("3_k3eya")
+
+[node name="Decoration" type="Node3D" unique_id=1448339959]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=76456606]
+transform = Transform3D(-0.39999998, 0, 3.2455702e-08, 0, 1.04, 0, -3.4969105e-08, 0, -0.37124994, -2.1815507, 1.0855174, -1.2983491)
+material_override = SubResource("StandardMaterial3D_wdf5i")
+mesh = SubResource("CylinderMesh_ue7ln")
+
+[node name="CSGMesh3D3" type="CSGMesh3D" parent="." unique_id=530200898]
+transform = Transform3D(-0.39999995, 0, 3.2455702e-08, 0, 1.5287997, 0, -3.4969105e-08, 0, -0.37124994, -2.1815507, 3.9855177, 1.4016509)
+material_override = SubResource("StandardMaterial3D_bfxrn")
+mesh = SubResource("CylinderMesh_ue7ln")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="." unique_id=1407998446]
+transform = Transform3D(-0.39999995, -1.0143226e-07, -1.4186836e-15, 0, -5.0716128e-08, 0.37124994, -3.4969105e-08, 1.1602498, 1.6227848e-08, -2.1815507, 2.3496153, 0.061554007)
+material_override = SubResource("StandardMaterial3D_qddfu")
+mesh = SubResource("CylinderMesh_ue7ln")
+
+[node name="CSGMesh3D4" type="CSGMesh3D" parent="." unique_id=466382210]
+transform = Transform3D(-0.43476287, 0, 3.7033196e-08, 0, 0.44961244, 0, -3.8008174e-08, 0, -0.42361036, -2.1658394, 2.3213847, -1.3057536)
+material_override = SubResource("StandardMaterial3D_lv7va")
+mesh = SubResource("BoxMesh_n7di7")
+
+[node name="CSGMesh3D5" type="CSGMesh3D" parent="." unique_id=1455518626]
+transform = Transform3D(-0.43476287, 0, 3.7033196e-08, 0, 0.44961244, 0, -3.8008174e-08, 0, -0.42361036, -2.1658394, 2.3213847, 1.3765141)
+material_override = SubResource("StandardMaterial3D_y68fo")
+mesh = SubResource("BoxMesh_n7di7")
+
+[node name="CSGMesh3D9" type="CSGMesh3D" parent="." unique_id=308352452]
+transform = Transform3D(-0.34687302, 0, -0.103861764, 0, 0.33720928, 0, 0.09294432, 0, -0.38761756, -1.670381, 0.12138467, 1.2077208)
+material_override = ExtResource("4_b0fop")
+mesh = SubResource("BoxMesh_n7di7")
+
+[node name="CSGMesh3D10" type="CSGMesh3D" parent="." unique_id=1947884489]
+transform = Transform3D(-0.32712045, 0, -0.16556464, 0, 0.33720925, 0, 0.14816125, 0, -0.36554474, -1.670381, 0.12138467, 0.70772076)
+material_override = ExtResource("4_b0fop")
+mesh = SubResource("BoxMesh_n7di7")
+
+[node name="CSGMesh3D11" type="CSGMesh3D" parent="." unique_id=257840927]
+transform = Transform3D(0.3577428, 0, 0.034974813, 0, 0.33720922, 0, -0.031298414, 0, 0.3997642, -1.670381, 0.45824182, 0.90772074)
+mesh = SubResource("BoxMesh_n7di7")
+material = ExtResource("4_b0fop")
+
+[node name="CSGMesh3D6" type="CSGMesh3D" parent="." unique_id=1544407486]
+transform = Transform3D(0.92562234, 0, 0.55732125, 0, 1.0386047, 0, -0.5344083, 0, 0.96530867, -0.058247328, 0.52138466, -0.5191635)
+mesh = SubResource("BoxMesh_n7di7")
+material = ExtResource("4_dy7xk")

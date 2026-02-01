@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3mfmx1ojm73k"
-path.s3tc="res://.godot/imported/crosshair.png-7a5ee98d03b748045923e3a0fa977b20.s3tc.ctex"
+uid="uid://d27wbk86mg8ab"
+path.s3tc="res://.godot/imported/crate.jpg-2dcf170cc97b0f8bb16684201032cb7b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/crosshair.png"
-dest_files=["res://.godot/imported/crosshair.png-7a5ee98d03b748045923e3a0fa977b20.s3tc.ctex"]
+source_file="res://assets/textures/crate.jpg"
+dest_files=["res://.godot/imported/crate.jpg-2dcf170cc97b0f8bb16684201032cb7b.s3tc.ctex"]
 
 [params]
 
