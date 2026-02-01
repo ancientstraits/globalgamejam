@@ -4,6 +4,7 @@ var game_scene := 'res://scenes/title.tscn'
 var player : CharacterBody3D
 var health := 4
 var time := 0.0
+var died = false
 
 signal die(cause: String)
 signal timeout(cause: String)

@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://bvf0l4t2kcxi5"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x6imn"]
+shading_mode = 0
+
 [sub_resource type="BoxMesh" id="BoxMesh_x6imn"]
+material = SubResource("StandardMaterial3D_x6imn")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qba7n"]
 
@@ -44,6 +48,7 @@ size = Vector3(5, 0.1, 5)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="basic_floor" unique_id=2006127394]
 transform = Transform3D(4.0394835, 0, 0, 0, 4.0394835, 0, 0, 0, 4.0394835, 0, -10.071928, 0)
 layers = 4
+ignore_occlusion_culling = true
 mesh = SubResource("BoxMesh_x6imn")
 
 [node name="Plane" type="MeshInstance3D" parent="basic_floor" unique_id=2131043330]

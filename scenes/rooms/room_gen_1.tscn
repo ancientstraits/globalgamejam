@@ -1,7 +1,94 @@
-[gd_scene format=3 uid="uid://derwakc4ay0l"]
+[gd_scene format=4 uid="uid://derwakc4ay0l"]
 
-[ext_resource type="PackedScene" uid="uid://bvf0l4t2kcxi5" path="res://scenes/tiles/basic_floor.tscn" id="1_laqjl"]
-[ext_resource type="PackedScene" uid="uid://dmr2k3nr3ttgm" path="res://scenes/generator.tscn" id="2_rkfgp"]
+[ext_resource type="Script" uid="uid://b053u7yx5kp8r" path="res://scripts/generator.gd" id="1_rnvb2"]
+[ext_resource type="PackedScene" uid="uid://c4ujeyr0po3jj" path="res://scenes/defect.tscn" id="2_tc8nk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ef8yp"]
+size = Vector3(6.2402344, 3.9509277, 2.9667969)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_i7141"]
+size = Vector2(5.755, 2.365)
+center_offset = Vector3(0, 0.75, 1.5)
+orientation = 2
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yat5j"]
+load_path = "res://.godot/imported/dihGreen.png-e23ef29dac0a70cc31bc42675c401c2c.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8nd2q"]
+albedo_texture = SubResource("CompressedTexture2D_yat5j")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_10hea"]
+_surfaces = [{
+"aabb": AABB(-1.5825888, -1.239265, -2.6289842, 2.9868822, 2.9868822, 5.2579684),
+"format": 34896613377,
+"index_count": 84,
+"index_data": PackedByteArray("AAABAAIAAwACAAEAAwAEAAIABQADAAEAAAAFAAEABgAEAAMABQAGAAMABwACAAQABwAAAAIABgAHAAQACAAFAAAACQAGAAUACAAJAAUACQAKAAYACgAHAAYACwAJAAgADAAAAAcACgAMAAcADAAIAAAADQAMAAoADgAIAAwADQAOAAwADgALAAgADwANAAoADwAOAA0ADwAKAAkADwALAA4ACwAPAAkA"),
+"name": "Body",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("AAC2UOr4AAAAAP//FAcAAAAA///q+AAA/////xQHAAD/////6vgAAAAAtlAUBwAA//+2UBQHAAD//7ZQ6vgAAAAA4jP//wAAAADiMwAAAAD//+IzAAAAAAAAAAD//wAA///iM///AAD//wAAAAAAAP//AAD//wAAAAAAAAAAAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_08qly"]
+resource_name = "generator_Cube_002"
+_surfaces = [{
+"aabb": AABB(-1.5825888, -1.239265, -2.6289842, 2.9868822, 2.9868822, 5.2579684),
+"attribute_data": PackedByteArray("NhcNz1Ht5XY2F+V2Ue0Nz/IQjN2V84zd8hCk95XzpPeAVDdHp6npDIBU6QynqTdHUe0NzzYX5XZR7eV2NhcNz5XzjN3yEIzdlfOk9/IQpPenqTdHgFTpDKep6QyAVDdHlfOk9/IQpPeV86T38hCk9/roiwUxvAVQMbyLBfroBVCnqc1QgFQ3R6epN0eAVM1QgFTNUKepN0eAVDdHp6nNUIBUEGKnqc1QgFTNUKepEGKnqRBigFTNUKepzVCAVBBi"),
+"format": 34896613399,
+"index_count": 84,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAADAAAABAAFAAMABgAFAAQABgAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAAPAAwAEAARAA8AEgARABAAEgATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0A"),
+"material": SubResource("StandardMaterial3D_8nd2q"),
+"name": "Body",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 48,
+"vertex_data": PackedByteArray("AAC2UOr4AAAAAP//FAcAAAAA///q+AAAAAC2UBQHAAAAAOIz//8AAAAA4jMAAAAAAAAAAP//AAAAAAAAAAAAAAAAtlAUBwAA/////xQHAAAAAP//FAcAAP//tlAUBwAA//+2UBQH/7//////6vj/v/////8UB/+///+2UOr4/7///+IzAAD/v///4jP///+///8AAAAA/7///wAA////v///tlDq+ACAAAD//+r4AID/////6vgAgAAAtlDq+ACAAAAAAAAA/7///wAA////v///AAAAAP+/AAAAAP///7//////FAf/vwAA///q+P+/AAD//xQH/7//////6vj/v///4jP//5+QAAC2UOr4n5D//7ZQ6vifkAAA4jP//5+QAADiMwAAnxD//7ZQFAefEAAAtlAUB58Q///iMwAAnxAAAAAAAAAAAP//4jMAAAAAAADiMwAAAAD//wAAAAAAAP//AAD//wCAAADiM///AID//+Iz//8AgAAAAAD//wCA/z//f/8//3//P/9//z//f/8//3//P/9//z//f/8//3////9/////f////3////9//38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/f////3////9/////f///AAD/fwAA/38AAP9/AAD/f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3//f////3////9/////f///")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_10hea")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yat5j"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rnvb2"]
+material = SubResource("StandardMaterial3D_yat5j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qba7n"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_8d6ti"]
+_surfaces = [{
+"aabb": AABB(-2.5, 0, -2.5, 5, 1e-05, 5),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAAADAAEA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAP//AAD//wAAAAAAAP//AAD//wAAAAAAAAAAAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_crse5"]
+resource_name = "basic_floor_Plane_001"
+_surfaces = [{
+"aabb": AABB(-2.5, 0, -2.5, 5, 1e-05, 5),
+"attribute_data": PackedByteArray("AAD/////AAD/////AAAAAA=="),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAAADAAEA"),
+"material": SubResource("StandardMaterial3D_qba7n"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAP///7///wAAAAD/v///AAD///+/AAAAAAAA/7////9/////f////3////9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_8d6ti")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_abtpw"]
+size = Vector3(5, 0.1, 5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rkfgp"]
 albedo_color = Color(0.11372549, 0.59607846, 0, 1)
@@ -12,26 +99,159 @@ material = SubResource("StandardMaterial3D_rkfgp")
 [node name="RoomGen1" type="Node3D" unique_id=1415989661]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 
-[node name="Generator" parent="." unique_id=1422162699 instance=ExtResource("2_rkfgp")]
+[node name="Generator" type="StaticBody3D" parent="." unique_id=1422162699]
 transform = Transform3D(-0.47863063, 0, -0.87801635, 0, 1, 0, 0.87801635, 0, -0.47863063, 3.346099, 0.95262694, 3.7936282)
+script = ExtResource("1_rnvb2")
+defect = ExtResource("2_tc8nk")
+defect_position_padding = 0.3
+defect_spawn_rate = 30.0
+defect_spawn_rate_variability = 5.0
+defect_lose_threshold = 6
 
-[node name="BasicFloor" parent="." unique_id=621641132 instance=ExtResource("1_laqjl")]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Generator" unique_id=830310474]
+shape = SubResource("BoxShape3D_ef8yp")
 
-[node name="BasicFloor5" parent="." unique_id=77373297 instance=ExtResource("1_laqjl")]
+[node name="RepairPlane" type="MeshInstance3D" parent="Generator" unique_id=630042335]
+mesh = SubResource("PlaneMesh_i7141")
+
+[node name="Timer" type="Timer" parent="Generator" unique_id=881121636]
+one_shot = true
+
+[node name="generator" type="Node3D" parent="Generator" unique_id=612058480]
+transform = Transform3D(-4.371139e-08, 0, 1.928163, 0, 1.3219545, 0, -1, 0, -8.428268e-08, -2.917842e-09, -0.6198425, -0.06675244)
+
+[node name="Cube" type="MeshInstance3D" parent="Generator/generator" unique_id=1381079048]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.6096632, 0, 0.22286928, 0)
+mesh = SubResource("ArrayMesh_08qly")
+skeleton = NodePath("")
+
+[node name="BasicFloor" type="Node3D" parent="." unique_id=621641132]
+
+[node name="basic_floor" type="Node3D" parent="BasicFloor" unique_id=444274420]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BasicFloor/basic_floor" unique_id=2006127394]
+transform = Transform3D(4.0394835, 0, 0, 0, 4.0394835, 0, 0, 0, 4.0394835, 0, -10.071928, 0)
+layers = 4
+mesh = SubResource("BoxMesh_rnvb2")
+
+[node name="Plane" type="MeshInstance3D" parent="BasicFloor/basic_floor" unique_id=2131043330]
+mesh = SubResource("ArrayMesh_crse5")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="BasicFloor/basic_floor" unique_id=1877455822]
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasicFloor/basic_floor/StaticBody3D" unique_id=821147601]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0450269, 0)
+shape = SubResource("BoxShape3D_abtpw")
+
+[node name="BasicFloor5" type="Node3D" parent="." unique_id=77373297]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 
-[node name="BasicFloor4" parent="." unique_id=1241190560 instance=ExtResource("1_laqjl")]
+[node name="basic_floor" type="Node3D" parent="BasicFloor5" unique_id=2094143361]
+
+[node name="Plane" type="MeshInstance3D" parent="BasicFloor5/basic_floor" unique_id=1381874394]
+mesh = SubResource("ArrayMesh_crse5")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="BasicFloor5/basic_floor" unique_id=442751219]
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasicFloor5/basic_floor/StaticBody3D" unique_id=36052704]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0450269, 0)
+shape = SubResource("BoxShape3D_abtpw")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="BasicFloor5/basic_floor" unique_id=1092432379]
+transform = Transform3D(4.0394835, 0, 0, 0, 4.0394835, 0, 0, 0, 4.0394835, 0, -10.071928, 0)
+layers = 4
+mesh = SubResource("BoxMesh_rnvb2")
+
+[node name="BasicFloor6" type="Node3D" parent="." unique_id=2115010538]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 10)
+
+[node name="basic_floor" type="Node3D" parent="BasicFloor6" unique_id=1467208432]
+
+[node name="Plane" type="MeshInstance3D" parent="BasicFloor6/basic_floor" unique_id=1829059468]
+mesh = SubResource("ArrayMesh_crse5")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="BasicFloor6/basic_floor" unique_id=1750017384]
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasicFloor6/basic_floor/StaticBody3D" unique_id=1242570685]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0450269, 0)
+shape = SubResource("BoxShape3D_abtpw")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="BasicFloor6/basic_floor" unique_id=1889127774]
+transform = Transform3D(4.0394835, 0, 0, 0, 4.0394835, 0, 0, 0, 4.0394835, 0, -10.071928, 0)
+layers = 4
+mesh = SubResource("BoxMesh_rnvb2")
+
+[node name="BasicFloor4" type="Node3D" parent="." unique_id=1241190560]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 
-[node name="BasicFloor2" parent="." unique_id=640939305 instance=ExtResource("1_laqjl")]
+[node name="basic_floor" type="Node3D" parent="BasicFloor4" unique_id=657407757]
+
+[node name="Plane" type="MeshInstance3D" parent="BasicFloor4/basic_floor" unique_id=363032350]
+mesh = SubResource("ArrayMesh_crse5")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="BasicFloor4/basic_floor" unique_id=1858929203]
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasicFloor4/basic_floor/StaticBody3D" unique_id=60013599]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0450269, 0)
+shape = SubResource("BoxShape3D_abtpw")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="BasicFloor4/basic_floor" unique_id=937568480]
+transform = Transform3D(4.0394835, 0, 0, 0, 4.0394835, 0, 0, 0, 4.0394835, 0, -10.071928, 0)
+layers = 4
+mesh = SubResource("BoxMesh_rnvb2")
+
+[node name="BasicFloor2" type="Node3D" parent="." unique_id=640939305]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
 
-[node name="BasicFloor3" parent="." unique_id=953700829 instance=ExtResource("1_laqjl")]
+[node name="basic_floor" type="Node3D" parent="BasicFloor2" unique_id=831348809]
+
+[node name="Plane" type="MeshInstance3D" parent="BasicFloor2/basic_floor" unique_id=1802937582]
+mesh = SubResource("ArrayMesh_crse5")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="BasicFloor2/basic_floor" unique_id=2079273471]
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasicFloor2/basic_floor/StaticBody3D" unique_id=701111595]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0450269, 0)
+shape = SubResource("BoxShape3D_abtpw")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="BasicFloor2/basic_floor" unique_id=1557722788]
+transform = Transform3D(4.0394835, 0, 0, 0, 4.0394835, 0, 0, 0, 4.0394835, 0, -10.071928, 0)
+layers = 4
+mesh = SubResource("BoxMesh_rnvb2")
+
+[node name="BasicFloor3" type="Node3D" parent="." unique_id=953700829]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
 
-[node name="BasicFloor6" parent="." unique_id=2115010538 instance=ExtResource("1_laqjl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 10)
+[node name="basic_floor" type="Node3D" parent="BasicFloor3" unique_id=641859950]
+
+[node name="Plane" type="MeshInstance3D" parent="BasicFloor3/basic_floor" unique_id=783976146]
+mesh = SubResource("ArrayMesh_crse5")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="BasicFloor3/basic_floor" unique_id=1117386935]
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasicFloor3/basic_floor/StaticBody3D" unique_id=1619208734]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0450269, 0)
+shape = SubResource("BoxShape3D_abtpw")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="BasicFloor3/basic_floor" unique_id=2000698996]
+transform = Transform3D(4.0394835, 0, 0, 0, 4.0394835, 0, 0, 0, 4.0394835, 0, -10.071928, 0)
+layers = 4
+mesh = SubResource("BoxMesh_rnvb2")
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=850481141]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3486009, 1.0276675, 9.909467)
 mesh = SubResource("BoxMesh_yat5j")
+
+[connection signal="timeout" from="Generator/Timer" to="Generator" method="_on_timer_timeout"]
