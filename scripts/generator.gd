@@ -30,5 +30,5 @@ func _on_timer_timeout() -> void:
 		add_child(defect_instance)
 		defect_count += 1
 		
-		var timer = $Timer
-		timer.start(randf_range(defect_spawn_rate - defect_spawn_rate_variability, defect_spawn_rate + defect_spawn_rate_variability))
+	var timer = $Timer
+	timer.start(randf_range(defect_spawn_rate - defect_spawn_rate_variability, defect_spawn_rate + defect_spawn_rate_variability))
