@@ -10,16 +10,18 @@
 radius = 0.2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_3i4hm"]
-radius = 3.5
+radius = 2.5
 
 [node name="BasicEnemy" type="CharacterBody3D" unique_id=662068 groups=["enemy"]]
 collision_layer = 66
 collision_mask = 2
 script = ExtResource("1_3i4hm")
-speed = 3.0
-push_force = 3.0
+speed = 5.0
+wander_radius = 30.0
+push_force = 6.0
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=161381309]
+debug_path_custom_point_size = 22.8
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=970019306]
 mesh = SubResource("CapsuleMesh_k0juu")

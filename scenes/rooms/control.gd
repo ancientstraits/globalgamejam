@@ -15,5 +15,5 @@ func _physics_process(delta: float) -> void:
 	for i in range(Globals.generators.size()):
 		var bar = progress_bars[i]
 		var gen = Globals.generators[i]
-		print('Generator ' + str(i) + ' has ' + str(gen.defect_count) + ' defects, max is ' + str(gen.defect_lose_threshold))
+		#print('Generator ' + str(i) + ' has ' + str(gen.defect_count) + ' defects, max is ' + str(gen.defect_lose_threshold))
 		bar.value =  gen.defect_lose_threshold - gen.defect_count
