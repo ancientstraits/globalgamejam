@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://c172bm4pntw2a" path="res://scenes/rooms/room_gen_3.tscn" id="6_1m8nx"]
 [ext_resource type="PackedScene" uid="uid://d18o3088qw52d" path="res://scenes/rooms/control_room.tscn" id="7_vqau2"]
 [ext_resource type="PackedScene" uid="uid://cbkeaygqfvg56" path="res://scenes/placeholder/enemy_placeholder.tscn" id="8_1m8nx"]
-[ext_resource type="PackedScene" uid="uid://dvtbga5saiwf2" path="res://scenes/placeholder/boss_placeholder.tscn" id="9_3auog"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lp8i1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -25,6 +24,8 @@ sky_material = SubResource("ProceduralSkyMaterial_lp8i1")
 background_mode = 2
 sky = SubResource("Sky_1m8nx")
 tonemap_mode = 2
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_vqau2"]
 
 [sub_resource type="Resource" id="Resource_rapvc"]
 script = ExtResource("3_1eqve")
@@ -67,7 +68,8 @@ shadow_enabled = true
 [node name="Player" parent="." unique_id=155048425 instance=ExtResource("1_rapvc")]
 transform = Transform3D(0.86788684, 0, 0.49676192, 0, 1, 0, -0.49676192, 0, 0.86788684, 0, 16.911182, 0)
 
-[node name="Node3D" type="Node3D" parent="." unique_id=160167784]
+[node name="Node3D" type="NavigationRegion3D" parent="." unique_id=1233017566]
+navigation_mesh = SubResource("NavigationMesh_vqau2")
 script = ExtResource("2_sp6hj")
 mandatory_rooms = Array[ExtResource("3_1eqve")]([SubResource("Resource_rapvc"), SubResource("Resource_7uevp"), SubResource("Resource_vqau2"), SubResource("Resource_ryk2b")])
 placeholder_visual = ExtResource("3_wnehw")
@@ -77,4 +79,9 @@ wall_tile = ExtResource("4_1eqve")
 gas_ratio = 0.4
 enemy_min_distance = 3
 enemy_placeholder = ExtResource("8_1m8nx")
-boss_placeholder = ExtResource("9_3auog")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1420581911]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 6.999756, 21.394775, 8.184433)
+cull_mask = 4
+projection = 1
+size = 22.951809

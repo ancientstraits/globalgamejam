@@ -1,16 +1,63 @@
 [gd_scene format=3 uid="uid://d18o3088qw52d"]
 
+[ext_resource type="Shader" uid="uid://8m85mr4x630x" path="res://assets/uvshader.gdshader" id="1_wfb1n"]
 [ext_resource type="PackedScene" uid="uid://420wvdt8tbyd" path="res://scenes/clock.tscn" id="2_mpooj"]
 [ext_resource type="PackedScene" uid="uid://bvf0l4t2kcxi5" path="res://scenes/tiles/basic_floor.tscn" id="2_wfb1n"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_af5mn"]
+resource_local_to_scene = true
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_wfb1n"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rkw5e"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_wfb1n")
+shader_parameter/image = SubResource("ViewportTexture_wfb1n")
+
+[sub_resource type="QuadMesh" id="QuadMesh_rkw5e"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_rkw5e")
 
 [node name="RoomGen1" type="Node3D" unique_id=1415989661]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=355497927]
+[node name="SubViewport" type="SubViewport" parent="." unique_id=829638043]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="SubViewport" unique_id=2030038889]
+
+[node name="Control" type="VBoxContainer" parent="SubViewport/CanvasLayer" unique_id=515732419]
+custom_minimum_size = Vector2(512, 512)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport/CanvasLayer/Control" unique_id=525636086]
+layout_mode = 2
+value = 50.0
+
+[node name="ProgressBar2" type="ProgressBar" parent="SubViewport/CanvasLayer/Control" unique_id=22163913]
+layout_mode = 2
+value = 50.0
+
+[node name="ProgressBar3" type="ProgressBar" parent="SubViewport/CanvasLayer/Control" unique_id=231803289]
+layout_mode = 2
+value = 50.0
+
+[node name="ControlPanel" type="CSGMesh3D" parent="." unique_id=355497927]
 transform = Transform3D(2.6412685, 0, 0.52629256, 0, 3.0084274, 0, -0.8836536, 0, 1.5731051, 0.9446256, 1.2816386, 0.74468374)
 mesh = SubResource("BoxMesh_af5mn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ControlPanel" unique_id=452948658]
+transform = Transform3D(0.81119823, 0, 0, 0, 0.8111984, 0, -2.9802322e-08, 0, 0.81119823, 4.4703484e-08, 0.017950475, 0.5161332)
+mesh = SubResource("QuadMesh_rkw5e")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=396765877]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5717669, 1.1071421, 4.1658363)
 
 [node name="BasicFloor" parent="." unique_id=621641132 instance=ExtResource("2_wfb1n")]
 

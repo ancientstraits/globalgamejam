@@ -6,3 +6,5 @@ var time := 0.0
 
 signal die
 signal take_damage
+
+var generators : Array

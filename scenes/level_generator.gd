@@ -412,6 +412,7 @@ func add_gas_to_layout(layout, target_ratio = 0.3):
 
 	# for now, allow gas anywhere:
 	var _is_valid_gas_tile = func _is_valid_gas_tile(x, y):
+		if x == 0 and y == 0: return false
 		return true
 
 	coords.shuffle()
@@ -539,6 +540,8 @@ func add_enemy_spawns_to_layout(layout, desired_count, min_distance):
 		if tiles[y][x] != TILE_EMPTY:
 			continue
 
+		if x == 0 and y == 0: continue
+
 		if too_close.call(x, y):
 			continue
 
@@ -614,28 +617,16 @@ func add_bosses_to_layout(layout):
 			# for now, allow any non-gas floor:
 			candidates.append(Vector2(x, y))
 
-	if candidates.size() < 2:
+	if candidates.size() < 3:
 		layout["boss_positions"] = []
 		return layout
 
 	candidates.shuffle()
 	var boss1 = candidates[0]
-
-	# BFS from boss1 to get path distances
-	var dist = _bfs_distances_from(int(boss1.x), int(boss1.y), width, height, h_walls, v_walls)
-
-	var best_dist = -1
 	var boss2 = candidates[1]
+	var boss3 = candidates[2]
 
-	for c in candidates:
-		var x = int(c.x)
-		var y = int(c.y)
-		var d = dist[y][x]
-		if d > best_dist:
-			best_dist = d
-			boss2 = c
-
-	layout["boss_positions"] = [boss1, boss2]
+	layout["boss_positions"] = [boss1, boss2, boss3]
 	return layout
 
 func _wall_sides_for_tile(x, y, width, height, h_walls, v_walls):
@@ -678,7 +669,7 @@ func _wall_sides_for_tile(x, y, width, height, h_walls, v_walls):
 @export var enemy_min_distance: int = 4
 
 @export var enemy_placeholder: PackedScene
-@export var boss_placeholder: PackedScene
+@export var boss_placeholder: Array[PackedScene]
 
 @export var wall_decos: Array[PackedScene] = []
 @export var free_decos: Array[PackedScene] = []
@@ -725,9 +716,11 @@ func _populate(layout) -> void:
 	for rm in rooms:
 		var node = rm.room.scene.instantiate()
 		add_child(node)
+		if rm.room.type == MandatoryRoom.RoomType.GENERATOR:
+			Globals.generators.append(node.get_node("Generator"))
 		if rm.w > rm.h:
-			node.global_position = _grid2world(rm.x, rm.y - 1)
 			node.rotation_degrees.y = -90
+			node.global_position = _grid2world(rm.x, rm.y + 1)
 		else:
 			node.global_position = _grid2world(rm.x, rm.y)
 
@@ -808,13 +801,10 @@ func _populate(layout) -> void:
 				deco2.rotation_degrees.y = randf() * 360.0
 
 	# 2) Bosses
-	if boss_placeholder != null:
-		for bp in boss_positions:
-			var bx = int(bp.x)
-			var by = int(bp.y)
-			var b = boss_placeholder.instantiate()
-			add_child(b)
-			b.global_position = _grid2world(bx, by)
+	for i in range(boss_placeholder.size()):
+		var node = boss_placeholder[i].instantiate()
+		add_child(node)
+		node.global_position = _grid2world(boss_positions[i].x, boss_positions[i].y)
 
 	# 3) Walls (unchanged)
 	for y in height + 1:
