@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://vdopyv0jkbxu" path="res://scenes/rooms/room_gen_2.tscn" id="5_lp8i1"]
 [ext_resource type="PackedScene" uid="uid://c172bm4pntw2a" path="res://scenes/rooms/room_gen_3.tscn" id="6_1m8nx"]
 [ext_resource type="PackedScene" uid="uid://d18o3088qw52d" path="res://scenes/rooms/control_room.tscn" id="7_vqau2"]
+[ext_resource type="PackedScene" uid="uid://cvl24qop3s56h" path="res://scenes/placeholder/gas_placeholder.tscn" id="5_1eqve"]
 [ext_resource type="PackedScene" uid="uid://cbkeaygqfvg56" path="res://scenes/placeholder/enemy_placeholder.tscn" id="8_1m8nx"]
 [ext_resource type="PackedScene" uid="uid://dvtbga5saiwf2" path="res://scenes/placeholder/boss_placeholder.tscn" id="9_3auog"]
 

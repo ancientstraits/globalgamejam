@@ -1,5 +1,17 @@
 [gd_scene format=4 uid="uid://duqgukf7cmwbx"]
 
+[ext_resource type="Texture2D" uid="uid://ddqkv1vma4xea" path="res://assets/Poster.png" id="1_hhdw3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ufvim"]
+albedo_texture = ExtResource("1_hhdw3")
+uv1_scale = Vector3(0.57, 0.57, 0.57)
+uv1_offset = Vector3(0, -0.515, -0.5)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_rd4sf"]
+material = SubResource("StandardMaterial3D_ufvim")
+size = Vector3(0.055, 1.77, 1.705)
+
 [sub_resource type="BoxMesh" id="BoxMesh_0xp1p"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xp1p"]
@@ -190,8 +202,13 @@ shadow_mesh = SubResource("ArrayMesh_ufvim")
 
 [node name="Decoration2" type="Node3D" unique_id=1448339959]
 
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="." unique_id=1895850]
+transform = Transform3D(0.027, 0, 0, 0, 0.8362658, -0.081983365, 0, 0.12796666, 0.5357637, -2.4501126, 2.3697567, -0.8664499)
+mesh = SubResource("BoxMesh_rd4sf")
+
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=894567889]
 transform = Transform3D(0.049999982, 0, 0, 0, 1.5603756, -0.13595766, 0, 0.2141333, 0.99071467, -2.4272175, 2.4, -0.90000004)
+visible = false
 mesh = SubResource("BoxMesh_0xp1p")
 material = SubResource("StandardMaterial3D_0xp1p")
 
