@@ -13,8 +13,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if interacting:
 		fix_amount += fix_rate * delta
-		print(fix_amount)
+		$MeshInstance3D.mesh.material.albedo_color.g = fix_threshold/(fix_threshold-fix_amount) - 1
 	if fix_amount >= fix_threshold:
+		get_parent().defect_count -= 1
 		queue_free()
 		
 	interacting = false
