@@ -1,9 +1,9 @@
 [gd_scene format=4 uid="uid://d18o3088qw52d"]
 
-[ext_resource type="Script" uid="uid://cx31ei5upgebc" path="res://scenes/rooms/control.gd" id="1_rkw5e"]
+[ext_resource type="Script" uid="uid://dcetd3n62lby6" path="res://scenes/rooms/control.gd" id="1_rkw5e"]
 [ext_resource type="PackedScene" uid="uid://420wvdt8tbyd" path="res://scenes/clock.tscn" id="2_mpooj"]
 [ext_resource type="PackedScene" uid="uid://bvf0l4t2kcxi5" path="res://scenes/tiles/basic_floor.tscn" id="2_wfb1n"]
-[ext_resource type="Script" uid="uid://wnbmw00bik3x" path="res://scripts/controlpanel.gd" id="5_n1edn"]
+[ext_resource type="Script" path="res://scripts/controlpanel.gd" id="5_n1edn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3gr8v"]
 resource_name = "Material.003"

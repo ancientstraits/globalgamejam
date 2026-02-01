@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cnyha7j8gdx03"]
 
 [ext_resource type="Script" uid="uid://cy04b2ow18jlo" path="res://scripts/player3d.gd" id="1_qhqgy"]
-[ext_resource type="Shader" path="res://scenes/postproc.gdshader" id="2_3v2ag"]
+[ext_resource type="Shader" uid="uid://dyvi2gawwbewk" path="res://scenes/postproc.gdshader" id="2_3v2ag"]
 [ext_resource type="Script" uid="uid://d30j6idw7vuat" path="res://scripts/gas_mask.gd" id="2_dqkch"]
-[ext_resource type="Script" path="res://scripts/gasmasklayer.gd" id="2_jej6c"]
+[ext_resource type="Script" uid="uid://da8oku04vawyq" path="res://scripts/gasmasklayer.gd" id="2_jej6c"]
 [ext_resource type="Script" uid="uid://bubq3tve6bkb2" path="res://scenes/interaction_cast.gd" id="2_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://08bmi5fllv6c" path="res://assets/gasmaskcutout.png" id="3_jej6c"]
 [ext_resource type="Script" uid="uid://dk2on0wnitumo" path="res://scenes/gas_detector.gd" id="3_qlg0r"]
@@ -15,6 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://c6fpn5euunax8" path="res://scenes/ouch_hud.tscn" id="9_3v2ag"]
 [ext_resource type="AudioStream" uid="uid://dj60lovmefkir" path="res://assets/audio/ambience.ogg" id="14_oprun"]
 [ext_resource type="FontFile" uid="uid://oj2726l1ruaw" path="res://assets/Pixel-UniCode.ttf" id="15_oprun"]
+[ext_resource type="AudioStream" uid="uid://b4gdjqtoqh3at" path="res://assets/audio/damaged.ogg" id="16_a8ls1"]
+[ext_resource type="Script" uid="uid://d21sbkpxkhr50" path="res://scenes/ouch_player.gd" id="17_qfm1y"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jej6c"]
 shader = ExtResource("2_3v2ag")
@@ -39,6 +41,7 @@ radius = 0.3
 blend_mode = 1
 
 [sub_resource type="LabelSettings" id="LabelSettings_a8ls1"]
+line_spacing = 1.0
 font = ExtResource("15_oprun")
 font_size = 156
 outline_color = Color(0, 0, 0, 1)
@@ -198,7 +201,7 @@ texture = ExtResource("5_tuyoq")
 
 [node name="AmbiencePlayer" type="AudioStreamPlayer3D" parent="." unique_id=403005818]
 stream = ExtResource("14_oprun")
-volume_db = -45.455
+volume_db = -29.455
 autoplay = true
 playback_type = 1
 
@@ -232,6 +235,25 @@ label_settings = SubResource("LabelSettings_a8ls1")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Label2" type="Label" parent="GameOver/ColorRect" unique_id=406425265]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -380.0
+offset_top = 76.0
+offset_right = 381.0
+offset_bottom = 431.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "TIME SURVIVED:"
+label_settings = SubResource("LabelSettings_a8ls1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Cause" type="Label" parent="GameOver/ColorRect" unique_id=837841207]
 visible = false
 layout_mode = 1
@@ -249,5 +271,9 @@ grow_vertical = 2
 label_settings = SubResource("LabelSettings_a8ls1")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="OuchPlayer" type="AudioStreamPlayer3D" parent="." unique_id=842314613]
+stream = ExtResource("16_a8ls1")
+script = ExtResource("17_qfm1y")
 
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]
