@@ -22,6 +22,7 @@ config/icon="res://assets/icon.svg"
 [autoload]
 
 Globals="*uid://buwp7ihkx4c1f"
+TitleGlobal="*uid://b3ly0e4a7g7ei"
 
 [display]
 
