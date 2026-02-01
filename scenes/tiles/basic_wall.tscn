@@ -1,120 +1,19 @@
-[gd_scene format=4 uid="uid://txoahdybgw01"]
+[gd_scene format=3 uid="uid://txoahdybgw01"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_47wtd"]
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_ijmh8"]
-_surfaces = [{
-"aabb": AABB(-0.054375768, -1, -2.5, 0.108751535, 3.6284537, 5),
-"format": 34896613377,
-"index_count": 36,
-"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 8,
-"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
-}]
-blend_shape_mode = 0
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_56m7p"]
-resource_name = "basic_wall_Cube_004"
-_surfaces = [{
-"aabb": AABB(-0.054375768, -1, -2.5, 0.108751535, 3.6284537, 5),
-"attribute_data": PackedByteArray("/1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8/"),
-"format": 34896613399,
-"index_count": 36,
-"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
-"material": SubResource("StandardMaterial3D_47wtd"),
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 24,
-"vertex_data": PackedByteArray("AAAAAP//VNUAAP//AABU1QAA/////1TVAAAAAAAAVNUAAAAAAAD///////8AAP//AAD//wAA/////wAAAAD/////AAAAAFTV////////VNX/////AABU1f//AAD//1TV//8AAP///78AAP//////v/////////+/AAAAAP///78AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AAP//AAD///////8AAP//AAD/////////////VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/")
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_ijmh8")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_17kg5"]
-albedo_color = Color(0.27022192, 0.27022192, 0.2702219, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j7set"]
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_7xgvm"]
-_surfaces = [{
-"aabb": AABB(-0.100000024, -1, -2.5, 0.20000005, 3.65, 5),
-"format": 34896613377,
-"index_count": 72,
-"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYACAAJAAoACAALAAkADAAKAAkACwAMAAkADQAIAAoACwAIAA0ADAAOAAoADQAKAA4ACwAPAAwACwANAA8ADwAOAAwADwANAA4A"),
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 16,
-"vertex_data": PackedByteArray("AAAAAP//AAAAAP//wfUAAAAA/////wAAAAAAAMH1AAD/////wfUAAP//AAD//wAA////////AAD//wAAwfUAAAAAAAA9CgAAAAD//wAAAAAAAP//PQoAAAAAAAAAAAAA/////wAAAAD//wAAPQoAAP////89CgAA//8AAAAAAAA=")
-}]
-blend_shape_mode = 0
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_3acxd"]
-resource_name = "basic_wall_Cube_005"
-_surfaces = [{
-"aabb": AABB(-0.100000024, -1, -2.5, 0.20000005, 3.65, 5),
-"attribute_data": PackedByteArray("/1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8//1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8/"),
-"format": 34896613399,
-"index_count": 72,
-"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0A"),
-"material": SubResource("StandardMaterial3D_j7set"),
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 48,
-"vertex_data": PackedByteArray("AAAAAP//VNUAAP//wfVU1QAA/////1TVAAAAAMH1VNUAAAAAwfX////////B9f//AAD//8H1/////wAAwfX/////AADB9VTV////////VNX/////wfVU1f//AAD//1TV//8AAP///78AAP//////v/////////+/AAAAAP///78AAAAAwfX/v///AAD///+///8AAMH1/78AAAAA////v//////B9f//AAD///////8AAP//wfX/////////////AAAAAD0KVNUAAP//AABU1QAA//89ClTVAAAAAAAAVNUAAAAAAAD///////8AAP//AAD//wAA/////wAAAAD/////AAAAAFTV/////z0KVNX/////AABU1f//AAA9ClTV//8AAD0K/78AAP//PQr/v/////89Cv+/AAAAAD0K/78AAAAAAAD/v///AAA9Cv+///8AAAAA/78AAAAAPQr/v/////8AAP//AAD//z0K//8AAP//AAD///////89Cv//VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/")
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_7xgvm")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pi13y"]
-albedo_color = Color(0.03012127, 0.03134168, 0.015002052, 1)
+[ext_resource type="PackedScene" uid="uid://dice07rkiggd6" path="res://assets/models/basic_wall.glb" id="1_pi13y"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_17kg5"]
 size = Vector3(0.1, 3.7, 5.02)
 
 [node name="Node3D" type="Node3D" unique_id=1458460162]
 
-[node name="basic_wall" type="Node3D" parent="." unique_id=1900613033]
-transform = Transform3D(1, 0, 0, 0, 1.4997742, 0, 0, 0, 1, 0, 0.7822875, 0)
+[node name="basic_wall" parent="." unique_id=307350599 instance=ExtResource("1_pi13y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7881317, 0)
 
-[node name="Skeleton3D" type="Skeleton3D" parent="basic_wall" unique_id=1522669273]
-bones/0/name = "Cube"
-bones/0/parent = -1
-bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-bones/0/enabled = true
-bones/0/position = Vector3(0, 0, 0)
-bones/0/rotation = Quaternion(0, 0, 0, 1)
-bones/0/scale = Vector3(1, 1, 1)
-bones/1/name = "Cube.002"
-bones/1/parent = -1
-bones/1/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-bones/1/enabled = true
-bones/1/position = Vector3(0, 0, 0)
-bones/1/rotation = Quaternion(0, 0, 0, 1)
-bones/1/scale = Vector3(1, 1, 1)
-
-[node name="Cube" type="BoneAttachment3D" parent="basic_wall/Skeleton3D" unique_id=1583591224]
-bone_name = "Cube"
-bone_idx = 0
-
-[node name="Cube" type="MeshInstance3D" parent="basic_wall/Skeleton3D/Cube" unique_id=1460091124]
-mesh = SubResource("ArrayMesh_56m7p")
-skeleton = NodePath("")
-surface_material_override/0 = SubResource("StandardMaterial3D_17kg5")
-
-[node name="Cube_002" type="BoneAttachment3D" parent="basic_wall/Skeleton3D" unique_id=440452020]
-bone_name = "Cube.002"
-bone_idx = 1
-
-[node name="Cube_002" type="MeshInstance3D" parent="basic_wall/Skeleton3D/Cube_002" unique_id=59012151]
-mesh = SubResource("ArrayMesh_3acxd")
-skeleton = NodePath("")
-surface_material_override/0 = SubResource("StandardMaterial3D_pi13y")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="basic_wall" unique_id=557151688]
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=557151688]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7822875, 0)
 collision_layer = 3
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="basic_wall/StaticBody3D" unique_id=910438635]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=910438635]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8303325, 0)
 shape = SubResource("BoxShape3D_17kg5")

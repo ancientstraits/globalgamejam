@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://cb4leu2fawtqn"]
+[gd_scene format=4 uid="uid://dnwtul40poxab"]
 
 [ext_resource type="Script" uid="uid://bqjmf4pi5iwvy" path="res://scripts/hanger.gd" id="1_slx41"]
 
@@ -38,6 +38,8 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_l0nmy")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_slx41"]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_aa3wj"]
 size = Vector3(2, 1.4196243, 1)
 
@@ -50,6 +52,13 @@ script = ExtResource("1_slx41")
 transform = Transform3D(0.1, 0, 0, 0, 0.17451897, 0, 0, 0, 0.1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_rgguv")
 skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_slx41")
+
+[node name="HangerMesh2" type="MeshInstance3D" parent="." unique_id=375989645]
+transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.17451897, 0, 0.1, 0, -4.371139e-09, 0, 0, 0)
+mesh = SubResource("ArrayMesh_rgguv")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_slx41")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=76055562]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4231224, 0)

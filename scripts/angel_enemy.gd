@@ -10,6 +10,8 @@ extends CharacterBody3D
 @onready var nav_update_timer := $NavigationUpdateTimer
 @onready var audio_player = $AudioStreamPlayer3D
 
+@onready var animator := $Model/AnimationPlayer
+
 var can_update_navigation := true
 var flashed := false
 var seen_once := false
@@ -44,9 +46,14 @@ func _physics_process(delta: float) -> void:
 			var destination = nav_agent.get_next_path_position()
 			var local_destination = destination - global_position
 			var direction = local_destination.normalized()
+			rotation.y = Vector2(direction.x, direction.z).angle() + 90
 				
 			velocity = direction * speed
+			animator.stop()
+			animator.play("Running")
 		elif seen_once == true:
+			animator.stop()
+			animator.play("Idle")
 			velocity = Vector3.ZERO
 			time_not_seen += delta_cache
 			if time_not_seen > time_not_seen_threshold:
@@ -54,6 +61,8 @@ func _physics_process(delta: float) -> void:
 				time_not_seen = 0
 				pick_random_destination()
 		else:
+			animator.stop()
+			animator.play("Idle")
 			velocity = Vector3.ZERO
 		
 		can_update_navigation = false

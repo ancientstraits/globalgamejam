@@ -16,4 +16,4 @@ func _physics_process(delta: float) -> void:
 		gas -= gas_drain_rate * delta
 	if gas >= max_gas:
 		Globals.die.emit('Suffocation')
-	gas_meter.value = gas
+	gas_meter.value = max_gas - gas

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bbubk3klgti8q"]
 
-[ext_resource type="Script" uid="uid://cklkww8yf80oq" path="res://scripts/title.gd" id="1_b3w7a"]
+[ext_resource type="Script" path="res://scripts/title.gd" id="1_b3w7a"]
 [ext_resource type="Texture2D" uid="uid://dydaxuxmspkwv" path="res://assets/generator.png" id="1_wosw1"]
 [ext_resource type="Texture2D" uid="uid://08bmi5fllv6c" path="res://assets/gasmaskcutout.png" id="2_p6dhs"]
 [ext_resource type="Shader" uid="uid://c45ia4jf0n58r" path="res://shaders/title_gasmask.gdshader" id="4_b3w7a"]
@@ -15,6 +15,13 @@ shader_parameter/gasmask_mul = Vector2(3, 1)
 shader_parameter/gasmask_off = Vector2(1, 0)
 shader_parameter/vignette_m = 0.0
 shader_parameter/vignette_b = 1.0
+
+[sub_resource type="FontVariation" id="FontVariation_yql1r"]
+spacing_glyph = -25
+
+[sub_resource type="LabelSettings" id="LabelSettings_ia1n6"]
+font = SubResource("FontVariation_yql1r")
+font_size = 192
 
 [node name="Title" type="Control" unique_id=1640334557]
 layout_mode = 3
@@ -72,13 +79,14 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 99.0
-offset_top = -3.0
-offset_right = -10.0
-offset_bottom = 270.0
+offset_left = 676.0
+offset_top = 19.0
+offset_right = 567.0
+offset_bottom = 292.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 200
-text = "Laughing Gas"
+text = "LAUGHING   GAS"
+label_settings = SubResource("LabelSettings_ia1n6")
 
 [node name="StartGame" type="Button" parent="ColorRect" unique_id=1939455835]
 layout_mode = 1
@@ -87,14 +95,14 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -430.0
+offset_left = -504.0
 offset_top = -289.0
 offset_right = -106.0
 offset_bottom = -95.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 70
-text = "Begin."
+text = "Mask up."
 
 [node name="TitleTool" type="Node" parent="." unique_id=1474613147]
 script = ExtResource("6_4rr2b")

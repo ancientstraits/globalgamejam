@@ -3,6 +3,7 @@ extends CharacterBody3D
 @export var gravity: float
 @export var jump_vel: float
 @export var move_vel: float
+var move_penalty: float = 1
 @export var camera_speed: float
 @export var invulnerability_time : float
 
@@ -13,6 +14,7 @@ extends CharacterBody3D
 var is_dead = false
 var can_take_damage := true
 var hanging: bool = false
+var was_hanging: bool = false
 var hang_pos: Vector3 = Vector3.ZERO
 var can_move = true
 
@@ -49,6 +51,7 @@ func _process(delta: float) -> void:
 	
 	if hanging and Input.is_action_just_pressed('jump'):
 		hanging = false
+		was_hanging = true
 		# this stops the hanging animation
 		var tweens := get_tree().get_processed_tweens()
 		if tweens.size() > 0:
@@ -62,16 +65,21 @@ func _process(delta: float) -> void:
 	
 	postproc.gasmask_mul = \
 		postproc.gasmask_mul.lerp(0.03 * vel_vec.y * Vector2.ONE, 0.5)
-	
+
 	if is_on_floor():		
+		if was_hanging:
+			was_hanging = false
+			move_penalty = 0.3
+		else:
+			move_penalty = lerp(move_penalty, 1.0, 0.03)
 		if Input.is_action_just_pressed('jump'):
 			velocity.y = jump_vel
 	else:
 		velocity.y += gravity * delta
 
 	
-	velocity.z = move_vel * dir.z
-	velocity.x = move_vel * dir.x
+	velocity.z = move_vel * dir.z * move_penalty
+	velocity.x = move_vel * dir.x * move_penalty
 	
 	if hanging:
 		var to_hangpos := hang_pos - global_position

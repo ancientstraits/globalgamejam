@@ -1,63 +1,22 @@
 [gd_scene format=3 uid="uid://bvf0l4t2kcxi5"]
 
-[ext_resource type="PackedScene" uid="uid://cb4leu2fawtqn" path="res://scenes/hanger.tscn" id="1_abtpw"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_x6imn"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qba7n"]
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_8d6ti"]
-_surfaces = [{
-"aabb": AABB(-2.5, 0, -2.5, 5, 1e-05, 5),
-"format": 34896613377,
-"index_count": 6,
-"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 3, 0, 1, 0),
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 4,
-"vertex_data": PackedByteArray(0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-}]
-blend_shape_mode = 0
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_crse5"]
-resource_name = "basic_floor_Plane_001"
-_surfaces = [{
-"aabb": AABB(-2.5, 0, -2.5, 5, 1e-05, 5),
-"attribute_data": PackedByteArray(0, 0, 255, 255, 255, 255, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0),
-"format": 34896613399,
-"index_count": 6,
-"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 3, 0, 1, 0),
-"material": SubResource("StandardMaterial3D_qba7n"),
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 4,
-"vertex_data": PackedByteArray(0, 0, 0, 0, 255, 255, 255, 191, 255, 255, 0, 0, 0, 0, 255, 191, 255, 255, 0, 0, 255, 255, 255, 191, 0, 0, 0, 0, 0, 0, 255, 191, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127)
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_8d6ti")
+[ext_resource type="PackedScene" uid="uid://vnvqiu2nxm05" path="res://assets/models/basic_floor.glb" id="1_abtpw"]
+[ext_resource type="PackedScene" uid="uid://dnwtul40poxab" path="res://scenes/hanger.tscn" id="2_k3dji"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_abtpw"]
 size = Vector3(5, 0.1, 5)
 
 [node name="BasicFloor" type="Node3D" unique_id=621641132]
 
-[node name="basic_floor" type="Node3D" parent="." unique_id=444274420]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="basic_floor" unique_id=2006127394]
-transform = Transform3D(4.0394835, 0, 0, 0, 4.0394835, 0, 0, 0, 4.0394835, 0, -10.071928, 0)
-layers = 4
-mesh = SubResource("BoxMesh_x6imn")
-
-[node name="Hanger" parent="basic_floor" unique_id=2055355291 instance=ExtResource("1_abtpw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.47297, 0)
-
-[node name="Plane" type="MeshInstance3D" parent="basic_floor" unique_id=2131043330]
-mesh = SubResource("ArrayMesh_crse5")
-skeleton = NodePath("")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="basic_floor" unique_id=1877455822]
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=301118528]
 collision_layer = 3
+collision_mask = 3
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="basic_floor/StaticBody3D" unique_id=821147601]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0450269, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=961726913]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.06285775, 0)
 shape = SubResource("BoxShape3D_abtpw")
+
+[node name="basic_floor2" parent="." unique_id=1296044428 instance=ExtResource("1_abtpw")]
+
+[node name="Hanger" parent="." unique_id=2055355291 instance=ExtResource("2_k3dji")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0034387, 0)

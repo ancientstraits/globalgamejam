@@ -23,7 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://c2sbco2w508an" path="res://scenes/decorations/pipe-n-boxes.tscn" id="20_xbugx"]
 [ext_resource type="PackedScene" uid="uid://dj7nvkneq8qls" path="res://scenes/decorations/boiler-thing.tscn" id="21_ggb0u"]
 [ext_resource type="PackedScene" uid="uid://8acjeg0ycda3" path="res://scenes/decorations/big-boiler.tscn" id="22_ygtp0"]
-[ext_resource type="PackedScene" path="res://scenes/decorations/pipe.tscn" id="23_3yivh"]
+[ext_resource type="PackedScene" uid="uid://x64561e6wfot" path="res://scenes/decorations/pipe.tscn" id="23_3yivh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lp8i1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -90,7 +90,6 @@ size = Vector3(300, 1, 300)
 environment = SubResource("Environment_3auog")
 
 [node name="Player" parent="." unique_id=155048425 groups=["player"] instance=ExtResource("1_rapvc")]
-transform = Transform3D(0.86788684, 0, 0.49676192, 0, 1, 0, -0.49676192, 0, 0.86788684, 0, 2, 0)
 
 [node name="Node3D" type="NavigationRegion3D" parent="." unique_id=1233017566]
 navigation_mesh = SubResource("NavigationMesh_mkhxr")

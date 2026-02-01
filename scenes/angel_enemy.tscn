@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://brajv7npi6yfb"]
 
 [ext_resource type="Script" uid="uid://cx3cj0t1ggixs" path="res://scripts/angel_enemy.gd" id="1_1p1gb"]
+[ext_resource type="PackedScene" uid="uid://cp5wcduff4rf1" path="res://assets/models/cryin_radio.glb" id="2_qlcfc"]
 [ext_resource type="Texture2D" uid="uid://bkervevfim1s1" path="res://assets/icon.svg" id="2_ty40x"]
 [ext_resource type="AudioStream" uid="uid://b74qg3dceji5l" path="res://assets/audio/screech.ogg" id="3_1g3p5"]
 
@@ -11,9 +12,10 @@ albedo_texture = ExtResource("2_ty40x")
 material = SubResource("StandardMaterial3D_1g3p5")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_71j4m"]
+radius = 0.28564453
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3i4hm"]
-radius = 0.55322266
+radius = 0.4248047
 
 [node name="AngelEnemy" type="CharacterBody3D" unique_id=662068]
 collision_layer = 2
@@ -26,7 +28,11 @@ time_not_seen_threshold = 3.0
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=161381309]
 
+[node name="Model" parent="." unique_id=1213451577 instance=ExtResource("2_qlcfc")]
+transform = Transform3D(-3.453265e-08, 0, -0.7900149, 0, 0.7900149, 0, 0.7900149, 0, -3.453265e-08, 0, -0.8, 0)
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=970019306]
+visible = false
 mesh = SubResource("CapsuleMesh_k0juu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=328318335]

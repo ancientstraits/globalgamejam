@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://fwmr5soew7hf"]
 
 [ext_resource type="Script" uid="uid://brkliyb6hfu4m" path="res://scripts/basic_enemy.gd" id="1_3i4hm"]
+[ext_resource type="PackedScene" uid="uid://dtgcqnlkig67x" path="res://assets/models/shambler.glb" id="2_md22f"]
+[ext_resource type="Script" uid="uid://bhgko40oed2rb" path="res://assets/models/shambler_visual.gd" id="3_fn5nn"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_k0juu"]
 
@@ -24,7 +26,12 @@ push_force = 6.0
 debug_path_custom_point_size = 22.8
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=970019306]
+visible = false
 mesh = SubResource("CapsuleMesh_k0juu")
+
+[node name="shambler" parent="." unique_id=335517075 instance=ExtResource("2_md22f")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.14898682, -0.93341064, 0.09655762)
+script = ExtResource("3_fn5nn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=328318335]
 shape = SubResource("CapsuleShape3D_md22f")
